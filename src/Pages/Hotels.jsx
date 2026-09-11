@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import API_URL from "../api";
 
 import "../css/restaurant.css";
 
@@ -10,9 +11,7 @@ function Hotels() {
     // =====================================================
 
     const [hotels, setHotels] = useState([]);
-
     const [loading, setLoading] = useState(true);
-
     const [error, setError] = useState("");
 
 
@@ -39,17 +38,12 @@ function Hotels() {
 
         // Images are stored inside:
         // React public/images
-        //
-        // Examples:
-        //
-        // hotel.jpg
-        //      -> /hotel.jpg
-        //
+
         // /images/hotel.jpg
-        //      -> /images/hotel.jpg
-        //
+        // -> /images/hotel.jpg
+
         // images/hotel.jpg
-        //      -> /images/hotel.jpg
+        // -> /images/hotel.jpg
 
         if (image.startsWith("/images/")) {
             return image;
@@ -75,20 +69,16 @@ function Hotels() {
 
     useEffect(() => {
 
-        fetch("http://localhost:5014/api/Hotels")
-
+        fetch(`${API_URL}/api/Hotels`)
             .then((response) => {
 
                 if (!response.ok) {
-
                     throw new Error(
                         "Failed to fetch hotels"
                     );
-
                 }
 
                 return response.json();
-
             })
 
             .then((data) => {
@@ -96,9 +86,7 @@ function Hotels() {
                 console.log("Hotels:", data);
 
                 setHotels(data);
-
                 setLoading(false);
-
             })
 
             .catch((error) => {
@@ -110,7 +98,6 @@ function Hotels() {
                 );
 
                 setLoading(false);
-
             });
 
     }, []);
@@ -238,6 +225,7 @@ function Hotels() {
                                                         hotel.image
                                                     )}
                                                     alt={hotel.name}
+
                                                     onError={(e) => {
 
                                                         console.error(
@@ -253,7 +241,6 @@ function Hotels() {
                                                         // Fallback image
                                                         e.currentTarget.src =
                                                             "/images/hotel-placeholder.jpg";
-
                                                     }}
                                                 />
 
