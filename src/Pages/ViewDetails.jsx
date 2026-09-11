@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import API_URL from "../api";
 import "./ViewDetails.css";
 
 function ViewDetails() {
@@ -37,21 +38,17 @@ function ViewDetails() {
 
         const checkLogin = () => {
 
-            const token =
-                localStorage.getItem("userToken");
+            const token = localStorage.getItem("userToken");
 
             setIsLoggedIn(!!token);
         };
 
-
         checkLogin();
-
 
         window.addEventListener(
             "userAuthChanged",
             checkLogin
         );
-
 
         return () => {
 
@@ -88,7 +85,7 @@ function ViewDetails() {
                 if (type === "hotel") {
 
                     apiUrl =
-                        `http://localhost:5014/api/Hotels/${id}`;
+                        `${API_URL}/api/Hotels/${id}`;
 
                 }
 
@@ -100,7 +97,7 @@ function ViewDetails() {
                 else if (type === "restaurant") {
 
                     apiUrl =
-                        `http://localhost:5014/api/Restaurants/${id}`;
+                        `${API_URL}/api/Restaurants/${id}`;
 
                 }
 
@@ -112,7 +109,7 @@ function ViewDetails() {
                 else if (type === "touristspot") {
 
                     apiUrl =
-                        `http://localhost:5014/api/TouristSpots/${id}`;
+                        `${API_URL}/api/TouristSpots/${id}`;
 
                 }
 
@@ -124,7 +121,7 @@ function ViewDetails() {
                 else if (type === "resort") {
 
                     apiUrl =
-                        `http://localhost:5014/api/Resorts/${id}`;
+                        `${API_URL}/api/Resorts/${id}`;
 
                 }
 
@@ -181,7 +178,12 @@ function ViewDetails() {
         };
 
 
-        loadDetails();
+        if (type && id) {
+            loadDetails();
+        } else {
+            setLoading(false);
+            setError("Invalid item information.");
+        }
 
     }, [type, id]);
 
@@ -226,7 +228,7 @@ function ViewDetails() {
                 if (type === "hotel") {
 
                     ratingApiUrl =
-                        `http://localhost:5014/api/HotelRatings/${id}`;
+                        `${API_URL}/api/HotelRatings/${id}`;
 
                 }
 
@@ -238,7 +240,7 @@ function ViewDetails() {
                 else if (type === "restaurant") {
 
                     ratingApiUrl =
-                        `http://localhost:5014/api/RestaurantRatings/${id}`;
+                        `${API_URL}/api/RestaurantRatings/${id}`;
 
                 }
 
@@ -250,7 +252,7 @@ function ViewDetails() {
                 else if (type === "touristspot") {
 
                     ratingApiUrl =
-                        `http://localhost:5014/api/TouristSpotRatings/${id}`;
+                        `${API_URL}/api/TouristSpotRatings/${id}`;
 
                 }
 
@@ -262,7 +264,7 @@ function ViewDetails() {
                 else if (type === "resort") {
 
                     ratingApiUrl =
-                        `http://localhost:5014/api/ResortRatings/${id}`;
+                        `${API_URL}/api/ResortRatings/${id}`;
 
                 }
 
@@ -370,7 +372,7 @@ function ViewDetails() {
             if (type === "hotel") {
 
                 ratingApiUrl =
-                    "http://localhost:5014/api/HotelRatings";
+                    `${API_URL}/api/HotelRatings`;
 
             }
 
@@ -382,7 +384,7 @@ function ViewDetails() {
             else if (type === "restaurant") {
 
                 ratingApiUrl =
-                    "http://localhost:5014/api/RestaurantRatings";
+                    `${API_URL}/api/RestaurantRatings`;
 
             }
 
@@ -394,7 +396,7 @@ function ViewDetails() {
             else if (type === "touristspot") {
 
                 ratingApiUrl =
-                    "http://localhost:5014/api/TouristSpotRatings";
+                    `${API_URL}/api/TouristSpotRatings`;
 
             }
 
@@ -406,7 +408,7 @@ function ViewDetails() {
             else if (type === "resort") {
 
                 ratingApiUrl =
-                    "http://localhost:5014/api/ResortRatings";
+                    `${API_URL}/api/ResortRatings`;
 
             }
 
@@ -528,9 +530,7 @@ function ViewDetails() {
 
             if (!response.ok) {
 
-                // =============================================
                 // TOKEN EXPIRED
-                // =============================================
 
                 if (response.status === 401) {
 
@@ -861,7 +861,6 @@ function ViewDetails() {
 
                                 {/* =================================================
                                      REAL RATING DISPLAY
-                                     HOTEL / RESTAURANT / TOURIST SPOT / RESORT
                                      ================================================= */}
 
                                 {(
@@ -953,8 +952,6 @@ function ViewDetails() {
                                             </h5>
 
 
-                                            {/* CUISINE */}
-
                                             {item.cuisine && (
 
                                                 <p className="mb-2">
@@ -969,8 +966,6 @@ function ViewDetails() {
 
                                             )}
 
-
-                                            {/* PRICE */}
 
                                             {item.price && (
 
@@ -994,8 +989,6 @@ function ViewDetails() {
 
                                             )}
 
-
-                                            {/* SEATS */}
 
                                             {item.availableSeats !== undefined && (
 
@@ -1049,8 +1042,6 @@ function ViewDetails() {
                                             </h5>
 
 
-                                            {/* PRICE */}
-
                                             {item.price && (
 
                                                 <p className="mb-2">
@@ -1073,8 +1064,6 @@ function ViewDetails() {
 
                                             )}
 
-
-                                            {/* ROOMS */}
 
                                             {item.availableRooms !== undefined && (
 
@@ -1128,8 +1117,6 @@ function ViewDetails() {
                                             </h5>
 
 
-                                            {/* TOUR DURATION */}
-
                                             <div className="d-flex justify-content-between align-items-center mb-3">
 
                                                 <span className="fw-semibold">
@@ -1152,8 +1139,6 @@ function ViewDetails() {
                                             </div>
 
 
-                                            {/* ORIGINAL PRICE */}
-
                                             <div className="d-flex justify-content-between align-items-center mb-3">
 
                                                 <span className="fw-semibold">
@@ -1173,8 +1158,6 @@ function ViewDetails() {
                                             </div>
 
 
-                                            {/* DISCOUNT */}
-
                                             <div className="d-flex justify-content-between align-items-center mb-3">
 
                                                 <span className="fw-semibold">
@@ -1191,8 +1174,6 @@ function ViewDetails() {
 
                                             </div>
 
-
-                                            {/* DISCOUNT AMOUNT */}
 
                                             <div className="d-flex justify-content-between align-items-center mb-3">
 
@@ -1215,8 +1196,6 @@ function ViewDetails() {
 
                                             <hr />
 
-
-                                            {/* FINAL PRICE */}
 
                                             <div className="d-flex justify-content-between align-items-center">
 
@@ -1273,8 +1252,6 @@ function ViewDetails() {
                                             </h5>
 
 
-                                            {/* PRICE */}
-
                                             {item.price && (
 
                                                 <p className="mb-2">
@@ -1297,8 +1274,6 @@ function ViewDetails() {
 
                                             )}
 
-
-                                            {/* ROOMS */}
 
                                             {item.availableRooms !== undefined && (
 
@@ -1329,8 +1304,6 @@ function ViewDetails() {
                                             )}
 
 
-                                            {/* DISCOUNT */}
-
                                             {item.discountPercent !== undefined &&
                                                 item.discountPercent !== null &&
                                                 item.discountPercent > 0 && (
@@ -1351,8 +1324,6 @@ function ViewDetails() {
 
                                                 )}
 
-
-                                            {/* OFFER */}
 
                                             {item.offerText && (
 
@@ -1381,7 +1352,6 @@ function ViewDetails() {
 
                                 {/* =================================================
                                      RATING BOX
-                                     HOTEL / RESTAURANT / TOURIST SPOT / RESORT
                                      ================================================= */}
 
                                 {(
@@ -1409,10 +1379,6 @@ function ViewDetails() {
 
                                         </h5>
 
-
-                                        {/* =================================================
-                                             NOT LOGGED IN
-                                             ================================================= */}
 
                                         {!isLoggedIn ? (
 
@@ -1448,10 +1414,6 @@ function ViewDetails() {
                                         ) : (
 
                                             <>
-
-                                                {/* =================================================
-                                                     STAR SELECTION
-                                                     ================================================= */}
 
                                                 <div
                                                     className="rating-select"
@@ -1500,8 +1462,6 @@ function ViewDetails() {
                                                 </div>
 
 
-                                                {/* SELECTED RATING */}
-
                                                 {selectedRating > 0 && (
 
                                                     <p className="mt-2 mb-2">
@@ -1518,8 +1478,6 @@ function ViewDetails() {
 
                                                 )}
 
-
-                                                {/* SUBMIT */}
 
                                                 <button
                                                     type="button"
@@ -1542,8 +1500,6 @@ function ViewDetails() {
 
                                                 </button>
 
-
-                                                {/* MESSAGE */}
 
                                                 {ratingMessage && (
 
