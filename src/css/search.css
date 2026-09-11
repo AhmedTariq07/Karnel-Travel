@@ -1,0 +1,518 @@
+/* =====================================================
+   SEARCH HERO
+   ===================================================== */
+
+.search-hero {
+
+    min-height: 400px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    background:
+        url("../images/pakistan-search.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    color: white;
+}
+
+
+.search-hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(15, 55, 43, .94),
+            rgba(15, 55, 43, .55)
+        );
+}
+
+
+.search-hero .container {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.search-hero-content {
+
+    max-width: 700px;
+}
+
+
+.search-hero-content > span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #d6a84f;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.search-hero h1 {
+
+    margin: 18px 0;
+
+    font-size: clamp(45px, 6vw, 68px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+}
+
+
+.search-hero h1 strong {
+
+    display: block;
+
+    color: #d6a84f;
+
+    font-style: italic;
+
+    font-weight: 500;
+}
+
+
+.search-hero p {
+
+    max-width: 600px;
+
+    color: rgba(255,255,255,.75);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+
+/* =====================================================
+   SEARCH SECTION
+   ===================================================== */
+
+.search-section {
+
+    padding: 90px 0;
+
+    background: #f7f6f2;
+}
+
+
+.search-heading {
+
+    max-width: 700px;
+
+    margin: 0 auto 45px;
+}
+
+
+.search-heading > span {
+
+    color: #b98931;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.search-heading h2 {
+
+    margin: 10px 0;
+
+    color: #163d32;
+
+    font-size: 40px;
+
+    font-weight: 800;
+}
+
+
+.search-heading p {
+
+    color: #777;
+
+    line-height: 1.7;
+}
+
+
+
+/* =====================================================
+   SEARCH BOX
+   ===================================================== */
+
+.search-box {
+
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 40px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.08);
+}
+
+
+.form-label {
+
+    color: #163d32;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+.form-label i {
+
+    margin-right: 6px;
+
+    color: #b98931;
+}
+
+
+.search-box .form-control,
+.search-box .form-select {
+
+    min-height: 50px;
+
+    border: 1px solid #e2e2e2;
+
+    border-radius: 8px;
+
+    color: #555;
+
+    box-shadow: none;
+}
+
+
+.search-box .form-control:focus,
+.search-box .form-select:focus {
+
+    border-color: #b98931;
+
+    box-shadow:
+        0 0 0 3px rgba(185,137,49,.1);
+}
+
+
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.search-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 10px;
+}
+
+
+.search-main-btn,
+.search-reset-btn {
+
+    min-width: 150px;
+
+    padding: 13px 25px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+
+.search-main-btn {
+
+    border: none;
+
+    background: #163d32;
+
+    color: white;
+}
+
+
+.search-main-btn:hover {
+
+    background: #b98931;
+
+    transform: translateY(-2px);
+}
+
+
+.search-reset-btn {
+
+    border: 1px solid #ddd;
+
+    background: white;
+
+    color: #666;
+}
+
+
+.search-reset-btn:hover {
+
+    border-color: #b98931;
+
+    color: #b98931;
+}
+
+
+
+/* =====================================================
+   SEARCH RESULT
+   ===================================================== */
+
+.search-result {
+
+    max-width: 1000px;
+
+    margin: 25px auto 0;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    color: #666;
+}
+
+
+.search-result.success {
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: #e8f5ef;
+
+    color: #246b4c;
+}
+
+
+.search-result.error {
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: #fff0ef;
+
+    color: #b94a48;
+}
+
+
+
+/* =====================================================
+   QUICK SEARCH
+   ===================================================== */
+
+.quick-search-section {
+
+    padding: 90px 0;
+
+    background: white;
+}
+
+
+.quick-card {
+
+    display: block;
+
+    height: 100%;
+
+    padding: 30px;
+
+    border: 1px solid #eee;
+
+    border-radius: 18px;
+
+    background: white;
+
+    text-decoration: none;
+
+    transition: .35s;
+}
+
+
+.quick-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color: #d6a84f;
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.08);
+}
+
+
+.quick-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border-radius: 14px;
+
+    background: #f3ead8;
+
+    color: #b98931;
+
+    font-size: 24px;
+
+    transition: .3s;
+}
+
+
+.quick-card:hover .quick-icon {
+
+    background: #163d32;
+
+    color: white;
+}
+
+
+.quick-card h4 {
+
+    margin-bottom: 10px;
+
+    color: #163d32;
+
+    font-size: 19px;
+
+    font-weight: 800;
+}
+
+
+.quick-card p {
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+.quick-card > span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 10px;
+
+    color: #b98931;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    transition: .3s;
+}
+
+
+.quick-card:hover > span {
+
+    gap: 12px;
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 767px) {
+
+    .search-hero {
+
+        min-height: 360px;
+    }
+
+
+    .search-hero h1 {
+
+        font-size: 45px;
+    }
+
+
+    .search-section,
+    .quick-search-section {
+
+        padding: 65px 0;
+    }
+
+
+    .search-heading h2 {
+
+        font-size: 32px;
+    }
+
+
+    .search-box {
+
+        padding: 25px 20px;
+    }
+
+
+    .search-buttons {
+
+        flex-direction: column;
+    }
+
+
+    .search-main-btn,
+    .search-reset-btn {
+
+        width: 100%;
+    }
+
+}

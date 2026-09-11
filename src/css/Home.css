@@ -1,0 +1,1862 @@
+/* =========================================================
+   KARNEL TRAVEL — MODERN HOME PAGE
+   Scoped to .home-page
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL HOME PAGE
+   ========================================================= */
+
+.home-page {
+    width: 100%;
+    overflow-x: hidden;
+    background: #ffffff;
+    color: #1d2939;
+}
+
+.home-page * {
+    box-sizing: border-box;
+}
+
+.home-page a {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
+
+.home-page .modern-hero {
+    min-height: 720px;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    background-image: url("../images/hunza.jpg");
+    background-size: cover;
+    background-position: center;
+
+    color: #ffffff;
+}
+
+
+/* Dark overlay */
+
+.home-page .hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3, 35, 61, 0.94) 0%,
+            rgba(4, 57, 91, 0.78) 45%,
+            rgba(4, 57, 91, 0.35) 100%
+        );
+}
+
+
+/* Hero container */
+
+.home-page .hero-container {
+    position: relative;
+    z-index: 2;
+
+    padding-top: 90px;
+    padding-bottom: 55px;
+}
+
+
+/* =========================================================
+   HERO TEXT
+   ========================================================= */
+
+.home-page .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 9px 16px;
+
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 50px;
+
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(10px);
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+
+    margin-bottom: 22px;
+}
+
+.home-page .hero-label i {
+    color: #f0b84b;
+    font-size: 14px;
+}
+
+
+.home-page .hero-text h1 {
+    margin: 0 0 24px;
+
+    font-size: clamp(48px, 6vw, 78px);
+    line-height: 1.02;
+
+    font-weight: 800;
+    letter-spacing: -2.5px;
+
+    color: #ffffff;
+}
+
+.home-page .hero-text h1 span {
+    color: #f0b84b;
+
+    font-style: italic;
+    font-weight: 500;
+}
+
+
+.home-page .hero-text p {
+    max-width: 610px;
+
+    margin: 0;
+
+    font-size: 17px;
+    line-height: 1.8;
+
+    color: rgba(255, 255, 255, 0.82);
+}
+
+
+/* =========================================================
+   HERO BUTTONS
+   ========================================================= */
+
+.home-page .hero-buttons {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+    margin-top: 32px;
+}
+
+
+.home-page .hero-primary-btn,
+.home-page .hero-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 11px;
+
+    min-height: 50px;
+
+    padding: 14px 23px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.home-page .hero-primary-btn {
+    background: #f0b84b;
+    color: #ffffff;
+
+    box-shadow: 0 10px 25px rgba(240, 184, 75, 0.22);
+}
+
+.home-page .hero-primary-btn:hover {
+    background: #d99d2e;
+    color: #ffffff;
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 14px 30px rgba(240, 184, 75, 0.30);
+}
+
+
+.home-page .hero-secondary-btn {
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.48);
+
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(5px);
+}
+
+.home-page .hero-secondary-btn:hover {
+    background: #ffffff;
+    color: #07548d;
+
+    transform: translateY(-3px);
+}
+
+
+.home-page .hero-primary-btn i,
+.home-page .hero-secondary-btn i {
+    transition: transform 0.3s ease;
+}
+
+.home-page .hero-primary-btn:hover i,
+.home-page .hero-secondary-btn:hover i {
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   HERO SEARCH CARD
+   ========================================================= */
+
+.home-page .hero-search-card {
+    padding: 30px;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    color: #1d2939;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.28);
+
+    border: 1px solid rgba(255, 255, 255, 0.6);
+
+    backdrop-filter: blur(12px);
+}
+
+
+/* Search heading */
+
+.home-page .search-title {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 25px;
+}
+
+
+.home-page .search-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #07548d;
+    color: #ffffff;
+
+    font-size: 20px;
+
+    box-shadow: 0 8px 20px rgba(7, 84, 141, 0.20);
+}
+
+
+.home-page .search-title h4 {
+    margin: 0;
+
+    color: #17324d;
+
+    font-size: 19px;
+    font-weight: 750;
+}
+
+
+.home-page .search-title p {
+    margin: 4px 0 0;
+
+    color: #7b8794;
+
+    font-size: 13px;
+}
+
+
+/* Search fields */
+
+.home-page .search-field {
+    position: relative;
+
+    margin-bottom: 14px;
+}
+
+
+.home-page .search-field > i {
+    position: absolute;
+
+    left: 15px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 2;
+
+    color: #6c7a89;
+
+    pointer-events: none;
+}
+
+
+.home-page .search-field .form-select {
+    width: 100%;
+    height: 52px;
+
+    padding-left: 42px;
+    padding-right: 35px;
+
+    border: 1px solid #e0e6eb;
+    border-radius: 9px;
+
+    background-color: #ffffff;
+
+    color: #344054;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.home-page .search-field .form-select:focus {
+    border-color: #07548d;
+
+    box-shadow:
+        0 0 0 3px rgba(7, 84, 141, 0.10);
+
+    outline: none;
+}
+
+
+/* Search button */
+
+.home-page .hero-search-btn {
+    width: 100%;
+    height: 52px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: #07548d;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.home-page .hero-search-btn:hover {
+    background: #043f6b;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(7, 84, 141, 0.22);
+}
+
+
+.home-page .hero-search-btn i {
+    margin-right: 7px;
+}
+
+
+/* =========================================================
+   HERO STATISTICS
+   ========================================================= */
+
+.home-page .hero-stat-row {
+    display: flex;
+
+    max-width: 720px;
+
+    margin-top: 65px;
+}
+
+
+.home-page .hero-stat {
+    min-width: 155px;
+
+    padding: 0 25px;
+
+    border-right:
+        1px solid rgba(255, 255, 255, 0.25);
+}
+
+
+.home-page .hero-stat:first-child {
+    padding-left: 0;
+}
+
+
+.home-page .hero-stat:last-child {
+    border-right: 0;
+}
+
+
+.home-page .hero-stat strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #ffffff;
+
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+
+.home-page .hero-stat span {
+    color: rgba(255, 255, 255, 0.68);
+
+    font-size: 12px;
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+   ========================================================= */
+
+.home-page .popular-section,
+.home-page .services-modern,
+.home-page .why-modern {
+    padding: 100px 0;
+}
+
+
+/* Scoped Bootstrap-like container */
+
+.home-page > .container,
+.home-page section > .container {
+    width: 100%;
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+   ========================================================= */
+
+.home-page .section-heading-modern {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 40px;
+}
+
+
+.home-page .section-heading-modern span,
+.home-page .section-label {
+    display: block;
+
+    color: #07548d;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.home-page .section-heading-modern h2 {
+    margin: 8px 0 0;
+
+    color: #172b3a;
+
+    font-size: 40px;
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    letter-spacing: -0.7px;
+}
+
+
+.home-page .view-all-link {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    color: #07548d;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.home-page .view-all-link:hover {
+    color: #f0a72e;
+
+    transform: translateX(4px);
+}
+
+
+.home-page .view-all-link i {
+    margin-left: 2px;
+}
+
+
+/* =========================================================
+   DESTINATION CARDS
+   ========================================================= */
+
+.home-page .destination-modern {
+    position: relative;
+
+    display: block;
+
+    height: 390px;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    background: #17324d;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.10);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+.home-page .destination-modern:hover {
+    color: #ffffff;
+
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.18);
+}
+
+
+.home-page .destination-modern img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.7s ease;
+}
+
+
+.home-page .destination-modern:hover img {
+    transform: scale(1.08);
+}
+
+
+/* Destination overlay */
+
+.home-page .destination-gradient {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(4, 25, 40, 0.90) 0%,
+            rgba(4, 25, 40, 0.48) 45%,
+            rgba(4, 25, 40, 0.04) 75%,
+            rgba(4, 25, 40, 0) 100%
+        );
+}
+
+
+/* Rating */
+
+.home-page .rating-pill {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 8px 12px;
+
+    border-radius: 50px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    color: #263238;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+
+.home-page .rating-pill i {
+    color: #f0ae32;
+}
+
+
+/* Destination information */
+
+.home-page .destination-info {
+    position: absolute;
+
+    left: 25px;
+    right: 25px;
+    bottom: 23px;
+
+    z-index: 2;
+}
+
+
+.home-page .destination-info small {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 12px;
+}
+
+
+.home-page .destination-info h3 {
+    margin: 8px 0;
+
+    color: #ffffff;
+
+    font-size: 28px;
+    line-height: 1.2;
+
+    font-weight: 800;
+}
+
+
+.home-page .destination-info p {
+    margin: 0 0 13px;
+
+    max-width: 500px;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+.home-page .destination-link {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    color: #f0c15f;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.home-page .destination-link i {
+    transition: transform 0.25s ease;
+}
+
+
+.home-page .destination-modern:hover .destination-link i {
+    transform: translateX(5px);
+}
+
+
+/* Wide cards */
+
+.home-page .destination-wide {
+    height: 340px;
+}
+
+
+/* =========================================================
+   SERVICES SECTION
+   ========================================================= */
+
+.home-page .services-modern {
+    background:
+        linear-gradient(
+            180deg,
+            #f5f8fa 0%,
+            #eef3f6 100%
+        );
+}
+
+
+.home-page .service-modern {
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e7edf1;
+
+    box-shadow:
+        0 8px 30px rgba(7, 38, 61, 0.07);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+.home-page .service-modern:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 20px 45px rgba(7, 38, 61, 0.13);
+}
+
+
+/* Service image */
+
+.home-page .service-image {
+    height: 245px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.home-page .service-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.6s ease;
+}
+
+
+.home-page .service-modern:hover .service-image img {
+    transform: scale(1.07);
+}
+
+
+/* Service icon */
+
+.home-page .service-icon {
+    position: absolute;
+
+    left: 20px;
+    bottom: 20px;
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #07548d;
+    color: #ffffff;
+
+    font-size: 22px;
+
+    box-shadow:
+        0 8px 20px rgba(7, 84, 141, 0.25);
+}
+
+
+/* Service body */
+
+.home-page .service-body {
+    padding: 25px;
+}
+
+
+.home-page .service-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #07548d;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.home-page .service-body h3 {
+    margin: 10px 0;
+
+    color: #172b3a;
+
+    font-size: 27px;
+    line-height: 1.2;
+
+    font-weight: 800;
+}
+
+
+.home-page .service-body p {
+    margin-bottom: 18px;
+
+    color: #687787;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+.home-page .service-body a {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    color: #07548d;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.home-page .service-body a:hover {
+    color: #e4a62e;
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   WHY CHOOSE US
+   ========================================================= */
+
+.home-page .why-modern {
+    position: relative;
+
+    background:
+        linear-gradient(
+            135deg,
+            #063e67 0%,
+            #07548d 55%,
+            #063b60 100%
+        );
+
+    color: #ffffff;
+}
+
+
+/* subtle pattern */
+
+.home-page .why-modern::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.05;
+
+    background-image:
+        radial-gradient(
+            circle at 20% 20%,
+            #ffffff 1px,
+            transparent 1px
+        );
+
+    background-size: 24px 24px;
+
+    pointer-events: none;
+}
+
+
+.home-page .why-modern > .container {
+    position: relative;
+    z-index: 2;
+}
+
+
+.home-page .why-modern h2 {
+    margin: 15px 0 20px;
+
+    color: #ffffff;
+
+    font-size: 45px;
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+}
+
+
+.home-page .why-modern h2 span {
+    color: #f0bd55;
+}
+
+
+.home-page .why-modern > .container > .row > .col-lg-5 p {
+    max-width: 500px;
+
+    margin-bottom: 0;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* Dark section button */
+
+.home-page .dark-btn {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+    padding: 13px 21px;
+
+    border-radius: 8px;
+
+    background: #f0b84b;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.home-page .dark-btn:hover {
+    background: #d99d2e;
+    color: #ffffff;
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   FEATURE GRID
+   ========================================================= */
+
+.home-page .feature-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+
+.home-page .feature-box {
+    position: relative;
+
+    min-height: 210px;
+
+    padding: 28px;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    backdrop-filter: blur(8px);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.home-page .feature-box:hover {
+    transform: translateY(-5px);
+
+    background: rgba(255, 255, 255, 0.11);
+
+    border-color:
+        rgba(240, 184, 75, 0.35);
+}
+
+
+.home-page .feature-box > i {
+    display: block;
+
+    margin: 20px 0 15px;
+
+    color: #f0bd55;
+
+    font-size: 25px;
+}
+
+
+.home-page .feature-box h4 {
+    margin-bottom: 9px;
+
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+.home-page .feature-box p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.62);
+
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+.home-page .feature-number {
+    position: absolute;
+
+    top: 20px;
+    right: 20px;
+
+    color: rgba(255, 255, 255, 0.22);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   CTA SECTION
+   ========================================================= */
+
+.home-page .travel-cta {
+    padding: 80px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f4f7f9,
+            #ffffff
+        );
+}
+
+
+.home-page .cta-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 55px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #063e67,
+            #07548d
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 20px 50px rgba(7, 84, 141, 0.18);
+
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Decorative circle */
+
+.home-page .cta-box::after {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    right: -100px;
+    top: -150px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    pointer-events: none;
+}
+
+
+.home-page .cta-box > div {
+    position: relative;
+    z-index: 2;
+}
+
+
+.home-page .cta-box span {
+    display: block;
+
+    color: #f0bd55;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.home-page .cta-box h2 {
+    margin: 10px 0;
+
+    color: #ffffff;
+
+    font-size: 38px;
+    line-height: 1.2;
+
+    font-weight: 800;
+}
+
+
+.home-page .cta-box p {
+    margin: 0;
+
+    max-width: 600px;
+
+    color: rgba(255, 255, 255, 0.70);
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* CTA button */
+
+.home-page .cta-button {
+    position: relative;
+    z-index: 2;
+
+    flex-shrink: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    min-height: 50px;
+
+    padding: 15px 23px;
+
+    border-radius: 8px;
+
+    background: #f0b84b;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.home-page .cta-button:hover {
+    background: #d99d2e;
+    color: #ffffff;
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.home-page .footer {
+    padding: 70px 0 20px;
+
+    background: #062f4d;
+
+    color: rgba(255, 255, 255, 0.70);
+}
+
+
+.home-page .footer-title {
+    margin-bottom: 7px;
+
+    color: #ffffff;
+
+    font-size: 28px;
+    font-weight: 800;
+}
+
+
+.home-page .footer-title span {
+    display: block;
+
+    color: #f0bd55;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+}
+
+
+.home-page .footer h5 {
+    margin-bottom: 20px;
+
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+.home-page .footer a {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    font-size: 14px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.home-page .footer a:hover {
+    color: #f0bd55;
+
+    transform: translateX(3px);
+}
+
+
+.home-page .footer hr {
+    margin-top: 40px;
+
+    border-color: rgba(255, 255, 255, 0.10);
+}
+
+
+.home-page .copyright-text {
+    margin: 15px 0 0;
+
+    color: rgba(255, 255, 255, 0.43);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+    .home-page .modern-hero {
+        min-height: auto;
+    }
+
+
+    .home-page .hero-container {
+        padding-top: 80px;
+        padding-bottom: 70px;
+    }
+
+
+    .home-page .hero-text {
+        text-align: center;
+    }
+
+
+    .home-page .hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    .home-page .hero-label {
+        margin-bottom: 18px;
+    }
+
+
+    .home-page .hero-buttons {
+        justify-content: center;
+    }
+
+
+    .home-page .hero-search-card {
+        max-width: 650px;
+
+        margin: 45px auto 0;
+    }
+
+
+    .home-page .hero-stat-row {
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        margin-top: 45px;
+
+        gap: 20px;
+    }
+
+
+    .home-page .hero-stat {
+        min-width: 120px;
+    }
+
+
+    .home-page .section-heading-modern h2 {
+        font-size: 34px;
+    }
+
+
+    .home-page .destination-modern {
+        height: 350px;
+    }
+
+
+    .home-page .destination-wide {
+        height: 320px;
+    }
+
+
+    .home-page .service-image {
+        height: 220px;
+    }
+
+
+    .home-page .why-modern h2 {
+        font-size: 38px;
+    }
+
+
+    .home-page .cta-box {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    /* IMPORTANT:
+       Scoped so other pages are NOT affected.
+    */
+
+    .home-page .container {
+        width: 100%;
+
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+
+    /* =====================================================
+       HERO
+       ===================================================== */
+
+    .home-page .modern-hero {
+        min-height: auto;
+
+        background-position: center;
+    }
+
+
+    .home-page .hero-container {
+        padding-top: 55px;
+        padding-bottom: 45px;
+    }
+
+
+    .home-page .hero-text {
+        text-align: center;
+    }
+
+
+    .home-page .hero-label {
+        padding: 7px 12px;
+
+        font-size: 10px;
+
+        letter-spacing: 1px;
+    }
+
+
+    .home-page .hero-text h1 {
+        margin-bottom: 20px;
+
+        font-size: clamp(38px, 11vw, 48px);
+
+        line-height: 1.05;
+
+        letter-spacing: -1px;
+    }
+
+
+    .home-page .hero-text p {
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+
+    /* =====================================================
+       HERO BUTTONS
+       ===================================================== */
+
+    .home-page .hero-buttons {
+        width: 100%;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 10px;
+
+        margin-top: 25px;
+    }
+
+
+    .home-page .hero-primary-btn,
+    .home-page .hero-secondary-btn {
+        width: 100%;
+
+        justify-content: center;
+
+        padding: 13px 18px;
+    }
+
+
+    /* =====================================================
+       SEARCH
+       ===================================================== */
+
+    .home-page .hero-search-card {
+        margin-top: 35px;
+
+        padding: 20px;
+
+        border-radius: 14px;
+    }
+
+
+    .home-page .search-title {
+        gap: 10px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .home-page .search-icon {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+
+        font-size: 17px;
+    }
+
+
+    .home-page .search-title h4 {
+        font-size: 17px;
+    }
+
+
+    .home-page .search-title p {
+        font-size: 12px;
+    }
+
+
+    .home-page .search-field .form-select {
+        height: 50px;
+
+        font-size: 14px;
+    }
+
+
+    .home-page .hero-search-btn {
+        height: 50px;
+    }
+
+
+    /* =====================================================
+       HERO STATISTICS
+       ===================================================== */
+
+    .home-page .hero-stat-row {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        width: 100%;
+
+        gap: 0;
+
+        margin-top: 35px;
+    }
+
+
+    .home-page .hero-stat {
+        min-width: 0;
+
+        padding: 15px 10px;
+
+        text-align: center;
+
+        border-right: 0;
+
+        border-bottom:
+            1px solid rgba(255, 255, 255, 0.20);
+    }
+
+
+    .home-page .hero-stat:nth-child(3),
+    .home-page .hero-stat:nth-child(4) {
+        border-bottom: 0;
+    }
+
+
+    .home-page .hero-stat strong {
+        font-size: 24px;
+    }
+
+
+    .home-page .hero-stat span {
+        font-size: 11px;
+    }
+
+
+    /* =====================================================
+       SECTION HEADINGS
+       ===================================================== */
+
+    .home-page .popular-section,
+    .home-page .services-modern,
+    .home-page .why-modern {
+        padding: 60px 0;
+    }
+
+
+    .home-page .section-heading-modern {
+        display: block;
+
+        margin-bottom: 30px;
+    }
+
+
+    .home-page .section-heading-modern h2 {
+        font-size: 30px;
+
+        line-height: 1.2;
+    }
+
+
+    .home-page .section-heading-modern span,
+    .home-page .section-label {
+        font-size: 10px;
+
+        letter-spacing: 1.5px;
+    }
+
+
+    .home-page .view-all-link {
+        margin-top: 12px;
+    }
+
+
+    /* =====================================================
+       DESTINATIONS
+       ===================================================== */
+
+    .home-page .destination-modern,
+    .home-page .destination-wide {
+        height: 330px;
+    }
+
+
+    .home-page .destination-info {
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+    }
+
+
+    .home-page .destination-info h3 {
+        font-size: 24px;
+    }
+
+
+    .home-page .destination-info p {
+        font-size: 14px;
+
+        line-height: 1.5;
+    }
+
+
+    .home-page .rating-pill {
+        top: 14px;
+        right: 14px;
+
+        padding: 7px 10px;
+
+        font-size: 12px;
+    }
+
+
+    /* =====================================================
+       SERVICES
+       ===================================================== */
+
+    .home-page .service-image {
+        height: 210px;
+    }
+
+
+    .home-page .service-body {
+        padding: 20px;
+    }
+
+
+    .home-page .service-body h3 {
+        font-size: 24px;
+    }
+
+
+    .home-page .service-body p {
+        font-size: 14px;
+    }
+
+
+    /* =====================================================
+       WHY CHOOSE US
+       ===================================================== */
+
+    .home-page .why-modern h2 {
+        font-size: 34px;
+    }
+
+
+    .home-page .feature-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    .home-page .feature-box {
+        min-height: auto;
+
+        padding: 22px;
+    }
+
+
+    /* =====================================================
+       CTA
+       ===================================================== */
+
+    .home-page .travel-cta {
+        padding: 50px 0;
+    }
+
+
+    .home-page .cta-box {
+        padding: 30px 20px;
+
+        border-radius: 15px;
+
+        text-align: center;
+
+        align-items: center;
+    }
+
+
+    .home-page .cta-box h2 {
+        font-size: 27px;
+
+        line-height: 1.25;
+    }
+
+
+    .home-page .cta-box p {
+        font-size: 14px;
+    }
+
+
+    .home-page .cta-button {
+        width: 100%;
+
+        justify-content: center;
+    }
+
+
+    /* =====================================================
+       FOOTER
+       ===================================================== */
+
+    .home-page .footer {
+        padding: 50px 0 20px;
+    }
+
+
+    .home-page .footer-title {
+        font-size: 25px;
+    }
+
+
+    .home-page .footer h5 {
+        margin-top: 15px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .home-page .container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+
+    .home-page .hero-container {
+        padding-top: 45px;
+    }
+
+
+    .home-page .hero-text h1 {
+        font-size: 36px;
+    }
+
+
+    .home-page .hero-search-card {
+        padding: 16px;
+    }
+
+
+    .home-page .hero-stat strong {
+        font-size: 21px;
+    }
+
+
+    .home-page .destination-modern,
+    .home-page .destination-wide {
+        height: 300px;
+    }
+
+
+    .home-page .destination-info h3 {
+        font-size: 22px;
+    }
+
+
+    .home-page .section-heading-modern h2 {
+        font-size: 27px;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.home-page .hero-primary-btn:focus-visible,
+.home-page .hero-secondary-btn:focus-visible,
+.home-page .hero-search-btn:focus-visible,
+.home-page .view-all-link:focus-visible,
+.home-page .dark-btn:focus-visible,
+.home-page .cta-button:focus-visible {
+    outline: 3px solid rgba(240, 184, 75, 0.55);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .home-page *,
+    .home-page *::before,
+    .home-page *::after {
+        scroll-behavior: auto !important;
+
+        transition: none !important;
+
+        animation: none !important;
+    }
+}

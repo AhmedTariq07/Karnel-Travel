@@ -1,0 +1,1229 @@
+
+/* ============================================================
+   KARNEL TRAVEL
+   PREMIUM TRAVEL INFORMATION PAGE
+   Same visual style as Tourist Spots
+   ============================================================ */
+
+
+/* ============================================================
+   FONT
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
+
+/* ============================================================
+   VARIABLES
+   ============================================================ */
+
+:root {
+    --travel-blue: #07548d;
+    --travel-blue-dark: #032f52;
+    --travel-cyan: #08b7d9;
+
+    --travel-light: #eaf8fc;
+
+    --text-dark: #102a43;
+    --text-light: #627d98;
+
+    --white: #ffffff;
+
+    --shadow-small:
+        0 10px 30px rgba(3, 47, 82, 0.08);
+
+    --shadow-large:
+        0 28px 65px rgba(3, 47, 82, 0.17);
+}
+
+
+/* ============================================================
+   PAGE BANNER
+   ============================================================ */
+
+.travel-page-banner {
+    position: relative;
+
+    min-height: 430px;
+
+    padding: 80px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(2, 31, 54, 0.94),
+            rgba(7, 84, 141, 0.82)
+        ),
+        url("https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1800&q=90")
+        center center / cover no-repeat;
+
+    text-align: center;
+
+    color: #ffffff;
+
+    font-family: "DM Sans", sans-serif;
+}
+
+
+/* ============================================================
+   BANNER GLOW
+   ============================================================ */
+
+.travel-page-banner::before {
+    content: "";
+
+    position: absolute;
+
+    width: 650px;
+    height: 650px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(8, 183, 217, 0.28),
+            transparent 68%
+        );
+
+    top: -360px;
+    right: -100px;
+}
+
+
+/* ============================================================
+   BANNER CIRCLE
+   ============================================================ */
+
+.travel-page-banner::after {
+    content: "";
+
+    position: absolute;
+
+    width: 520px;
+    height: 520px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    bottom: -350px;
+    left: -150px;
+}
+
+
+/* ============================================================
+   BANNER CONTENT
+   ============================================================ */
+
+.travel-page-banner > * {
+    position: relative;
+
+    z-index: 3;
+}
+
+
+.travel-page-banner h2 {
+    position: relative;
+
+    margin: 0 0 18px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(48px, 7vw, 78px);
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+
+    line-height: 1.05;
+
+    text-shadow:
+        0 15px 35px rgba(0,0,0,0.28);
+}
+
+
+/* Small decorative label */
+
+.travel-page-banner h2::before {
+    content: "TRAVEL WITH CONFIDENCE";
+
+    display: block;
+
+    margin-bottom: 20px;
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 4px;
+
+    color: #75e8f7;
+}
+
+
+.travel-page-banner p {
+    max-width: 680px;
+
+    margin: 0 auto;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+
+    color: rgba(255,255,255,0.88);
+}
+
+
+/* ============================================================
+   MAIN SECTION
+   ============================================================ */
+
+.travel-information-section {
+    position: relative;
+
+    padding: 110px 0 120px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 5% 15%,
+            rgba(8,183,217,0.09),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 95% 75%,
+            rgba(7,84,141,0.07),
+            transparent 30%
+        ),
+        #f6fafc;
+
+    font-family: "DM Sans", sans-serif;
+}
+
+
+/* Decorative background */
+
+.travel-information-section::before {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(7,84,141,0.06);
+
+    top: -260px;
+    right: -200px;
+}
+
+
+.travel-information-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 360px;
+    height: 360px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(8,183,217,0.07);
+
+    bottom: -200px;
+    left: -170px;
+}
+
+
+/* ============================================================
+   SECTION CONTAINER
+   ============================================================ */
+
+.travel-information-section > .container {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 1280px;
+}
+
+
+/* ============================================================
+   SECTION HEADING
+   ============================================================ */
+
+.travel-section-heading {
+    position: relative;
+
+    max-width: 850px;
+
+    margin: 0 auto 65px;
+
+    text-align: center;
+}
+
+
+.travel-section-heading span {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 16px;
+
+    padding: 8px 17px;
+
+    border-radius: 50px;
+
+    background: rgba(8,183,217,0.10);
+
+    border: 1px solid rgba(8,183,217,0.15);
+
+    color: var(--travel-blue);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2.5px;
+
+    text-transform: uppercase;
+}
+
+
+.travel-section-heading span::before {
+    content: "✦";
+
+    color: var(--travel-cyan);
+
+    font-size: 13px;
+}
+
+
+.travel-section-heading h2 {
+    margin: 0 0 18px;
+
+    color: var(--text-dark);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(34px, 5vw, 52px);
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    line-height: 1.15;
+}
+
+
+.travel-section-heading p {
+    max-width: 700px;
+
+    margin: auto;
+
+    color: var(--text-light);
+
+    font-size: 16px;
+
+    line-height: 1.9;
+}
+
+
+/* ============================================================
+   CARD ROW
+   ============================================================ */
+
+.travel-information-section .row {
+    row-gap: 35px;
+}
+
+
+/* ============================================================
+   PREMIUM TRAVEL CARD
+   ============================================================ */
+
+.travel-card {
+    position: relative;
+
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: #ffffff;
+
+    border: 1px solid rgba(7,84,141,0.07);
+
+    box-shadow: var(--shadow-small);
+
+    transition:
+        transform 0.55s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.55s ease;
+}
+
+
+.travel-card:hover {
+    transform: translateY(-15px);
+
+    box-shadow: var(--shadow-large);
+}
+
+
+/* Bottom animated accent */
+
+.travel-card::before {
+    content: "";
+
+    position: absolute;
+
+    z-index: 10;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--travel-blue),
+            var(--travel-cyan)
+        );
+
+    transition: width 0.5s ease;
+}
+
+
+.travel-card:hover::before {
+    width: 100%;
+}
+
+
+/* ============================================================
+   CARD IMAGE
+   ============================================================ */
+
+.travel-card-image {
+    position: relative;
+
+    height: 290px;
+
+    overflow: hidden;
+
+    background: #dcecf2;
+}
+
+
+.travel-card-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.9s cubic-bezier(.2,.8,.2,1),
+        filter 0.6s ease;
+}
+
+
+.travel-card:hover .travel-card-image img {
+    transform: scale(1.10);
+
+    filter: saturate(1.12);
+}
+
+
+/* ============================================================
+   CINEMATIC IMAGE OVERLAY
+   ============================================================ */
+
+.travel-card-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(1,25,43,0.62) 0%,
+            rgba(1,25,43,0.15) 45%,
+            transparent 75%
+        );
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   IMAGE SHINE
+   ============================================================ */
+
+.travel-card-image::before {
+    content: "";
+
+    position: absolute;
+
+    z-index: 3;
+
+    top: 0;
+    left: -130%;
+
+    width: 65%;
+    height: 100%;
+
+    transform: skewX(-20deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.24),
+            transparent
+        );
+
+    transition: left 0.9s ease;
+
+    pointer-events: none;
+}
+
+
+.travel-card:hover .travel-card-image::before {
+    left: 140%;
+}
+
+
+/* ============================================================
+   CARD ICON
+   ============================================================ */
+
+.travel-card-icon {
+    position: absolute;
+
+    z-index: 5;
+
+    left: 28px;
+    bottom: 20px;
+
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 19px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f4fcff
+        );
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,0.18);
+
+    border: 1px solid rgba(255,255,255,0.7);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+
+.travel-card:hover .travel-card-icon {
+    transform:
+        translateY(-6px)
+        rotate(-7deg)
+        scale(1.08);
+
+    box-shadow:
+        0 17px 35px rgba(0,0,0,0.22);
+}
+
+
+.travel-card-icon i {
+    font-size: 25px;
+
+    color: var(--travel-blue);
+
+    transition: color 0.3s ease;
+}
+
+
+.travel-card:hover .travel-card-icon i {
+    color: var(--travel-cyan);
+}
+
+
+/* ============================================================
+   CARD CONTENT
+   ============================================================ */
+
+.travel-card-content {
+    position: relative;
+
+    padding: 42px 30px 32px;
+
+    min-height: 330px;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* ============================================================
+   CARD TITLE
+   ============================================================ */
+
+.travel-card-content h3 {
+    margin: 0 0 15px;
+
+    color: var(--text-dark);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    line-height: 1.25;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.travel-card:hover .travel-card-content h3 {
+    color: var(--travel-blue);
+
+    transform: translateX(3px);
+}
+
+
+/* ============================================================
+   CARD DESCRIPTION
+   ============================================================ */
+
+.travel-card-content > p {
+    margin: 0 0 22px;
+
+    color: var(--text-light);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+/* ============================================================
+   INFORMATION LIST
+   ============================================================ */
+
+.travel-info-list {
+    margin-top: auto;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid rgba(16,42,67,0.08);
+}
+
+
+/* ============================================================
+   INFORMATION ITEM
+   ============================================================ */
+
+.travel-info-list div {
+    position: relative;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    margin-bottom: 14px;
+
+    padding-left: 2px;
+}
+
+
+.travel-info-list div:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ============================================================
+   INFORMATION ICON
+   ============================================================ */
+
+.travel-info-list i {
+    min-width: 20px;
+
+    margin-top: 2px;
+
+    color: var(--travel-blue);
+
+    font-size: 16px;
+
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+}
+
+
+.travel-info-list div:hover i {
+    color: var(--travel-cyan);
+
+    transform: scale(1.15);
+}
+
+
+/* ============================================================
+   INFORMATION TEXT
+   ============================================================ */
+
+.travel-info-list span {
+    color: #526b80;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   TAGS
+   ============================================================ */
+
+.travel-tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 22px;
+}
+
+
+.travel-tags span {
+    position: relative;
+
+    display: inline-block;
+
+    padding: 7px 13px;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f1f8fb,
+            #eaf5f9
+        );
+
+    border: 1px solid rgba(8,183,217,0.10);
+
+    color: var(--travel-blue);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.travel-tags span:hover {
+    transform: translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #e3f7fb,
+            #dff4f8
+        );
+}
+
+
+/* ============================================================
+   TRAVEL TIP BOX
+   ============================================================ */
+
+.travel-tip-box {
+    position: relative;
+
+    margin-top: 65px;
+
+    padding: 32px 35px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 22px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f5fbfd
+        );
+
+    border:
+        1px solid rgba(8,183,217,0.12);
+
+    box-shadow: var(--shadow-small);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+.travel-tip-box:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 20px 45px rgba(3,47,82,0.12);
+}
+
+
+/* Tip accent */
+
+.travel-tip-box::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 5px;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            to bottom,
+            var(--travel-blue),
+            var(--travel-cyan)
+        );
+}
+
+
+/* ============================================================
+   TIP ICON
+   ============================================================ */
+
+.travel-tip-icon {
+    min-width: 62px;
+
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 19px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--travel-blue),
+            var(--travel-cyan)
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 25px rgba(7,84,141,0.22);
+
+    transition:
+        transform 0.35s ease;
+}
+
+
+.travel-tip-box:hover .travel-tip-icon {
+    transform:
+        rotate(-7deg)
+        scale(1.06);
+}
+
+
+.travel-tip-icon i {
+    font-size: 25px;
+}
+
+
+/* ============================================================
+   TIP CONTENT
+   ============================================================ */
+
+.travel-tip-box h4 {
+    margin: 2px 0 8px;
+
+    color: var(--text-dark);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+
+.travel-tip-box p {
+    margin: 0;
+
+    color: var(--text-light);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+/* ============================================================
+   COPYRIGHT
+   ============================================================ */
+
+.copyright {
+    position: relative;
+
+    padding: 28px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #021f36,
+            #07548d
+        );
+
+    color: rgba(255,255,255,0.72);
+
+    font-family: "DM Sans", sans-serif;
+}
+
+
+.copyright::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: 80px;
+    height: 3px;
+
+    transform: translateX(-50%);
+
+    border-radius: 0 0 10px 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--travel-cyan),
+            #ffffff
+        );
+}
+
+
+.copyright p {
+    margin: 0;
+
+    font-size: 13px;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 991px) {
+
+    .travel-page-banner {
+        min-height: 370px;
+
+        padding: 75px 20px;
+    }
+
+
+    .travel-information-section {
+        padding: 85px 20px 95px;
+    }
+
+
+    .travel-section-heading {
+        margin-bottom: 50px;
+    }
+
+
+    .travel-card-image {
+        height: 260px;
+    }
+
+
+    .travel-card-content {
+        min-height: 310px;
+
+        padding:
+            40px 25px 28px;
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 767px) {
+
+    .travel-page-banner {
+        min-height: 330px;
+
+        padding: 60px 20px;
+    }
+
+
+    .travel-page-banner h2 {
+        font-size: 44px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .travel-page-banner h2::before {
+        font-size: 9px;
+
+        letter-spacing: 2.5px;
+    }
+
+
+    .travel-page-banner p {
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+
+    .travel-information-section {
+        padding:
+            70px 15px 80px;
+    }
+
+
+    .travel-section-heading {
+        margin-bottom: 45px;
+    }
+
+
+    .travel-section-heading h2 {
+        font-size: 34px;
+    }
+
+
+    .travel-section-heading p {
+        font-size: 14px;
+    }
+
+
+    .travel-card {
+        border-radius: 23px;
+    }
+
+
+    .travel-card-image {
+        height: 250px;
+    }
+
+
+    .travel-card-content {
+        min-height: 300px;
+
+        padding:
+            40px 22px 25px;
+    }
+
+
+    .travel-card-content h3 {
+        font-size: 23px;
+    }
+
+
+    .travel-card-content > p {
+        font-size: 13.5px;
+    }
+
+
+    .travel-card-icon {
+        left: 22px;
+
+        width: 60px;
+        height: 60px;
+    }
+
+
+    .travel-tip-box {
+        margin-top: 45px;
+
+        padding:
+            28px 22px;
+
+        gap: 16px;
+    }
+
+
+    .travel-tip-icon {
+        min-width: 58px;
+
+        width: 58px;
+        height: 58px;
+    }
+
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+    .travel-page-banner {
+        min-height: 300px;
+    }
+
+
+    .travel-page-banner h2 {
+        font-size: 38px;
+    }
+
+
+    .travel-page-banner p {
+        font-size: 14px;
+    }
+
+
+    .travel-section-heading h2 {
+        font-size: 29px;
+    }
+
+
+    .travel-section-heading span {
+        font-size: 9px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .travel-card-image {
+        height: 225px;
+    }
+
+
+    .travel-card-content {
+        padding:
+            38px 19px 23px;
+    }
+
+
+    .travel-card-content h3 {
+        font-size: 21px;
+    }
+
+
+    .travel-card-content > p {
+        font-size: 13px;
+    }
+
+
+    .travel-info-list span {
+        font-size: 12.5px;
+    }
+
+
+    .travel-tip-box {
+        display: block;
+
+        padding: 25px 20px;
+    }
+
+
+    .travel-tip-icon {
+        margin-bottom: 16px;
+    }
+
+
+    .travel-tip-box h4 {
+        font-size: 20px;
+    }
+
+
+    .travel-tip-box p {
+        font-size: 13px;
+    }
+
+}
+
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+
+        transition: none !important;
+
+        scroll-behavior: auto !important;
+    }
+
+}
+

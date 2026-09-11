@@ -1,0 +1,1032 @@
+/* =========================================================
+   RESTAURANTS PAGE
+   MODERN PREMIUM TRAVEL UI
+========================================================= */
+
+
+/* =========================================================
+   PAGE BANNER
+========================================================= */
+
+.page-banner {
+    position: relative;
+    min-height: 290px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 60px 20px;
+
+    color: #ffffff;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(255, 255, 255, 0.15),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(255, 138, 0, 0.16),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #043f66 0%,
+            #075b91 42%,
+            #087f8a 72%,
+            #138b82 100%
+        );
+}
+
+
+/* =========================================================
+   BANNER DECORATIVE CIRCLES
+========================================================= */
+
+.page-banner::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    left: -210px;
+    top: -250px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+
+    background: rgba(255, 255, 255, 0.05);
+
+    box-shadow:
+        0 0 0 35px rgba(255, 255, 255, 0.025),
+        0 0 0 70px rgba(255, 255, 255, 0.018),
+        0 0 0 110px rgba(255, 255, 255, 0.012);
+}
+
+
+.page-banner::after {
+    content: "";
+
+    position: absolute;
+
+    width: 460px;
+    height: 460px;
+
+    right: -220px;
+    bottom: -300px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+
+    background: rgba(255, 255, 255, 0.045);
+
+    box-shadow:
+        0 0 0 35px rgba(255, 255, 255, 0.025),
+        0 0 0 70px rgba(255, 255, 255, 0.018),
+        0 0 0 110px rgba(255, 255, 255, 0.012);
+}
+
+
+/* =========================================================
+   BANNER CONTAINER
+========================================================= */
+
+.page-banner .container {
+    position: relative;
+
+    z-index: 3;
+
+    max-width: 950px;
+}
+
+
+/* =========================================================
+   BANNER HEADING
+========================================================= */
+
+.page-banner h2 {
+    margin: 0 0 16px;
+
+    color: #ffffff;
+
+    font-size: clamp(38px, 5vw, 56px);
+
+    font-weight: 800;
+
+    line-height: 1.12;
+
+    letter-spacing: -1.5px;
+
+    text-shadow:
+        0 5px 22px rgba(0, 0, 0, 0.20);
+
+    animation: bannerTitle 0.8s ease both;
+}
+
+
+.page-banner p {
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    font-weight: 400;
+
+    animation: bannerText 1s ease both;
+}
+
+
+/* =========================================================
+   BANNER ANIMATIONS
+========================================================= */
+
+@keyframes bannerTitle {
+
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes bannerText {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   MAIN RESTAURANT SECTION
+========================================================= */
+
+.page-section {
+    position: relative;
+
+    padding: 90px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f7fafc 0%,
+            #ffffff 45%,
+            #f5f9fb 100%
+        );
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.section-heading {
+    margin-bottom: 55px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   SMALL ORANGE LABEL
+========================================================= */
+
+.section-heading span {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    margin-bottom: 15px;
+
+    color: #f28a16;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+
+.section-heading span::before,
+.section-heading span::after {
+    content: "";
+
+    width: 32px;
+    height: 2px;
+
+    margin: 0 11px;
+
+    border-radius: 20px;
+
+    background: #f28a16;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-heading h2 {
+    position: relative;
+
+    margin: 0;
+
+    color: #075b91;
+
+    font-size: clamp(31px, 4vw, 42px);
+
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   TITLE UNDERLINE
+========================================================= */
+
+.section-heading h2::after {
+    content: "";
+
+    display: block;
+
+    width: 65px;
+    height: 4px;
+
+    margin: 17px auto 0;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #075b91,
+            #087f8a,
+            #ff8a00
+        );
+}
+
+
+/* =========================================================
+   SECTION DESCRIPTION
+========================================================= */
+
+.section-heading p {
+    max-width: 720px;
+
+    margin: 20px auto 0;
+
+    color: #707b82;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   RESTAURANT CARD
+========================================================= */
+
+.info-card {
+    position: relative;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid rgba(7, 91, 145, 0.08);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px rgba(15, 50, 70, 0.07),
+        0 3px 8px rgba(15, 50, 70, 0.035);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+}
+
+
+/* =========================================================
+   CARD TOP ACCENT
+========================================================= */
+
+.info-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 4px;
+
+    z-index: 10;
+
+    background:
+        linear-gradient(
+            90deg,
+            #075b91,
+            #087f8a,
+            #ff8a00
+        );
+
+    transform: scaleX(0);
+
+    transform-origin: left;
+
+    transition: transform 0.4s ease;
+}
+
+
+.info-card:hover::before {
+    transform: scaleX(1);
+}
+
+
+/* =========================================================
+   CARD HOVER
+========================================================= */
+
+.info-card:hover {
+    transform: translateY(-12px);
+
+    border-color: rgba(7, 91, 145, 0.15);
+
+    box-shadow:
+        0 25px 55px rgba(15, 50, 70, 0.14),
+        0 8px 20px rgba(15, 50, 70, 0.06);
+}
+
+
+/* =========================================================
+   CARD IMAGE
+========================================================= */
+
+.card-image {
+    position: relative;
+
+    width: 100%;
+    height: 245px;
+
+    overflow: hidden;
+
+    background: #e9f1f4;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1),
+        filter 0.5s ease;
+}
+
+
+/* =========================================================
+   IMAGE OVERLAY
+========================================================= */
+
+.card-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.02) 20%,
+            rgba(0, 0, 0, 0.42) 100%
+        );
+
+    opacity: 0.65;
+
+    pointer-events: none;
+
+    transition: opacity 0.4s ease;
+}
+
+
+/* =========================================================
+   IMAGE HOVER
+========================================================= */
+
+.info-card:hover .card-image img {
+    transform: scale(1.10);
+
+    filter: saturate(1.08) contrast(1.02);
+}
+
+
+.info-card:hover .card-image::after {
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   CARD BODY
+========================================================= */
+
+.card-body {
+    position: relative;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 31px 28px 30px;
+
+    text-align: center;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   CARD ICON
+========================================================= */
+
+.card-icon {
+    width: 64px;
+    height: 64px;
+
+    position: relative;
+
+    z-index: 5;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: -63px auto 19px;
+
+    border: 4px solid #ffffff;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eaf7fa
+        );
+
+    color: #075b91;
+
+    font-size: 26px;
+
+    box-shadow:
+        0 9px 23px rgba(7, 91, 145, 0.17);
+
+    transition:
+        transform 0.4s ease,
+        background 0.4s ease,
+        color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+
+/* =========================================================
+   ICON HOVER
+========================================================= */
+
+.info-card:hover .card-icon {
+    transform: translateY(-5px) rotate(5deg);
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #075b91,
+            #087f8a
+        );
+
+    box-shadow:
+        0 12px 28px rgba(7, 91, 145, 0.25);
+}
+
+
+/* =========================================================
+   RESTAURANT NAME
+========================================================= */
+
+.card-body h4 {
+    margin: 0 0 13px;
+
+    color: #075b91;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    line-height: 1.35;
+
+    transition: color 0.3s ease;
+}
+
+
+.info-card:hover .card-body h4 {
+    color: #064b78;
+}
+
+
+/* =========================================================
+   RESTAURANT INFORMATION
+========================================================= */
+
+.card-body p {
+    width: 100%;
+
+    margin: 0 0 22px;
+
+    color: #68757b;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+.card-body p strong {
+    color: #334b58;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   READ MORE BUTTON
+========================================================= */
+
+.read-more {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: auto;
+
+    padding: 11px 20px;
+
+    color: #075b91;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    border: 1px solid rgba(7, 91, 145, 0.13);
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5fafc,
+            #edf7f9
+        );
+
+    transition:
+        color 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        transform 0.35s ease;
+}
+
+
+/* =========================================================
+   READ MORE ARROW
+========================================================= */
+
+.read-more::after {
+    content: "→";
+
+    font-size: 17px;
+
+    line-height: 1;
+
+    transition: transform 0.3s ease;
+}
+
+
+/* =========================================================
+   READ MORE HOVER
+========================================================= */
+
+.read-more:hover {
+    color: #ffffff;
+
+    border-color: transparent;
+
+    background:
+        linear-gradient(
+            135deg,
+            #075b91,
+            #087f8a
+        );
+
+    box-shadow:
+        0 9px 22px rgba(7, 91, 145, 0.22);
+
+    transform: translateY(-3px);
+}
+
+
+.read-more:hover::after {
+    transform: translateX(5px);
+}
+
+
+/* =========================================================
+   CARD GRID
+========================================================= */
+
+.page-section .row {
+    row-gap: 32px;
+}
+
+
+/* =========================================================
+   CARD ENTRANCE ANIMATION
+========================================================= */
+
+.info-card {
+    animation: cardFadeUp 0.7s ease both;
+}
+
+
+@keyframes cardFadeUp {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   DIFFERENT CARD DELAYS
+========================================================= */
+
+.page-section .col-lg-4:nth-child(2) .info-card {
+    animation-delay: 0.08s;
+}
+
+
+.page-section .col-lg-4:nth-child(3) .info-card {
+    animation-delay: 0.16s;
+}
+
+
+.page-section .col-lg-4:nth-child(4) .info-card {
+    animation-delay: 0.24s;
+}
+
+
+.page-section .col-lg-4:nth-child(5) .info-card {
+    animation-delay: 0.32s;
+}
+
+
+.page-section .col-lg-4:nth-child(6) .info-card {
+    animation-delay: 0.40s;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 992px) {
+
+    .page-banner {
+        min-height: 250px;
+
+        padding: 55px 20px;
+    }
+
+
+    .page-section {
+        padding: 75px 0;
+    }
+
+
+    .section-heading {
+        margin-bottom: 45px;
+    }
+
+
+    .card-image {
+        height: 225px;
+    }
+
+
+    .card-body {
+        padding: 29px 23px 27px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .page-banner {
+        min-height: 225px;
+
+        padding: 48px 18px;
+    }
+
+
+    .page-banner h2 {
+        font-size: 35px;
+
+        letter-spacing: -0.8px;
+    }
+
+
+    .page-banner p {
+        font-size: 15px;
+
+        line-height: 1.65;
+    }
+
+
+    .page-section {
+        padding: 65px 15px;
+    }
+
+
+    .section-heading {
+        margin-bottom: 40px;
+    }
+
+
+    .section-heading span::before,
+    .section-heading span::after {
+        width: 21px;
+
+        margin: 0 7px;
+    }
+
+
+    .section-heading h2 {
+        font-size: 30px;
+    }
+
+
+    .section-heading p {
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+
+    .card-image {
+        height: 225px;
+    }
+
+
+    .info-card:hover {
+        transform: translateY(-7px);
+    }
+
+
+    .card-body {
+        padding: 29px 22px 27px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 576px) {
+
+    .page-banner {
+        min-height: 205px;
+
+        padding: 45px 15px;
+    }
+
+
+    .page-banner h2 {
+        font-size: 29px;
+
+        letter-spacing: -0.5px;
+    }
+
+
+    .page-banner p {
+        font-size: 14px;
+    }
+
+
+    .page-section {
+        padding: 52px 12px;
+    }
+
+
+    .section-heading {
+        margin-bottom: 35px;
+    }
+
+
+    .section-heading span {
+        font-size: 11px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .section-heading h2 {
+        font-size: 27px;
+    }
+
+
+    .section-heading p {
+        font-size: 14px;
+    }
+
+
+    .card-image {
+        height: 210px;
+    }
+
+
+    .card-body {
+        padding: 28px 19px 25px;
+    }
+
+
+    .card-body h4 {
+        font-size: 20px;
+    }
+
+
+    .card-body p {
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+
+    .card-icon {
+        width: 59px;
+        height: 59px;
+
+        margin-top: -58px;
+
+        font-size: 23px;
+    }
+
+
+    .read-more {
+        padding: 10px 18px;
+
+        font-size: 13px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .page-banner h2 {
+        font-size: 27px;
+    }
+
+
+    .page-banner p {
+        font-size: 13px;
+    }
+
+
+    .section-heading h2 {
+        font-size: 25px;
+    }
+
+
+    .section-heading span::before,
+    .section-heading span::after {
+        display: none;
+    }
+
+
+    .card-image {
+        height: 195px;
+    }
+
+
+    .card-body {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.read-more:focus-visible {
+    outline: 3px solid rgba(255, 138, 0, 0.45);
+
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .info-card,
+    .card-image img,
+    .card-icon,
+    .read-more,
+    .read-more::after,
+    .page-banner h2,
+    .page-banner p {
+        animation: none;
+
+        transition: none;
+    }
+}

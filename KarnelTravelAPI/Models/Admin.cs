@@ -1,0 +1,21 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace KarnelTravelAPI.Models
+{
+    [Table("admins")]
+    public class Admin
+    {
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+
+        [Required]
+        [Column("username")]
+        public string Username { get; set; } = "";
+
+        [Required]
+        [Column("password_hash")]
+        public string PasswordHash { get; set; } = "";
+    }
+}

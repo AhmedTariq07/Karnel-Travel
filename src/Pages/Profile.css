@@ -1,0 +1,1080 @@
+/* =====================================================
+   KARNEL TRAVEL
+   PROFILE PAGE - PREMIUM UI
+   ===================================================== */
+
+
+/* =====================================================
+   PROFILE SECTION
+   ===================================================== */
+
+.profile-section {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding: 80px 20px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 8% 12%,
+            rgba(7, 91, 145, 0.14),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 92% 88%,
+            rgba(255, 138, 0, 0.11),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #f3f9fb 0%,
+            #ffffff 50%,
+            #f5faf9 100%
+        );
+}
+
+
+/* =====================================================
+   BACKGROUND DECORATION
+   ===================================================== */
+
+.profile-section::before {
+    content: "";
+
+    position: absolute;
+
+    width: 440px;
+    height: 440px;
+
+    left: -230px;
+    top: -210px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(7, 91, 145, 0.08);
+
+    background: rgba(7, 91, 145, 0.025);
+
+    box-shadow:
+        0 0 0 35px rgba(7, 91, 145, 0.018),
+        0 0 0 70px rgba(7, 91, 145, 0.012);
+
+    pointer-events: none;
+}
+
+
+.profile-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    right: -230px;
+    bottom: -250px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 138, 0, 0.10);
+
+    background: rgba(255, 138, 0, 0.025);
+
+    box-shadow:
+        0 0 0 35px rgba(255, 138, 0, 0.018),
+        0 0 0 70px rgba(255, 138, 0, 0.012);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   PROFILE CONTAINER
+   ===================================================== */
+
+.profile-container {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+}
+
+
+/* =====================================================
+   PROFILE PAGE HEADING
+   ===================================================== */
+
+.profile-heading {
+    position: relative;
+
+    margin: 0 0 40px;
+
+    text-align: center;
+
+    color: #075b91;
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.7px;
+
+    line-height: 1.2;
+
+    animation: profileHeading 0.7s ease both;
+}
+
+
+/* Heading underline */
+
+.profile-heading::after {
+    content: "";
+
+    display: block;
+
+    width: 55px;
+    height: 3px;
+
+    margin: 14px auto 0;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #075b91,
+            #ff8a00
+        );
+}
+
+
+/* =====================================================
+   PROFILE BOX
+   ===================================================== */
+
+.profile-box {
+    position: relative;
+
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    padding: 40px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    border: 1px solid rgba(7, 91, 145, 0.09);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 28px 70px rgba(13, 55, 75, 0.10),
+        0 8px 22px rgba(13, 55, 75, 0.05);
+
+    backdrop-filter: blur(12px);
+
+    animation: profileBox 0.8s ease both;
+}
+
+
+/* =====================================================
+   TOP GRADIENT LINE
+   ===================================================== */
+
+.profile-box::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 8%;
+
+    width: 84%;
+    height: 4px;
+
+    border-radius: 0 0 12px 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #075b91,
+            #07858c,
+            #ff8a00
+        );
+}
+
+
+/* =====================================================
+   PROFILE HEADER
+   ===================================================== */
+
+.profile-header {
+    text-align: center;
+
+    margin-bottom: 32px;
+}
+
+
+/* =====================================================
+   PROFILE ICON
+   ===================================================== */
+
+.profile-icon {
+    width: 82px;
+    height: 82px;
+
+    margin: 0 auto 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eaf7fa,
+            #f7fbfc
+        );
+
+    color: #075b91;
+
+    font-size: 34px;
+
+    border: 5px solid #ffffff;
+
+    box-shadow:
+        0 12px 28px rgba(7, 91, 145, 0.15);
+
+    transition:
+        transform 0.4s ease,
+        background 0.4s ease,
+        color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+
+/* Icon hover */
+
+.profile-box:hover .profile-icon {
+    transform: translateY(-4px) rotate(4deg);
+
+    background:
+        linear-gradient(
+            145deg,
+            #075b91,
+            #087d89
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 16px 32px rgba(7, 91, 145, 0.22);
+}
+
+
+/* =====================================================
+   PROFILE NAME
+   ===================================================== */
+
+.profile-header h3 {
+    margin: 5px 0 7px;
+
+    color: #075b91;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.3px;
+}
+
+
+/* =====================================================
+   PROFILE EMAIL
+   ===================================================== */
+
+.profile-header p {
+    margin: 0;
+
+    color: #7a878d;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   SUCCESS MESSAGE
+   ===================================================== */
+
+.profile-success {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    padding: 13px 15px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    background: #effaf4;
+
+    color: #23734b;
+
+    border-left: 4px solid #39a86b;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    animation: messageFade 0.4s ease both;
+}
+
+
+/* =====================================================
+   ERROR MESSAGE
+   ===================================================== */
+
+.profile-error {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+    padding: 13px 15px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    background: #fff1f1;
+
+    color: #bd3e3e;
+
+    border-left: 4px solid #dc5353;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    animation: errorShake 0.4s ease both;
+}
+
+
+/* =====================================================
+   PROFILE FORM GROUP
+   ===================================================== */
+
+.profile-form-group {
+    margin-bottom: 22px;
+}
+
+
+/* =====================================================
+   LABEL
+   ===================================================== */
+
+.profile-form-group label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #164e6c;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   INPUT
+   ===================================================== */
+
+.profile-form-group input {
+    width: 100%;
+
+    height: 53px;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
+
+    color: #263d49;
+
+    background: #f8fbfc;
+
+    border: 1px solid #dce8ed;
+
+    border-radius: 11px;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    outline: none;
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/* Placeholder */
+
+.profile-form-group input::placeholder {
+    color: #9aa8ae;
+
+    font-weight: 400;
+}
+
+
+/* Input focus */
+
+.profile-form-group input:focus {
+    background: #ffffff;
+
+    border-color: #078092;
+
+    box-shadow:
+        0 0 0 4px rgba(7, 128, 146, 0.10),
+        0 7px 18px rgba(7, 91, 145, 0.05);
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   PASSWORD SECTION
+   ===================================================== */
+
+.profile-password-title {
+    position: relative;
+
+    margin-top: 34px;
+
+    margin-bottom: 8px;
+
+    padding-top: 25px;
+
+    color: #075b91;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    border-top: 1px solid #edf1f3;
+}
+
+
+/* Small accent */
+
+.profile-password-title::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: -2px;
+
+    width: 45px;
+    height: 3px;
+
+    border-radius: 10px;
+
+    background: #ff8a00;
+}
+
+
+/* =====================================================
+   PASSWORD INFORMATION
+   ===================================================== */
+
+.profile-password-info {
+    margin-bottom: 21px;
+
+    color: #77848a;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   BUTTON BASE
+   ===================================================== */
+
+.profile-update-btn,
+.profile-logout-btn {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 53px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 13px 20px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+
+/* =====================================================
+   UPDATE BUTTON
+   ===================================================== */
+
+.profile-update-btn {
+    margin-top: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #075b91,
+            #087d89
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 23px rgba(7, 91, 145, 0.20);
+}
+
+
+/* Update button shine */
+
+.profile-update-btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.22),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.6s ease;
+}
+
+
+/* Update hover */
+
+.profile-update-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 16px 32px rgba(7, 91, 145, 0.27);
+}
+
+
+.profile-update-btn:hover:not(:disabled)::before {
+    left: 140%;
+}
+
+
+/* Disabled */
+
+.profile-update-btn:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    box-shadow: none;
+}
+
+
+/* =====================================================
+   LOGOUT BUTTON
+   ===================================================== */
+
+.profile-logout-btn {
+    margin-top: 14px;
+
+    background: #ffffff;
+
+    color: #c94343;
+
+    border: 1px solid #f0cccc;
+
+    box-shadow: none;
+}
+
+
+/* Logout hover */
+
+.profile-logout-btn:hover {
+    transform: translateY(-2px);
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dc3545,
+            #b92d3b
+        );
+
+    border-color: transparent;
+
+    box-shadow:
+        0 10px 22px rgba(220, 53, 69, 0.18);
+}
+
+
+/* =====================================================
+   NOT LOGGED IN BOX
+   ===================================================== */
+
+.profile-login-box {
+    position: relative;
+
+    max-width: 500px;
+
+    margin: 50px auto;
+
+    padding: 42px 35px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    border: 1px solid rgba(7, 91, 145, 0.09);
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 60px rgba(13, 55, 75, 0.10),
+        0 8px 20px rgba(13, 55, 75, 0.05);
+
+    animation: profileBox 0.8s ease both;
+}
+
+
+/* Top accent */
+
+.profile-login-box::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 10%;
+
+    width: 80%;
+    height: 4px;
+
+    border-radius: 0 0 10px 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #075b91,
+            #07858c,
+            #ff8a00
+        );
+}
+
+
+/* =====================================================
+   NOT LOGGED IN HEADING
+   ===================================================== */
+
+.profile-login-box h2 {
+    margin: 0 0 13px;
+
+    color: #075b91;
+
+    font-size: 29px;
+
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   NOT LOGGED IN TEXT
+   ===================================================== */
+
+.profile-login-box p {
+    margin: 0 0 25px;
+
+    color: #77848a;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   LOGIN BUTTON
+   ===================================================== */
+
+.profile-login-btn {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 28px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #075b91,
+            #087d89
+        );
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 9px 20px rgba(7, 91, 145, 0.18);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+
+/* Login button hover */
+
+.profile-login-btn:hover {
+    color: #ffffff;
+
+    transform: translateY(-3px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #064d7b,
+            #06747f
+        );
+
+    box-shadow:
+        0 14px 28px rgba(7, 91, 145, 0.25);
+}
+
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+
+@keyframes profileHeading {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(-18px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes profileBox {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes messageFade {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes errorShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    .profile-section {
+        padding: 65px 20px;
+    }
+
+
+    .profile-heading {
+        font-size: 32px;
+
+        margin-bottom: 32px;
+    }
+
+
+    .profile-box {
+        padding: 35px 30px;
+
+        border-radius: 20px;
+    }
+
+
+    .profile-icon {
+        width: 75px;
+        height: 75px;
+
+        font-size: 31px;
+    }
+
+
+    .profile-header h3 {
+        font-size: 23px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 480px) {
+
+    .profile-section {
+        padding: 50px 15px;
+    }
+
+
+    .profile-heading {
+        font-size: 27px;
+
+        margin-bottom: 27px;
+    }
+
+
+    .profile-box {
+        padding: 31px 20px 26px;
+
+        border-radius: 18px;
+    }
+
+
+    .profile-icon {
+        width: 68px;
+        height: 68px;
+
+        font-size: 28px;
+    }
+
+
+    .profile-header {
+        margin-bottom: 27px;
+    }
+
+
+    .profile-header h3 {
+        font-size: 21px;
+    }
+
+
+    .profile-header p {
+        font-size: 13px;
+    }
+
+
+    .profile-form-group input {
+        height: 51px;
+
+        font-size: 14px;
+    }
+
+
+    .profile-password-title {
+        font-size: 19px;
+
+        margin-top: 29px;
+    }
+
+
+    .profile-password-info {
+        font-size: 13px;
+    }
+
+
+    .profile-update-btn,
+    .profile-logout-btn {
+        min-height: 51px;
+
+        font-size: 14px;
+    }
+
+
+    .profile-login-box {
+        margin: 35px auto;
+
+        padding: 35px 22px;
+
+        border-radius: 18px;
+    }
+
+
+    .profile-login-box h2 {
+        font-size: 25px;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+   ===================================================== */
+
+@media (max-width: 360px) {
+
+    .profile-section {
+        padding: 40px 10px;
+    }
+
+
+    .profile-box {
+        padding: 27px 16px 23px;
+    }
+
+
+    .profile-heading {
+        font-size: 24px;
+    }
+
+
+    .profile-header h3 {
+        font-size: 19px;
+    }
+}
+
+
+/* =====================================================
+   ACCESSIBILITY
+   ===================================================== */
+
+.profile-update-btn:focus-visible,
+.profile-logout-btn:focus-visible,
+.profile-login-btn:focus-visible,
+.profile-form-group input:focus-visible {
+    outline: 3px solid rgba(255, 138, 0, 0.35);
+
+    outline-offset: 3px;
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .profile-heading,
+    .profile-box,
+    .profile-login-box,
+    .profile-success,
+    .profile-error {
+        animation: none;
+    }
+
+
+    .profile-icon,
+    .profile-update-btn,
+    .profile-logout-btn,
+    .profile-login-btn,
+    .profile-form-group input {
+        transition: none;
+    }
+}

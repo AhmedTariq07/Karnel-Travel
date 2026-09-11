@@ -1,0 +1,159 @@
+/* =====================================================
+   MANAGE RESTAURANTS PAGE
+===================================================== */
+
+.manage-restaurants-page {
+    padding: 40px;
+    background: #f5f6fa;
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.manage-restaurants-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.manage-restaurants-header h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.manage-restaurants-header p {
+    margin: 5px 0 0;
+    color: #777;
+}
+
+
+/* =====================================================
+   FORM CARD
+===================================================== */
+
+.manage-form-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+}
+
+.manage-form-card h3 {
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.manage-form-card label {
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+
+/* =====================================================
+   TABLE CARD
+===================================================== */
+
+.manage-table-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+.manage-table-card h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.manage-table-card table {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.manage-table-card th {
+    background: #f1f3f5;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.manage-table-card td {
+    vertical-align: middle;
+}
+
+.manage-table-card th,
+.manage-table-card td {
+    padding: 12px;
+}
+
+
+/* =====================================================
+   RESTAURANT IMAGE
+===================================================== */
+
+.restaurant-image {
+    width: 90px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.manage-table-card .btn {
+    min-width: 65px;
+}
+
+.manage-table-card .btn-warning {
+    margin-right: 5px;
+}
+
+
+/* =====================================================
+   ALERT
+===================================================== */
+
+.manage-restaurants-page .alert {
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .manage-restaurants-page {
+        padding: 20px;
+    }
+
+    .manage-restaurants-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .manage-form-card,
+    .manage-table-card {
+        padding: 20px;
+    }
+
+}

@@ -1,0 +1,966 @@
+/* =====================================================
+   ABOUT PAGE
+   ===================================================== */
+
+
+/* =====================================================
+   HERO
+   ===================================================== */
+
+.about-hero {
+
+    min-height: 450px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    background-image:
+        url("../images/hunza.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    color: white;
+}
+
+
+.about-hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8, 35, 28, .94),
+            rgba(8, 35, 28, .55)
+        );
+}
+
+
+.about-hero .container {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.about-hero-content {
+
+    max-width: 720px;
+}
+
+
+.about-label {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px 16px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,.12);
+
+    border: 1px solid rgba(255,255,255,.2);
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.about-hero h1 {
+
+    margin: 22px 0;
+
+    font-size: clamp(45px, 6vw, 72px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+}
+
+
+.about-hero h1 span {
+
+    display: block;
+
+    color: #d6a84f;
+
+    font-style: italic;
+
+    font-weight: 500;
+}
+
+
+.about-hero p {
+
+    max-width: 620px;
+
+    color: rgba(255,255,255,.75);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+
+
+/* =====================================================
+   INTRO
+   ===================================================== */
+
+.about-intro {
+
+    padding: 100px 0;
+
+    background: #f7f6f2;
+}
+
+
+.about-section-label {
+
+    color: #b98931;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.about-content h2 {
+
+    margin: 12px 0 25px;
+
+    color: #163d32;
+
+    font-size: 44px;
+
+    line-height: 1.15;
+
+    font-weight: 800;
+}
+
+
+.about-content h2 strong {
+
+    display: block;
+
+    color: #b98931;
+
+    font-weight: 500;
+
+    font-style: italic;
+}
+
+
+.about-content p {
+
+    color: #666;
+
+    font-size: 15px;
+
+    line-height: 1.9;
+
+    margin-bottom: 15px;
+}
+
+
+
+/* =====================================================
+   HIGHLIGHTS
+   ===================================================== */
+
+.about-highlights {
+
+    display: flex;
+
+    gap: 30px;
+
+    margin-top: 30px;
+
+    flex-wrap: wrap;
+}
+
+
+.highlight-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.highlight-icon {
+
+    width: 45px;
+
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #e9dfc9;
+
+    color: #b98931;
+}
+
+
+.highlight-item strong {
+
+    display: block;
+
+    color: #163d32;
+
+    font-size: 13px;
+}
+
+
+.highlight-item small {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #888;
+
+    font-size: 11px;
+}
+
+
+
+/* =====================================================
+   MISSION
+   ===================================================== */
+
+.mission-wrapper {
+
+    position: relative;
+
+    padding: 20px;
+}
+
+
+.mission-card {
+
+    position: relative;
+
+    z-index: 2;
+
+    padding: 45px;
+
+    border-radius: 22px;
+
+    background: #163d32;
+
+    color: white;
+
+    box-shadow:
+        0 25px 60px rgba(22,61,50,.2);
+}
+
+
+.mission-icon {
+
+    width: 60px;
+
+    height: 60px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 25px;
+
+    border-radius: 15px;
+
+    background: #d6a84f;
+
+    color: white;
+
+    font-size: 25px;
+}
+
+
+.mission-card > span {
+
+    color: #d6a84f;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.mission-card h3 {
+
+    margin: 12px 0 18px;
+
+    font-size: 30px;
+
+    line-height: 1.25;
+
+    font-weight: 800;
+}
+
+
+.mission-card p {
+
+    color: rgba(255,255,255,.65);
+
+    line-height: 1.8;
+
+    font-size: 14px;
+}
+
+
+.mission-line {
+
+    width: 60px;
+
+    height: 3px;
+
+    margin: 25px 0;
+
+    background: #d6a84f;
+}
+
+
+.mission-bottom {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: rgba(255,255,255,.8);
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+.mission-bottom i {
+
+    color: #d6a84f;
+}
+
+
+.mission-decoration {
+
+    position: absolute;
+
+    right: -5px;
+
+    bottom: -5px;
+
+    width: 100px;
+
+    height: 100px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 20px;
+
+    background: #d6a84f;
+
+    color: white;
+
+    font-size: 35px;
+}
+
+
+
+/* =====================================================
+   SERVICES
+   ===================================================== */
+
+.services-section {
+
+    padding: 100px 0;
+
+    background: white;
+}
+
+
+.about-section-heading {
+
+    max-width: 700px;
+
+    margin: 0 auto 55px;
+}
+
+
+.about-section-heading > span {
+
+    color: #b98931;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.about-section-heading h2 {
+
+    margin: 10px 0 15px;
+
+    color: #163d32;
+
+    font-size: 40px;
+
+    font-weight: 800;
+}
+
+
+.about-section-heading h2 strong {
+
+    color: #b98931;
+
+    font-style: italic;
+
+    font-weight: 500;
+}
+
+
+.about-section-heading p {
+
+    color: #777;
+
+    line-height: 1.7;
+}
+
+
+
+/* =====================================================
+   SERVICE CARD
+   ===================================================== */
+
+.about-service-card {
+
+    position: relative;
+
+    height: 100%;
+
+    padding: 35px;
+
+    border: 1px solid #eee;
+
+    border-radius: 18px;
+
+    background: white;
+
+    transition: .35s;
+
+    overflow: hidden;
+}
+
+
+.about-service-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color: #d6a84f;
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.08);
+}
+
+
+.service-icon {
+
+    width: 60px;
+
+    height: 60px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 25px;
+
+    border-radius: 15px;
+
+    background: #f3ead8;
+
+    color: #b98931;
+
+    font-size: 25px;
+
+    transition: .3s;
+}
+
+
+.about-service-card:hover .service-icon {
+
+    background: #163d32;
+
+    color: white;
+}
+
+
+.about-service-card > span {
+
+    position: absolute;
+
+    top: 30px;
+
+    right: 30px;
+
+    color: #ddd;
+
+    font-size: 35px;
+
+    font-weight: 800;
+}
+
+
+.about-service-card h3 {
+
+    position: relative;
+
+    margin-bottom: 15px;
+
+    color: #163d32;
+
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+
+.about-service-card p {
+
+    position: relative;
+
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+.about-service-card a {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 15px;
+
+    color: #b98931;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition: .3s;
+}
+
+
+.about-service-card a:hover {
+
+    gap: 13px;
+}
+
+
+
+/* =====================================================
+   DESTINATIONS
+   ===================================================== */
+
+.about-destinations {
+
+    padding: 100px 0;
+
+    background: #f7f6f2;
+}
+
+
+.destination-card {
+
+    position: relative;
+
+    min-height: 240px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    padding: 28px;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    background-size: cover;
+
+    background-position: center;
+
+    color: white;
+
+    transition: .4s;
+}
+
+
+.destination-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            transparent 20%,
+            rgba(0,0,0,.75)
+        );
+}
+
+
+.destination-card > div {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.destination-card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.15);
+}
+
+
+.destination-card span {
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    color: #e4c77f;
+}
+
+
+.destination-card h3 {
+
+    margin: 5px 0 0;
+
+    font-size: 28px;
+
+    font-weight: 800;
+}
+
+
+/*
+   Change these image paths if your
+   destination images have different names.
+*/
+
+.destination-hunza {
+
+    background-image:
+        url("../images/hunza.jpg");
+}
+
+
+.destination-skardu {
+
+    background-image:
+        url("../images/skardu.jpg");
+}
+
+
+.destination-swat {
+
+    background-image:
+        url("../images/swat.jpg");
+}
+
+
+.destination-murree {
+
+    background-image:
+        url("../images/murree.jpg");
+}
+
+
+.destination-gwadar {
+
+    background-image:
+        url("../images/gwadar.jpg");
+}
+
+
+
+/* =====================================================
+   CALL TO ACTION
+   ===================================================== */
+
+.about-cta {
+
+    padding: 70px 0;
+
+    background: #163d32;
+}
+
+
+.about-cta-inner {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.about-cta-inner > div:first-child {
+
+    max-width: 650px;
+}
+
+
+.about-cta span {
+
+    color: #d6a84f;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.about-cta h2 {
+
+    margin: 8px 0;
+
+    color: white;
+
+    font-size: 35px;
+
+    font-weight: 800;
+}
+
+
+.about-cta p {
+
+    margin: 0;
+
+    color: rgba(255,255,255,.65);
+
+    line-height: 1.7;
+}
+
+
+.cta-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+
+.cta-primary,
+.cta-secondary {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 14px 20px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition: .3s;
+}
+
+
+.cta-primary {
+
+    background: #d6a84f;
+
+    color: white;
+}
+
+
+.cta-primary:hover {
+
+    background: white;
+
+    color: #163d32;
+}
+
+
+.cta-secondary {
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    color: white;
+}
+
+
+.cta-secondary:hover {
+
+    background: white;
+
+    color: #163d32;
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 991px) {
+
+    .about-hero {
+
+        min-height: 400px;
+    }
+
+
+    .about-intro,
+    .services-section,
+    .about-destinations {
+
+        padding: 75px 0;
+    }
+
+
+    .about-content h2 {
+
+        font-size: 38px;
+    }
+
+
+    .about-cta-inner {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+}
+
+
+@media (max-width: 767px) {
+
+    .about-hero h1 {
+
+        font-size: 45px;
+    }
+
+
+    .about-hero p {
+
+        font-size: 15px;
+    }
+
+
+    .about-content h2 {
+
+        font-size: 32px;
+    }
+
+
+    .mission-card {
+
+        padding: 30px;
+    }
+
+
+    .about-section-heading h2 {
+
+        font-size: 31px;
+    }
+
+
+    .about-highlights {
+
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+
+    .cta-buttons {
+
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+
+    .cta-primary,
+    .cta-secondary {
+
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,735 @@
+/* =====================================================
+   KARNEL TRAVEL
+   ADMIN LOGIN - PREMIUM UI
+   ===================================================== */
+
+
+/* =====================================================
+   ADMIN LOGIN SECTION
+   ===================================================== */
+
+.admin-login-section {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding: 80px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(7, 91, 145, 0.15),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(255, 138, 0, 0.12),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #f3f9fb 0%,
+            #ffffff 50%,
+            #f5faf9 100%
+        );
+}
+
+
+/* =====================================================
+   DECORATIVE BACKGROUND - LEFT
+   ===================================================== */
+
+.admin-login-section::before {
+    content: "";
+
+    position: absolute;
+
+    width: 430px;
+    height: 430px;
+
+    left: -220px;
+    top: -200px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(7, 91, 145, 0.08);
+
+    background: rgba(7, 91, 145, 0.025);
+
+    box-shadow:
+        0 0 0 35px rgba(7, 91, 145, 0.018),
+        0 0 0 70px rgba(7, 91, 145, 0.012);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   DECORATIVE BACKGROUND - RIGHT
+   ===================================================== */
+
+.admin-login-section::after {
+    content: "";
+
+    position: absolute;
+
+    width: 450px;
+    height: 450px;
+
+    right: -230px;
+    bottom: -250px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 138, 0, 0.10);
+
+    background: rgba(255, 138, 0, 0.025);
+
+    box-shadow:
+        0 0 0 35px rgba(255, 138, 0, 0.018),
+        0 0 0 70px rgba(255, 138, 0, 0.012);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   ADMIN LOGIN CONTAINER
+   ===================================================== */
+
+.admin-login-container {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    max-width: 470px;
+
+    margin: 0 auto;
+
+    animation: adminFadeUp 0.8s ease both;
+}
+
+
+/* =====================================================
+   ADMIN LOGIN BOX
+   ===================================================== */
+
+.admin-login-box {
+    position: relative;
+
+    padding: 42px 40px 36px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    border: 1px solid rgba(7, 91, 145, 0.09);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 28px 70px rgba(13, 55, 75, 0.11),
+        0 8px 22px rgba(13, 55, 75, 0.05);
+
+    backdrop-filter: blur(12px);
+}
+
+
+/* =====================================================
+   TOP GRADIENT LINE
+   ===================================================== */
+
+.admin-login-box::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 8%;
+
+    width: 84%;
+    height: 4px;
+
+    border-radius: 0 0 12px 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #075b91,
+            #07858c,
+            #ff8a00
+        );
+}
+
+
+/* =====================================================
+   ADMIN ICON
+   ===================================================== */
+
+.admin-login-icon {
+    width: 72px;
+    height: 72px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eaf7fa,
+            #f7fbfc
+        );
+
+    color: #075b91;
+
+    font-size: 30px;
+
+    border: 5px solid #ffffff;
+
+    box-shadow:
+        0 10px 25px rgba(7, 91, 145, 0.14);
+
+    transition:
+        transform 0.4s ease,
+        background 0.4s ease,
+        color 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+
+/* Icon hover */
+
+.admin-login-box:hover .admin-login-icon {
+    transform: translateY(-4px) rotate(4deg);
+
+    background:
+        linear-gradient(
+            145deg,
+            #075b91,
+            #087d89
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 14px 28px rgba(7, 91, 145, 0.22);
+}
+
+
+/* =====================================================
+   ADMIN HEADING
+   ===================================================== */
+
+.admin-login-box h2 {
+    position: relative;
+
+    margin: 0 0 10px;
+
+    text-align: center;
+
+    color: #075b91;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.6px;
+
+    line-height: 1.2;
+}
+
+
+/* Heading underline */
+
+.admin-login-box h2::after {
+    content: "";
+
+    display: block;
+
+    width: 50px;
+    height: 3px;
+
+    margin: 13px auto 0;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #075b91,
+            #ff8a00
+        );
+}
+
+
+/* =====================================================
+   ADMIN DESCRIPTION
+   ===================================================== */
+
+.admin-login-box > p {
+    max-width: 360px;
+
+    margin: 17px auto 30px;
+
+    text-align: center;
+
+    color: #748087;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   ERROR MESSAGE
+   ===================================================== */
+
+.admin-login-error {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 12px 15px;
+
+    margin-bottom: 21px;
+
+    border-radius: 10px;
+
+    background: #fff1f1;
+
+    color: #bd3e3e;
+
+    border-left: 4px solid #dc5353;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    animation: errorShake 0.4s ease both;
+}
+
+
+/* =====================================================
+   ADMIN FORM GROUP
+   ===================================================== */
+
+.admin-form-group {
+    margin-bottom: 22px;
+}
+
+
+/* =====================================================
+   LABEL
+   ===================================================== */
+
+.admin-form-group label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #164e6c;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   INPUT
+   ===================================================== */
+
+.admin-form-group input {
+    width: 100%;
+
+    height: 53px;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
+
+    color: #263d49;
+
+    background: #f8fbfc;
+
+    border: 1px solid #dce8ed;
+
+    border-radius: 11px;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    outline: none;
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/* Placeholder */
+
+.admin-form-group input::placeholder {
+    color: #9aa8ae;
+
+    font-weight: 400;
+}
+
+
+/* Input focus */
+
+.admin-form-group input:focus {
+    background: #ffffff;
+
+    border-color: #078092;
+
+    box-shadow:
+        0 0 0 4px rgba(7, 128, 146, 0.10),
+        0 7px 18px rgba(7, 91, 145, 0.05);
+
+    transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   ADMIN LOGIN BUTTON
+   ===================================================== */
+
+.admin-login-btn {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 54px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 8px;
+
+    padding: 13px 20px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #075b91,
+            #087d89
+        );
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 23px rgba(7, 91, 145, 0.21);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+
+/* =====================================================
+   BUTTON SHINE
+   ===================================================== */
+
+.admin-login-btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.22),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.6s ease;
+}
+
+
+/* Button hover */
+
+.admin-login-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #064d7b,
+            #06747f
+        );
+
+    box-shadow:
+        0 16px 32px rgba(7, 91, 145, 0.27);
+}
+
+
+.admin-login-btn:hover:not(:disabled)::before {
+    left: 140%;
+}
+
+
+/* Button active */
+
+.admin-login-btn:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+
+/* Disabled */
+
+.admin-login-btn:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    box-shadow: none;
+}
+
+
+/* =====================================================
+   OPTIONAL BUTTON ICON SUPPORT
+   ===================================================== */
+
+.admin-login-btn i {
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   FORM BOTTOM DECORATION
+   ===================================================== */
+
+.admin-login-box::after {
+    content: "";
+
+    display: block;
+
+    width: 35px;
+    height: 3px;
+
+    margin: 27px auto 0;
+
+    border-radius: 10px;
+
+    background: #edf3f5;
+}
+
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+
+@keyframes adminFadeUp {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes errorShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    .admin-login-section {
+        padding: 65px 20px;
+    }
+
+
+    .admin-login-container {
+        max-width: 450px;
+    }
+
+
+    .admin-login-box {
+        padding: 38px 32px 32px;
+
+        border-radius: 20px;
+    }
+
+
+    .admin-login-box h2 {
+        font-size: 31px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 480px) {
+
+    .admin-login-section {
+        padding: 50px 15px;
+    }
+
+
+    .admin-login-box {
+        padding: 33px 22px 27px;
+
+        border-radius: 18px;
+    }
+
+
+    .admin-login-icon {
+        width: 65px;
+        height: 65px;
+
+        font-size: 27px;
+    }
+
+
+    .admin-login-box h2 {
+        font-size: 27px;
+    }
+
+
+    .admin-login-box > p {
+        font-size: 13px;
+
+        margin-bottom: 25px;
+    }
+
+
+    .admin-form-group input {
+        height: 51px;
+
+        font-size: 14px;
+    }
+
+
+    .admin-login-btn {
+        min-height: 52px;
+
+        font-size: 14px;
+    }
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+   ===================================================== */
+
+@media (max-width: 360px) {
+
+    .admin-login-section {
+        padding: 40px 10px;
+    }
+
+
+    .admin-login-box {
+        padding: 28px 17px 24px;
+    }
+
+
+    .admin-login-box h2 {
+        font-size: 24px;
+    }
+}
+
+
+/* =====================================================
+   ACCESSIBILITY
+   ===================================================== */
+
+.admin-login-btn:focus-visible,
+.admin-form-group input:focus-visible {
+    outline: 3px solid rgba(255, 138, 0, 0.35);
+
+    outline-offset: 3px;
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .admin-login-container,
+    .admin-login-error {
+        animation: none;
+    }
+
+
+    .admin-login-icon,
+    .admin-login-btn,
+    .admin-form-group input {
+        transition: none;
+    }
+}

@@ -1,0 +1,2173 @@
+
+/* =========================================================
+   KARNEL TRAVEL
+   PREMIUM ADMIN DASHBOARD
+   MODERN / CLEAN / PROFESSIONAL
+   ========================================================= */
+
+
+/* =========================================================
+   DESIGN VARIABLES
+   ========================================================= */
+
+:root {
+    --admin-blue: #075b91;
+    --admin-blue-dark: #064d78;
+    --admin-cyan: #087d89;
+    --admin-orange: #ff8a00;
+
+    --admin-bg: #f5f8fb;
+    --admin-white: #ffffff;
+
+    --admin-text: #172b3a;
+    --admin-text-soft: #687984;
+    --admin-muted: #8b98a3;
+
+    --admin-border: rgba(7, 91, 145, 0.08);
+
+    --admin-shadow:
+        0 10px 35px rgba(20, 55, 75, 0.07);
+
+    --admin-shadow-hover:
+        0 18px 45px rgba(20, 55, 75, 0.12);
+
+    --admin-radius: 18px;
+}
+
+
+/* =========================================================
+   ADMIN DASHBOARD
+   ========================================================= */
+
+.admin-dashboard {
+
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+
+    background:
+        radial-gradient(
+            circle at 5% 10%,
+            rgba(8, 125, 137, 0.035),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 95% 80%,
+            rgba(255, 138, 0, 0.035),
+            transparent 25%
+        ),
+        var(--admin-bg);
+
+    color: var(--admin-text);
+
+    font-family:
+        "DM Sans",
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+/* =========================================================
+   MAIN AREA
+   ========================================================= */
+
+.admin-main {
+
+    width: calc(100% - 257px);
+
+    min-height: 100vh;
+
+    margin-left: 257px;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TOP HEADER
+   ========================================================= */
+
+.admin-top-header {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 105px;
+
+    padding: 24px 45px;
+
+    background:
+        rgba(255, 255, 255, 0.94);
+
+    backdrop-filter: blur(14px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid rgba(7, 91, 145, 0.08);
+
+    box-sizing: border-box;
+
+    z-index: 20;
+}
+
+
+/* =========================================================
+   HEADER BOTTOM ACCENT
+   ========================================================= */
+
+.admin-top-header::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -1px;
+
+    width: 100%;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-blue),
+            var(--admin-cyan),
+            var(--admin-orange)
+        );
+
+    opacity: 0.75;
+}
+
+
+/* =========================================================
+   DASHBOARD LABEL
+   ========================================================= */
+
+.dashboard-label {
+
+    display: inline-block;
+
+    color: var(--admin-cyan);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.7px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   HEADER TITLE
+   ========================================================= */
+
+.admin-top-header h1 {
+
+    margin: 5px 0 3px;
+
+    color: var(--admin-text);
+
+    font-size: 29px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* =========================================================
+   HEADER DESCRIPTION
+   ========================================================= */
+
+.admin-top-header p {
+
+    margin: 0;
+
+    color: var(--admin-text-soft);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   ADMIN PROFILE
+   ========================================================= */
+
+.admin-profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+/* =========================================================
+   PROFILE ICON
+   ========================================================= */
+
+.admin-profile-icon {
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7, 91, 145, 0.12),
+            rgba(8, 125, 137, 0.10)
+        );
+
+    color: var(--admin-blue);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+
+    border: 1px solid rgba(7, 91, 145, 0.08);
+
+    box-shadow:
+        0 6px 18px rgba(7, 91, 145, 0.06);
+}
+
+
+/* =========================================================
+   PROFILE INFO
+   ========================================================= */
+
+.admin-profile-info strong {
+
+    display: block;
+
+    color: var(--admin-text);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.admin-profile-info span {
+
+    display: block;
+
+    color: var(--admin-muted);
+
+    font-size: 12px;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   HEADER LOGOUT
+   ========================================================= */
+
+.admin-header-logout {
+
+    width: 41px;
+    height: 41px;
+
+    border: 1px solid rgba(220, 53, 69, 0.08);
+
+    background:
+        rgba(220, 53, 69, 0.07);
+
+    color: #dc3545;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.admin-header-logout:hover {
+
+    background: #dc3545;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(220, 53, 69, 0.20);
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.admin-dashboard-content {
+
+    width: 100%;
+
+    max-width: 1600px;
+
+    margin: 0 auto;
+
+    padding: 38px 45px 55px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   WELCOME BANNER
+   ========================================================= */
+
+.admin-welcome {
+
+    position: relative;
+
+    min-height: 175px;
+
+    padding: 38px 42px;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(255, 138, 0, 0.18),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(8, 125, 137, 0.25),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #064d78 0%,
+            #075b91 50%,
+            #087d89 100%
+        );
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    box-shadow:
+        0 18px 45px rgba(7, 91, 145, 0.18);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   WELCOME CIRCLE
+   ========================================================= */
+
+.admin-welcome::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 330px;
+    height: 330px;
+
+    right: -150px;
+    top: -200px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.10);
+}
+
+
+.admin-welcome::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 170px;
+    height: 170px;
+
+    left: 40%;
+
+    bottom: -125px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+}
+
+
+/* =========================================================
+   WELCOME TEXT
+   ========================================================= */
+
+.welcome-text {
+
+    position: relative;
+
+    z-index: 3;
+}
+
+
+.welcome-text > span {
+
+    display: inline-block;
+
+    margin-bottom: 4px;
+
+    font-size: 12px;
+
+    color:
+        rgba(255, 255, 255, 0.76);
+
+    letter-spacing: 0.7px;
+}
+
+
+.welcome-text h2 {
+
+    margin: 6px 0 8px;
+
+    font-size: 31px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.6px;
+}
+
+
+.welcome-text p {
+
+    margin: 0;
+
+    max-width: 600px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color:
+        rgba(255, 255, 255, 0.80);
+}
+
+
+/* =========================================================
+   WELCOME ICON
+   ========================================================= */
+
+.welcome-icon {
+
+    position: relative;
+
+    z-index: 3;
+
+    width: 125px;
+    height: 125px;
+
+    flex-shrink: 0;
+
+    margin-right: 15px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.09);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.12);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 62px;
+
+    box-shadow:
+        inset 0 0 30px rgba(255, 255, 255, 0.04);
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.dashboard-search {
+
+    position: relative;
+
+    margin-top: 26px;
+
+    padding: 9px;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        1px solid rgba(7, 91, 145, 0.08);
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    box-shadow:
+        0 8px 28px rgba(20, 55, 75, 0.06);
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.dashboard-search:focus-within {
+
+    border-color:
+        rgba(7, 91, 145, 0.22);
+
+    box-shadow:
+        0 12px 35px rgba(7, 91, 145, 0.09);
+}
+
+
+.search-icon {
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--admin-blue);
+
+    font-size: 18px;
+}
+
+
+.dashboard-search form {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.dashboard-search input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    border: none;
+
+    outline: none;
+
+    padding: 13px 10px;
+
+    background: transparent;
+
+    color: var(--admin-text);
+
+    font-size: 14px;
+}
+
+
+.dashboard-search input::placeholder {
+
+    color: #a1abb3;
+}
+
+
+.dashboard-search button {
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--admin-blue),
+            var(--admin-cyan)
+        );
+
+    color: white;
+
+    padding: 12px 21px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    box-shadow:
+        0 7px 18px rgba(7, 91, 145, 0.17);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.dashboard-search button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 11px 25px rgba(7, 91, 145, 0.24);
+}
+
+
+.dashboard-search button i {
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.dashboard-search button:hover i {
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.dashboard-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, 1fr);
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+
+/* =========================================================
+   STAT BOX
+   ========================================================= */
+
+.stat-box {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        1px solid rgba(7, 91, 145, 0.07);
+
+    border-radius: 15px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow:
+        0 7px 24px rgba(20, 55, 75, 0.055);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.stat-box::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 75px;
+    height: 75px;
+
+    right: -30px;
+    bottom: -35px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(7, 91, 145, 0.025);
+}
+
+
+.stat-box:hover {
+
+    transform: translateY(-5px);
+
+    border-color:
+        rgba(7, 91, 145, 0.13);
+
+    box-shadow:
+        0 14px 35px rgba(20, 55, 75, 0.10);
+}
+
+
+/* =========================================================
+   STAT ICON
+   ========================================================= */
+
+.stat-icon {
+
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.stat-box:hover .stat-icon {
+
+    transform:
+        scale(1.08) rotate(-3deg);
+}
+
+
+/* =========================================================
+   STAT COLORS
+   ========================================================= */
+
+.tourist-stat {
+    background: #eaf4fb;
+    color: #075b96;
+}
+
+.hotel-stat {
+    background: #edf0ff;
+    color: #5664c7;
+}
+
+.restaurant-stat {
+    background: #fff2e8;
+    color: #e07827;
+}
+
+.resort-stat {
+    background: #e9f8ef;
+    color: #26945a;
+}
+
+.booking-stat {
+    background: #fff1f4;
+    color: #dc4b6b;
+}
+
+.users-stat {
+    background: #f0eaff;
+    color: #7356c7;
+}
+
+
+/* =========================================================
+   STAT TEXT
+   ========================================================= */
+
+.stat-box span {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #7b8790;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.stat-box strong {
+
+    display: block;
+
+    color: var(--admin-text);
+
+    font-size: 22px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.dashboard-section-heading {
+
+    position: relative;
+
+    margin: 38px 0 20px;
+}
+
+
+.dashboard-section-heading h2 {
+
+    margin: 0 0 5px;
+
+    color: var(--admin-text);
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.3px;
+}
+
+
+.dashboard-section-heading p {
+
+    margin: 0;
+
+    color: var(--admin-text-soft);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ADMIN CARDS
+   ========================================================= */
+
+.admin-cards {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   ADMIN CARD
+   ========================================================= */
+
+.admin-card {
+
+    position: relative;
+
+    min-height: 255px;
+
+    overflow: hidden;
+
+    padding: 28px;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    border:
+        1px solid rgba(7, 91, 145, 0.07);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 28px rgba(20, 55, 75, 0.06);
+
+    display: flex;
+
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+/* =========================================================
+   CARD TOP ACCENT
+   ========================================================= */
+
+.admin-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-blue),
+            var(--admin-cyan),
+            var(--admin-orange)
+        );
+}
+
+
+/* =========================================================
+   CARD DECORATIVE CIRCLE
+   ========================================================= */
+
+.admin-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 110px;
+    height: 110px;
+
+    right: -45px;
+    bottom: -45px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(7, 91, 145, 0.035);
+
+    transition:
+        transform 0.4s ease;
+}
+
+
+/* =========================================================
+   CARD HOVER
+   ========================================================= */
+
+.admin-card:hover {
+
+    transform: translateY(-7px);
+
+    border-color:
+        rgba(7, 91, 145, 0.13);
+
+    box-shadow:
+        var(--admin-shadow-hover);
+}
+
+
+.admin-card:hover::after {
+
+    transform: scale(1.45);
+}
+
+
+/* =========================================================
+   CARD TOP
+   ========================================================= */
+
+.card-top {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* =========================================================
+   CARD ICON
+   ========================================================= */
+
+.admin-card-icon {
+
+    width: 56px;
+    height: 56px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf4fb,
+            #f2f8fc
+        );
+
+    color: var(--admin-blue);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.admin-card:hover .admin-card-icon {
+
+    transform:
+        scale(1.08)
+        rotate(-3deg);
+
+    box-shadow:
+        0 8px 20px rgba(7, 91, 145, 0.10);
+}
+
+
+/* =========================================================
+   CARD NUMBER
+   ========================================================= */
+
+.card-number {
+
+    color: #d8e0e5;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.card-content {
+
+    flex: 1;
+
+    padding-top: 20px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.admin-card h3 {
+
+    margin: 0 0 9px;
+
+    color: var(--admin-text);
+
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+
+.admin-card p {
+
+    margin: 0;
+
+    max-width: 390px;
+
+    color: var(--admin-text-soft);
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CARD BUTTON
+   ========================================================= */
+
+.admin-card button {
+
+    width: fit-content;
+
+    position: relative;
+
+    z-index: 3;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--admin-blue),
+            var(--admin-cyan)
+        );
+
+    color: white;
+
+    padding: 11px 17px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    box-shadow:
+        0 7px 18px rgba(7, 91, 145, 0.15);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.admin-card button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 11px 25px rgba(7, 91, 145, 0.23);
+}
+
+
+.admin-card button i {
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.admin-card button:hover i {
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   CARD COLORS
+   ========================================================= */
+
+.hotel-card .admin-card-icon {
+    background: #edf0ff;
+    color: #5664c7;
+}
+
+.restaurant-card .admin-card-icon {
+    background: #fff2e8;
+    color: #e07827;
+}
+
+.resort-card .admin-card-icon {
+    background: #e9f8ef;
+    color: #26945a;
+}
+
+.booking-card .admin-card-icon {
+    background: #fff1f4;
+    color: #dc4b6b;
+}
+
+.users-card .admin-card-icon {
+    background: #f0eaff;
+    color: #7356c7;
+}
+
+
+/* =========================================================
+   RECENT BOOKINGS
+   ========================================================= */
+
+.recent-bookings {
+
+    margin-top: 26px;
+
+    overflow: hidden;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    border:
+        1px solid rgba(7, 91, 145, 0.07);
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 8px 28px rgba(20, 55, 75, 0.055);
+}
+
+
+/* =========================================================
+   RECENT BOOKINGS HEADER
+   ========================================================= */
+
+.recent-bookings-header {
+
+    padding: 21px 25px;
+
+    border-bottom:
+        1px solid #edf1f4;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.recent-bookings-header h2 {
+
+    margin: 0 0 5px;
+
+    color: var(--admin-text);
+
+    font-size: 19px;
+
+    font-weight: 800;
+}
+
+
+.recent-bookings-header p {
+
+    margin: 0;
+
+    color: var(--admin-text-soft);
+
+    font-size: 13px;
+}
+
+
+.recent-bookings-header button {
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--admin-blue);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.recent-bookings-header button i {
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.recent-bookings-header button:hover i {
+
+    transform:
+        translateX(4px);
+}
+
+
+/* =========================================================
+   BOOKING LIST
+   ========================================================= */
+
+.recent-bookings-list {
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   BOOKING ITEM
+   ========================================================= */
+
+.recent-booking-item {
+
+    display: grid;
+
+    grid-template-columns:
+        45px 1fr 110px 100px;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 16px 25px;
+
+    border-bottom:
+        1px solid #f0f3f5;
+
+    transition:
+        background 0.2s ease;
+}
+
+
+.recent-booking-item:last-child {
+
+    border-bottom: none;
+}
+
+
+.recent-booking-item:hover {
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(7, 91, 145, 0.025),
+            rgba(8, 125, 137, 0.015)
+        );
+}
+
+
+/* =========================================================
+   BOOKING ICON
+   ========================================================= */
+
+.recent-booking-icon {
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 13px;
+
+    background:
+        #eaf4fb;
+
+    color:
+        var(--admin-blue);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.recent-booking-item:hover
+.recent-booking-icon {
+
+    transform:
+        scale(1.08);
+}
+
+
+/* =========================================================
+   BOOKING INFO
+   ========================================================= */
+
+.recent-booking-info strong {
+
+    display: block;
+
+    color: var(--admin-text);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.recent-booking-info span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--admin-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   BOOKING TYPE
+   ========================================================= */
+
+.recent-booking-type {
+
+    color: var(--admin-blue);
+
+    background:
+        #eaf4fb;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-align: center;
+
+    border:
+        1px solid rgba(7, 91, 145, 0.06);
+}
+
+
+/* =========================================================
+   BOOKING DATE
+   ========================================================= */
+
+.recent-booking-date {
+
+    color: var(--admin-muted);
+
+    font-size: 12px;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   NO BOOKINGS
+   ========================================================= */
+
+.no-bookings {
+
+    padding: 45px 25px;
+
+    text-align: center;
+
+    color: var(--admin-muted);
+}
+
+
+.no-bookings i {
+
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #c1cbd2;
+
+    font-size: 36px;
+}
+
+
+.no-bookings p {
+
+    margin: 0;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   QUICK ACCESS
+   ========================================================= */
+
+.quick-access {
+
+    position: relative;
+
+    overflow: hidden;
+
+    margin-top: 26px;
+
+    padding: 21px 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.98),
+            rgba(250, 253, 255, 0.98)
+        );
+
+    border:
+        1px solid rgba(7, 91, 145, 0.07);
+
+    border-radius: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow:
+        0 8px 28px rgba(20, 55, 75, 0.05);
+}
+
+
+.quick-access::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 130px;
+    height: 130px;
+
+    right: -65px;
+    top: -75px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 138, 0, 0.035);
+}
+
+
+/* =========================================================
+   QUICK ACCESS ICON
+   ========================================================= */
+
+.quick-access-icon {
+
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    border-radius: 13px;
+
+    background:
+        #fff7df;
+
+    color:
+        #c08b1d;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   QUICK ACCESS TEXT
+   ========================================================= */
+
+.quick-access h3 {
+
+    margin: 0 0 5px;
+
+    color: var(--admin-text);
+
+    font-size: 17px;
+
+    font-weight: 800;
+}
+
+
+.quick-access p {
+
+    margin: 0;
+
+    color: var(--admin-text-soft);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.admin-footer {
+
+    margin-top: auto;
+
+    padding: 21px 45px;
+
+    background:
+        rgba(255, 255, 255, 0.94);
+
+    border-top:
+        1px solid rgba(7, 91, 145, 0.07);
+
+    color: var(--admin-muted);
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+
+.admin-footer p {
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   LARGE TABLET
+   ========================================================= */
+
+@media (max-width: 1300px) {
+
+    .dashboard-stats {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+
+    .admin-cards {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .admin-main {
+
+        width:
+            calc(100% - 257px);
+
+        margin-left: 257px;
+    }
+
+
+    .admin-dashboard-content {
+
+        padding:
+            30px;
+    }
+
+
+    .admin-top-header {
+
+        padding:
+            22px 30px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .admin-main {
+
+        width: 100%;
+
+        margin-left: 0;
+    }
+
+
+    .admin-top-header {
+
+        min-height: 85px;
+
+        padding:
+            18px 20px;
+    }
+
+
+    .admin-top-header h1 {
+
+        font-size: 24px;
+    }
+
+
+    .admin-top-header p {
+
+        font-size: 12px;
+    }
+
+
+    .admin-profile {
+
+        gap: 8px;
+    }
+
+
+    .admin-profile-info {
+
+        display: none;
+    }
+
+
+    .admin-dashboard-content {
+
+        padding:
+            25px 20px 40px;
+    }
+
+
+    .admin-welcome {
+
+        min-height: 145px;
+
+        padding:
+            28px;
+    }
+
+
+    .welcome-text h2 {
+
+        font-size: 25px;
+    }
+
+
+    .welcome-icon {
+
+        width: 90px;
+        height: 90px;
+
+        margin-right: 0;
+
+        font-size: 45px;
+    }
+
+
+    .dashboard-stats {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .admin-cards {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .recent-booking-item {
+
+        grid-template-columns:
+            45px 1fr;
+    }
+
+
+    .recent-booking-type,
+    .recent-booking-date {
+
+        display: none;
+    }
+
+
+    .quick-access {
+
+        align-items: flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .admin-top-header {
+
+        padding:
+            16px 15px;
+    }
+
+
+    .dashboard-label {
+
+        font-size: 9px;
+
+        letter-spacing: 1.3px;
+    }
+
+
+    .admin-top-header h1 {
+
+        font-size: 21px;
+    }
+
+
+    .admin-profile-icon {
+
+        width: 40px;
+        height: 40px;
+
+        border-radius: 12px;
+
+        font-size: 17px;
+    }
+
+
+    .admin-header-logout {
+
+        width: 37px;
+        height: 37px;
+    }
+
+
+    .admin-dashboard-content {
+
+        padding:
+            20px 15px 30px;
+    }
+
+
+    .admin-welcome {
+
+        min-height: 135px;
+
+        padding:
+            23px;
+    }
+
+
+    .welcome-text h2 {
+
+        font-size: 21px;
+    }
+
+
+    .welcome-text p {
+
+        font-size: 12px;
+
+        line-height: 1.6;
+    }
+
+
+    .welcome-icon {
+
+        display: none;
+    }
+
+
+    .dashboard-search {
+
+        padding: 7px;
+
+        border-radius: 12px;
+    }
+
+
+    .search-icon {
+
+        width: 38px;
+
+        font-size: 16px;
+    }
+
+
+    .dashboard-search form {
+
+        gap: 5px;
+    }
+
+
+    .dashboard-search input {
+
+        min-width: 0;
+
+        font-size: 12px;
+
+        padding:
+            12px 5px;
+    }
+
+
+    .dashboard-search button {
+
+        padding:
+            10px 12px;
+
+        font-size: 11px;
+
+        border-radius: 8px;
+    }
+
+
+    .dashboard-search button i {
+
+        display: none;
+    }
+
+
+    .dashboard-stats {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 10px;
+    }
+
+
+    .stat-box {
+
+        padding:
+            13px;
+
+        gap: 8px;
+
+        border-radius: 13px;
+    }
+
+
+    .stat-icon {
+
+        width: 37px;
+        height: 37px;
+
+        border-radius: 10px;
+
+        font-size: 15px;
+    }
+
+
+    .stat-box span {
+
+        font-size: 10px;
+    }
+
+
+    .stat-box strong {
+
+        font-size: 19px;
+    }
+
+
+    .dashboard-section-heading {
+
+        margin-top: 30px;
+    }
+
+
+    .dashboard-section-heading h2 {
+
+        font-size: 20px;
+    }
+
+
+    .dashboard-section-heading p {
+
+        font-size: 12px;
+    }
+
+
+    .admin-card {
+
+        min-height: 230px;
+
+        padding:
+            23px;
+
+        border-radius: 16px;
+    }
+
+
+    .admin-card h3 {
+
+        font-size: 19px;
+    }
+
+
+    .admin-card p {
+
+        font-size: 13px;
+    }
+
+
+    .admin-card-icon {
+
+        width: 51px;
+        height: 51px;
+
+        border-radius: 13px;
+    }
+
+
+    .recent-bookings {
+
+        border-radius: 14px;
+    }
+
+
+    .recent-bookings-header {
+
+        padding:
+            18px;
+    }
+
+
+    .recent-bookings-header h2 {
+
+        font-size: 17px;
+    }
+
+
+    .recent-booking-item {
+
+        padding:
+            13px 18px;
+    }
+
+
+    .quick-access {
+
+        padding:
+            17px;
+
+        border-radius: 14px;
+    }
+
+
+    .quick-access h3 {
+
+        font-size: 15px;
+    }
+
+
+    .quick-access p {
+
+        font-size: 12px;
+
+        line-height: 1.6;
+    }
+
+
+    .admin-footer {
+
+        padding:
+            17px 15px;
+
+        line-height: 1.6;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.admin-dashboard button:focus-visible,
+.admin-dashboard input:focus-visible {
+
+    outline:
+        3px solid rgba(255, 138, 0, 0.28);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .admin-dashboard *,
+    .admin-dashboard *::before,
+    .admin-dashboard *::after {
+
+        scroll-behavior: auto !important;
+
+        transition: none !important;
+
+        animation: none !important;
+    }
+
+}
+
