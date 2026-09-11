@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import "../Pages/ManageTouristSpots.css";
+import API_URL from "../api";
 
 function ManageRestaurants() {
-
     const navigate = useNavigate();
 
     const [restaurants, setRestaurants] = useState([]);
-
     const [loading, setLoading] = useState(true);
-
     const [message, setMessage] = useState("");
-
     const [showForm, setShowForm] = useState(false);
-
     const [editingId, setEditingId] = useState(null);
 
     const [formData, setFormData] = useState({
@@ -34,7 +29,6 @@ function ManageRestaurants() {
     // =====================================================
 
     const getImageUrl = (image) => {
-
         if (!image) return "";
 
         let imageUrl = image.replace(/\\/g, "/");
@@ -56,7 +50,7 @@ function ManageRestaurants() {
             imageUrl = "/" + imageUrl;
         }
 
-        return `http://localhost:5014${imageUrl}`;
+        return `${API_URL}${imageUrl}`;
     };
 
 
@@ -65,13 +59,11 @@ function ManageRestaurants() {
     // =====================================================
 
     const loadRestaurants = async () => {
-
         try {
-
             setLoading(true);
 
             const response = await fetch(
-                "http://localhost:5014/api/Restaurants"
+                `${API_URL}/api/Restaurants`
             );
 
             if (!response.ok) {
@@ -83,21 +75,16 @@ function ManageRestaurants() {
             const data = await response.json();
 
             setRestaurants(data);
-
         }
         catch (error) {
-
             console.error(error);
 
             setMessage(
                 "Unable to load restaurants."
             );
-
         }
         finally {
-
             setLoading(false);
-
         }
     };
 
@@ -107,19 +94,15 @@ function ManageRestaurants() {
     // =====================================================
 
     useEffect(() => {
-
         const token =
             localStorage.getItem("adminToken");
 
         if (!token) {
-
             navigate("/admin-login");
-
             return;
         }
 
         loadRestaurants();
-
     }, [navigate]);
 
 
@@ -128,7 +111,6 @@ function ManageRestaurants() {
     // =====================================================
 
     const handleChange = (e) => {
-
         const { name, value } = e.target;
 
         setFormData({
@@ -143,7 +125,6 @@ function ManageRestaurants() {
     // =====================================================
 
     const handleImageChange = (e) => {
-
         const file = e.target.files[0];
 
         setFormData({
@@ -158,7 +139,6 @@ function ManageRestaurants() {
     // =====================================================
 
     const resetForm = () => {
-
         setFormData({
             name: "",
             location: "",
@@ -171,7 +151,6 @@ function ManageRestaurants() {
         });
 
         setEditingId(null);
-
         setShowForm(false);
     };
 
@@ -181,7 +160,6 @@ function ManageRestaurants() {
     // =====================================================
 
     const editRestaurant = (restaurant) => {
-
         setEditingId(restaurant.id);
 
         setFormData({
@@ -190,15 +168,13 @@ function ManageRestaurants() {
             description: restaurant.description || "",
             price: restaurant.price || "",
             rating: restaurant.rating ?? "",
-            totalSeats:
-                restaurant.totalSeats ?? 0,
+            totalSeats: restaurant.totalSeats ?? 0,
             availableSeats:
                 restaurant.availableSeats ?? 0,
             image: null
         });
 
         setShowForm(true);
-
         setMessage("");
 
         window.scrollTo({
@@ -213,22 +189,7 @@ function ManageRestaurants() {
     // =====================================================
 
     const cancelEdit = () => {
-
-        setEditingId(null);
-
-        setFormData({
-            name: "",
-            location: "",
-            description: "",
-            price: "",
-            rating: "",
-            totalSeats: 0,
-            availableSeats: 0,
-            image: null
-        });
-
-        setShowForm(false);
-
+        resetForm();
         setMessage("");
     };
 
@@ -238,16 +199,13 @@ function ManageRestaurants() {
     // =====================================================
 
     const saveRestaurant = async (e) => {
-
         e.preventDefault();
 
         const token =
             localStorage.getItem("adminToken");
 
         if (!token) {
-
             navigate("/admin-login");
-
             return;
         }
 
@@ -264,31 +222,25 @@ function ManageRestaurants() {
 
 
         if (totalSeats < 0) {
-
             setMessage(
                 "Total seats cannot be negative."
             );
-
             return;
         }
 
 
         if (availableSeats < 0) {
-
             setMessage(
                 "Available seats cannot be negative."
             );
-
             return;
         }
 
 
         if (availableSeats > totalSeats) {
-
             setMessage(
                 "Available seats cannot be greater than total seats."
             );
-
             return;
         }
 
@@ -302,7 +254,7 @@ function ManageRestaurants() {
             if (editingId !== null) {
 
                 const response = await fetch(
-                    `http://localhost:5014/api/Restaurants/${editingId}`,
+                    `${API_URL}/api/Restaurants/${editingId}`,
                     {
                         method: "PUT",
 
@@ -315,7 +267,6 @@ function ManageRestaurants() {
                         },
 
                         body: JSON.stringify({
-
                             id: editingId,
 
                             name:
@@ -331,11 +282,11 @@ function ManageRestaurants() {
                                 formData.price,
 
                             rating:
-                                formData.rating
-                                    ? parseFloat(
+                                formData.rating === ""
+                                    ? null
+                                    : parseFloat(
                                         formData.rating
-                                    )
-                                    : null,
+                                    ),
 
                             totalSeats:
                                 totalSeats,
@@ -348,11 +299,11 @@ function ManageRestaurants() {
 
 
                 const responseData =
-                    await response.json();
+                    await response.json()
+                        .catch(() => ({}));
 
 
                 if (!response.ok) {
-
                     setMessage(
                         responseData.message ||
                         "Failed to update restaurant."
@@ -366,23 +317,7 @@ function ManageRestaurants() {
                     "Restaurant updated successfully."
                 );
 
-
-                setEditingId(null);
-
-
-                setFormData({
-                    name: "",
-                    location: "",
-                    description: "",
-                    price: "",
-                    rating: "",
-                    totalSeats: 0,
-                    availableSeats: 0,
-                    image: null
-                });
-
-
-                setShowForm(false);
+                resetForm();
 
                 loadRestaurants();
 
@@ -396,36 +331,30 @@ function ManageRestaurants() {
 
             const data = new FormData();
 
-
             data.append(
                 "name",
                 formData.name
             );
-
 
             data.append(
                 "location",
                 formData.location
             );
 
-
             data.append(
                 "description",
                 formData.description
             );
-
 
             data.append(
                 "price",
                 formData.price
             );
 
-
             data.append(
                 "totalSeats",
                 totalSeats
             );
-
 
             data.append(
                 "availableSeats",
@@ -434,7 +363,6 @@ function ManageRestaurants() {
 
 
             if (formData.rating !== "") {
-
                 data.append(
                     "rating",
                     parseFloat(
@@ -445,7 +373,6 @@ function ManageRestaurants() {
 
 
             if (formData.image) {
-
                 data.append(
                     "image",
                     formData.image
@@ -454,7 +381,7 @@ function ManageRestaurants() {
 
 
             const response = await fetch(
-                "http://localhost:5014/api/Restaurants",
+                `${API_URL}/api/Restaurants`,
                 {
                     method: "POST",
 
@@ -469,11 +396,11 @@ function ManageRestaurants() {
 
 
             const responseData =
-                await response.json();
+                await response.json()
+                    .catch(() => ({}));
 
 
             if (!response.ok) {
-
                 setMessage(
                     responseData.message ||
                     "Failed to add restaurant."
@@ -487,26 +414,11 @@ function ManageRestaurants() {
                 "Restaurant added successfully."
             );
 
-
-            setFormData({
-                name: "",
-                location: "",
-                description: "",
-                price: "",
-                rating: "",
-                totalSeats: 0,
-                availableSeats: 0,
-                image: null
-            });
-
-
-            setShowForm(false);
+            resetForm();
 
             loadRestaurants();
-
         }
         catch (error) {
-
             console.error(
                 "Restaurant Error:",
                 error
@@ -524,7 +436,6 @@ function ManageRestaurants() {
     // =====================================================
 
     const deleteRestaurant = async (id) => {
-
         const confirmDelete =
             window.confirm(
                 "Are you sure you want to delete this restaurant?"
@@ -540,10 +451,16 @@ function ManageRestaurants() {
             localStorage.getItem("adminToken");
 
 
+        if (!token) {
+            navigate("/admin-login");
+            return;
+        }
+
+
         try {
 
             const response = await fetch(
-                `http://localhost:5014/api/Restaurants/${id}`,
+                `${API_URL}/api/Restaurants/${id}`,
                 {
                     method: "DELETE",
 
@@ -556,11 +473,11 @@ function ManageRestaurants() {
 
 
             const data =
-                await response.json();
+                await response.json()
+                    .catch(() => ({}));
 
 
             if (!response.ok) {
-
                 setMessage(
                     data.message ||
                     "Delete failed."
@@ -574,12 +491,9 @@ function ManageRestaurants() {
                 "Restaurant deleted successfully."
             );
 
-
             loadRestaurants();
-
         }
         catch (error) {
-
             console.error(error);
 
             setMessage(
@@ -594,7 +508,6 @@ function ManageRestaurants() {
     // =====================================================
 
     const logout = () => {
-
         localStorage.removeItem(
             "adminToken"
         );
@@ -612,9 +525,7 @@ function ManageRestaurants() {
     // =====================================================
 
     return (
-
         <div className="manage-tourist-spots">
-
 
             {/* =================================================
                 HEADER
@@ -667,7 +578,6 @@ function ManageRestaurants() {
 
             <div className="manage-content">
 
-
                 {/* =================================================
                     TOP
                 ================================================= */}
@@ -686,9 +596,7 @@ function ManageRestaurants() {
                             if (
                                 editingId !== null
                             ) {
-
                                 cancelEdit();
-
                                 return;
                             }
 
@@ -758,7 +666,6 @@ function ManageRestaurants() {
                                 saveRestaurant
                             }
                         >
-
 
                             {/* NAME */}
 
@@ -1090,16 +997,16 @@ function ManageRestaurants() {
 
                                             <td>
                                                 {
-                                                    restaurant.location
-                                                    || "-"
+                                                    restaurant.location ||
+                                                    "-"
                                                 }
                                             </td>
 
 
                                             <td>
                                                 {
-                                                    restaurant.price
-                                                    || "-"
+                                                    restaurant.price ||
+                                                    "-"
                                                 }
                                             </td>
 
@@ -1109,15 +1016,15 @@ function ManageRestaurants() {
                                                 <span className="fw-bold">
 
                                                     {
-                                                        restaurant.availableSeats
-                                                        ?? 0
+                                                        restaurant.availableSeats ??
+                                                        0
                                                     }
 
                                                     {" / "}
 
                                                     {
-                                                        restaurant.totalSeats
-                                                        ?? 0
+                                                        restaurant.totalSeats ??
+                                                        0
                                                     }
 
                                                 </span>
@@ -1128,8 +1035,8 @@ function ManageRestaurants() {
                                             <td className="description-cell">
 
                                                 {
-                                                    restaurant.description
-                                                    || "-"
+                                                    restaurant.description ||
+                                                    "-"
                                                 }
 
                                             </td>
@@ -1150,17 +1057,13 @@ function ManageRestaurants() {
                                                         }
                                                         className="spot-image"
                                                         onError={(e) => {
-
                                                             e.target.style.display =
                                                                 "none";
-
                                                         }}
                                                     />
 
                                                 ) : (
-
                                                     "-"
-
                                                 )}
 
                                             </td>
@@ -1169,8 +1072,8 @@ function ManageRestaurants() {
                                             <td>
 
                                                 {
-                                                    restaurant.rating
-                                                    ?? "-"
+                                                    restaurant.rating ??
+                                                    "-"
                                                 }
 
                                             </td>
@@ -1179,7 +1082,6 @@ function ManageRestaurants() {
                                             <td>
 
                                                 <div className="action-buttons">
-
 
                                                     <button
                                                         className="edit-button"

@@ -16,6 +16,32 @@ function Restaurants() {
 
 
     // =====================================================
+    // RESTAURANT IMAGES
+    // =====================================================
+
+    const restaurantImages = {
+
+        // Skardu Restaurant
+        8: "/images/skardu-restaurant.jpg",
+
+        // Monal
+        9: "/images/islamabad-restaurant.jpg",
+
+        // Tuscany Courtyard
+        10: "/images/tuscany-restaurant.jpg",
+
+        // Spice Bazaar
+        11: "/images/spice-bazar-restaurant.jpg",
+
+        // Haveli Restaurant
+        12: "/images/haveli-restaurant.jpg",
+
+        // LalQila Restaurant
+        13: "/images/lalqila-restaurant.jpg"
+    };
+
+
+    // =====================================================
     // FETCH RESTAURANTS
     // =====================================================
 
@@ -49,39 +75,77 @@ function Restaurants() {
 
 
     // =====================================================
-    // IMAGE URL
+    // GET RESTAURANT IMAGE
     // =====================================================
 
-    const getImageUrl = (image) => {
+    const getImageUrl = (restaurant) => {
 
-        // No image
-        if (!image || image.trim() === "") {
-            return "/images/restaurant-placeholder.jpg";
+        // First use our local image mapping
+        if (restaurantImages[restaurant.id]) {
+            return restaurantImages[restaurant.id];
         }
 
-        // Already complete URL
-        if (
-            image.startsWith("http://") ||
-            image.startsWith("https://")
-        ) {
-            return image;
+
+        // If there is no ID mapping, try database image
+        if (restaurant.image) {
+
+            let image = restaurant.image
+                .trim()
+                .replace(/\\/g, "/");
+
+
+            // Old localhost upload URL
+            if (image.includes("/uploads/restaurants/")) {
+
+                const fileName =
+                    image.substring(
+                        image.lastIndexOf("/") + 1
+                    );
+
+                return `/images/${fileName}`;
+            }
+
+
+            // Already a frontend image
+            if (image.startsWith("/images/")) {
+                return image;
+            }
+
+
+            // Absolute URL
+            if (
+                image.startsWith("http://") ||
+                image.startsWith("https://")
+            ) {
+                return image;
+            }
+
+
+            // Other path
+            if (image.startsWith("/")) {
+                return image;
+            }
+
+
+            return `/images/${image}`;
         }
 
-        // Image path starts with /
-        if (image.startsWith("/")) {
-            return `${API_URL}${image}`;
-        }
 
-        // Image path does not start with /
-        return `${API_URL}/${image}`;
+        // Default
+        return "/images/restaurant-placeholder.jpg";
     };
 
 
     // =====================================================
-    // IMAGE FALLBACK
+    // IMAGE ERROR
     // =====================================================
 
     const handleImageError = (e) => {
+
+        console.error(
+            "Restaurant image failed:",
+            e.currentTarget.src
+        );
 
         e.currentTarget.onerror = null;
 
@@ -122,7 +186,7 @@ function Restaurants() {
 
 
             {/* =====================================================
-                RESTAURANTS SECTION
+                RESTAURANT SECTION
             ===================================================== */}
 
             <section className="page-section">
@@ -130,7 +194,7 @@ function Restaurants() {
                 <div className="container">
 
                     {/* =================================================
-                        SECTION HEADING
+                        HEADING
                     ================================================= */}
 
                     <div className="section-heading text-center">
@@ -186,7 +250,7 @@ function Restaurants() {
 
 
                     {/* =================================================
-                        RESTAURANT CARDS
+                        RESTAURANTS
                     ================================================= */}
 
                     {!loading && !error && (
@@ -210,7 +274,7 @@ function Restaurants() {
 
                                             <img
                                                 src={getImageUrl(
-                                                    restaurant.image
+                                                    restaurant
                                                 )}
                                                 alt={
                                                     restaurant.name ||
@@ -251,7 +315,7 @@ function Restaurants() {
 
 
                                             {/* =============================
-                                                INFORMATION
+                                                DETAILS
                                             ============================= */}
 
                                             <p>
@@ -268,7 +332,7 @@ function Restaurants() {
                                                     Cuisine:
                                                 </strong>{" "}
 
-                                                {restaurant.cuisine}
+                                                {restaurant.cuisine || "-"}
 
                                                 <br />
 
@@ -276,7 +340,7 @@ function Restaurants() {
                                                     Price:
                                                 </strong>{" "}
 
-                                                {restaurant.price}
+                                                {restaurant.price || "-"}
 
                                             </p>
 

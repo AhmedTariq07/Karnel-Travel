@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../api";
 import "../Pages/ManageTouristSpots.css";
 
 function ManageTouristSpots() {
@@ -7,11 +8,8 @@ function ManageTouristSpots() {
     const navigate = useNavigate();
 
     const [touristSpots, setTouristSpots] = useState([]);
-
     const [loading, setLoading] = useState(true);
-
     const [message, setMessage] = useState("");
-
     const [showForm, setShowForm] = useState(false);
 
     // =====================================================
@@ -45,21 +43,18 @@ function ManageTouristSpots() {
         try {
 
             const response = await fetch(
-                "http://localhost:5014/api/TouristSpots"
+                `${API_URL}/api/TouristSpots`
             );
 
             if (!response.ok) {
-                throw new Error(
-                    "Failed to load tourist spots"
-                );
+                throw new Error("Failed to load tourist spots");
             }
 
             const data = await response.json();
 
             setTouristSpots(data);
 
-        }
-        catch (error) {
+        } catch (error) {
 
             console.error(error);
 
@@ -141,7 +136,6 @@ function ManageTouristSpots() {
         });
 
         setShowForm(true);
-
         setMessage("");
 
         window.scrollTo({
@@ -170,7 +164,6 @@ function ManageTouristSpots() {
         });
 
         setShowForm(false);
-
         setMessage("");
     };
 
@@ -236,7 +229,7 @@ function ManageTouristSpots() {
 
                 const response =
                     await fetch(
-                        `http://localhost:5014/api/TouristSpots/${editingId}`,
+                        `${API_URL}/api/TouristSpots/${editingId}`,
                         {
                             method: "PUT",
 
@@ -275,7 +268,6 @@ function ManageTouristSpots() {
                                 price:
                                     price,
 
-                                // Backend also forces this
                                 discountPercent: 20
                             })
                         }
@@ -305,9 +297,7 @@ function ManageTouristSpots() {
                     "Tourist spot updated successfully."
                 );
 
-
                 setEditingId(null);
-
 
                 setFormData({
                     name: "",
@@ -319,9 +309,7 @@ function ManageTouristSpots() {
                     price: ""
                 });
 
-
                 setShowForm(false);
-
 
                 loadTouristSpots();
 
@@ -342,12 +330,10 @@ function ManageTouristSpots() {
                 formData.name
             );
 
-
             data.append(
                 "location",
                 formData.location
             );
-
 
             data.append(
                 "description",
@@ -409,7 +395,7 @@ function ManageTouristSpots() {
 
             const response =
                 await fetch(
-                    "http://localhost:5014/api/TouristSpots",
+                    `${API_URL}/api/TouristSpots`,
                     {
                         method: "POST",
 
@@ -475,8 +461,7 @@ function ManageTouristSpots() {
 
             loadTouristSpots();
 
-        }
-        catch (error) {
+        } catch (error) {
 
             console.error(
                 "Tourist Spot Error:",
@@ -512,7 +497,7 @@ function ManageTouristSpots() {
 
             const response =
                 await fetch(
-                    `http://localhost:5014/api/TouristSpots/${id}`,
+                    `${API_URL}/api/TouristSpots/${id}`,
                     {
                         method: "DELETE",
 
@@ -543,11 +528,9 @@ function ManageTouristSpots() {
                 "Tourist spot deleted successfully."
             );
 
-
             loadTouristSpots();
 
-        }
-        catch (error) {
+        } catch (error) {
 
             console.error(error);
 
@@ -583,7 +566,6 @@ function ManageTouristSpots() {
     return (
 
         <div className="manage-tourist-spots">
-
 
             {/* =================================================
                 HEADER
@@ -635,7 +617,6 @@ function ManageTouristSpots() {
             ================================================= */}
 
             <div className="manage-content">
-
 
                 {/* =================================================
                     TOP
@@ -722,7 +703,6 @@ function ManageTouristSpots() {
                                 addTouristSpot
                             }
                         >
-
 
                             {/* NAME */}
 
@@ -940,7 +920,6 @@ function ManageTouristSpots() {
                                 }
                             </button>
 
-
                         </form>
 
                     </div>
@@ -986,45 +965,25 @@ function ManageTouristSpots() {
 
                                 <tr>
 
-                                    <th>
-                                        ID
-                                    </th>
+                                    <th>ID</th>
 
-                                    <th>
-                                        Name
-                                    </th>
+                                    <th>Name</th>
 
-                                    <th>
-                                        Location
-                                    </th>
+                                    <th>Location</th>
 
-                                    <th>
-                                        Tour Days
-                                    </th>
+                                    <th>Tour Days</th>
 
-                                    <th>
-                                        Package Price
-                                    </th>
+                                    <th>Package Price</th>
 
-                                    <th>
-                                        Discount
-                                    </th>
+                                    <th>Discount</th>
 
-                                    <th>
-                                        Description
-                                    </th>
+                                    <th>Description</th>
 
-                                    <th>
-                                        Image
-                                    </th>
+                                    <th>Image</th>
 
-                                    <th>
-                                        Rating
-                                    </th>
+                                    <th>Rating</th>
 
-                                    <th>
-                                        Actions
-                                    </th>
+                                    <th>Actions</th>
 
                                 </tr>
 
@@ -1036,140 +995,156 @@ function ManageTouristSpots() {
                                 {touristSpots.map(
                                     (spot) => (
 
-                                    <tr
-                                        key={
-                                            spot.id
-                                        }
-                                    >
-
-                                        <td>
-                                            {spot.id}
-                                        </td>
-
-                                        <td>
-                                            {spot.name}
-                                        </td>
-
-                                        <td>
-                                            {spot.location ||
-                                                "-"
+                                        <tr
+                                            key={
+                                                spot.id
                                             }
-                                        </td>
+                                        >
 
-                                        <td>
+                                            <td>
+                                                {spot.id}
+                                            </td>
 
-                                            <span className="fw-bold">
-                                                {spot.tourDays ??
-                                                    1
-                                                }{" "}
-                                                {Number(
-                                                    spot.tourDays
-                                                ) === 1
-                                                    ? "Day"
-                                                    : "Days"
+                                            <td>
+                                                {spot.name}
+                                            </td>
+
+                                            <td>
+                                                {spot.location ||
+                                                    "-"
                                                 }
-                                            </span>
+                                            </td>
 
-                                        </td>
+                                            <td>
 
-                                        <td>
+                                                <span className="fw-bold">
 
-                                            <span className="fw-bold">
-                                                Rs.{" "}
-                                                {Number(
-                                                    spot.price ??
-                                                    0
-                                                ).toLocaleString()}
-                                            </span>
+                                                    {spot.tourDays ??
+                                                        1
+                                                    }{" "}
 
-                                        </td>
-
-                                        <td>
-
-                                            <span className="fw-bold text-success">
-                                                20% OFF
-                                            </span>
-
-                                        </td>
-
-                                        <td className="description-cell">
-
-                                            {spot.description ||
-                                                "-"
-                                            }
-
-                                        </td>
-
-                                        <td>
-
-                                            {spot.image ? (
-
-                                                <img
-                                                    src={
-                                                        spot.image
+                                                    {Number(
+                                                        spot.tourDays
+                                                    ) === 1
+                                                        ? "Day"
+                                                        : "Days"
                                                     }
-                                                    alt={
-                                                        spot.name
-                                                    }
-                                                    className="spot-image"
-                                                />
 
-                                            ) : (
+                                                </span>
 
-                                                "-"
+                                            </td>
 
-                                            )}
+                                            <td>
 
-                                        </td>
+                                                <span className="fw-bold">
 
-                                        <td>
+                                                    Rs.{" "}
 
-                                            {spot.rating ??
-                                                "-"
-                                            }
+                                                    {Number(
+                                                        spot.price ??
+                                                        0
+                                                    ).toLocaleString()}
 
-                                        </td>
+                                                </span>
 
-                                        <td>
+                                            </td>
 
-                                            <div className="action-buttons">
+                                            <td>
+
+                                                <span className="fw-bold text-success">
+                                                    20% OFF
+                                                </span>
+
+                                            </td>
+
+                                            <td className="description-cell">
+
+                                                {spot.description ||
+                                                    "-"
+                                                }
+
+                                            </td>
+
+                                            <td>
+
+                                                {spot.image ? (
+
+                                                    <img
+                                                        src={
+                                                            spot.image.startsWith(
+                                                                "http://"
+                                                            ) ||
+                                                            spot.image.startsWith(
+                                                                "https://"
+                                                            )
+                                                                ? spot.image
+                                                                : spot.image.startsWith(
+                                                                    "/"
+                                                                )
+                                                                    ? `${API_URL}${spot.image}`
+                                                                    : `${API_URL}/${spot.image}`
+                                                        }
+                                                        alt={
+                                                            spot.name
+                                                        }
+                                                        className="spot-image"
+                                                    />
+
+                                                ) : (
+
+                                                    "-"
+
+                                                )}
+
+                                            </td>
+
+                                            <td>
+
+                                                {spot.rating ??
+                                                    "-"
+                                                }
+
+                                            </td>
+
+                                            <td>
+
+                                                <div className="action-buttons">
+
+                                                    {/* EDIT */}
+
+                                                    <button
+                                                        className="edit-button"
+                                                        onClick={() =>
+                                                            editTouristSpot(
+                                                                spot
+                                                            )
+                                                        }
+                                                    >
+                                                        Edit
+                                                    </button>
 
 
-                                                {/* EDIT */}
+                                                    {/* DELETE */}
 
-                                                <button
-                                                    className="edit-button"
-                                                    onClick={() =>
-                                                        editTouristSpot(
-                                                            spot
-                                                        )
-                                                    }
-                                                >
-                                                    Edit
-                                                </button>
+                                                    <button
+                                                        className="delete-button"
+                                                        onClick={() =>
+                                                            deleteTouristSpot(
+                                                                spot.id
+                                                            )
+                                                        }
+                                                    >
+                                                        Delete
+                                                    </button>
 
+                                                </div>
 
-                                                {/* DELETE */}
+                                            </td>
 
-                                                <button
-                                                    className="delete-button"
-                                                    onClick={() =>
-                                                        deleteTouristSpot(
-                                                            spot.id
-                                                        )
-                                                    }
-                                                >
-                                                    Delete
-                                                </button>
+                                        </tr>
 
-
-                                            </div>
-
-                                        </td>
-
-                                    </tr>
-
-                                ))}
+                                    )
+                                )}
 
                             </tbody>
 

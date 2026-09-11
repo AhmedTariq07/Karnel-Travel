@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Pages/ManageTouristSpots.css";
+import API_URL from "../api";
 
 function ManageResorts() {
     const navigate = useNavigate();
@@ -33,13 +34,6 @@ function ManageResorts() {
 
 
     // =====================================================
-    // API URL
-    // =====================================================
-
-    const API_URL = "http://localhost:5014/api/Resorts";
-
-
-    // =====================================================
     // GET TOKEN
     // =====================================================
 
@@ -59,7 +53,9 @@ function ManageResorts() {
         try {
             setLoading(true);
 
-            const response = await fetch(API_URL);
+            const response = await fetch(
+                `${API_URL}/api/Resorts`
+            );
 
             if (!response.ok) {
                 throw new Error("Failed to load resorts");
@@ -153,15 +149,18 @@ function ManageResorts() {
             }
 
 
-            const response = await fetch(API_URL, {
-                method: "POST",
+            const response = await fetch(
+                `${API_URL}/api/Resorts`,
+                {
+                    method: "POST",
 
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
 
-                body: data
-            });
+                    body: data
+                }
+            );
 
 
             if (!response.ok) {
@@ -268,7 +267,7 @@ function ManageResorts() {
 
 
             const response = await fetch(
-                `${API_URL}/${editingId}`,
+                `${API_URL}/api/Resorts/${editingId}`,
                 {
                     method: "PUT",
 
@@ -327,7 +326,7 @@ function ManageResorts() {
 
         try {
             const response = await fetch(
-                `${API_URL}/${id}`,
+                `${API_URL}/api/Resorts/${id}`,
                 {
                     method: "DELETE",
 
@@ -411,7 +410,7 @@ function ManageResorts() {
             return image;
         }
 
-        return `http://localhost:5014${
+        return `${API_URL}${
             image.startsWith("/") ? "" : "/"
         }${image}`;
     };

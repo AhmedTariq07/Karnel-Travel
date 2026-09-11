@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import API_URL from "../api";
 
 function EditTrip() {
     const navigate = useNavigate();
@@ -44,7 +45,7 @@ function EditTrip() {
 
             try {
                 const response = await fetch(
-                    `http://localhost:5014/api/Trips/${tripId}`,
+                    `${API_URL}/api/Trips/${tripId}`,
                     {
                         method: "GET",
                         headers: {
@@ -152,7 +153,7 @@ function EditTrip() {
 
         try {
             const response = await fetch(
-                `http://localhost:5014/api/Trips/${tripId}`,
+                `${API_URL}/api/Trips/${tripId}`,
                 {
                     method: "PUT",
 

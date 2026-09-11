@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Pages/ManageTouristSpots.css";
+import API_URL from "../api";
 
 function ManageHotels() {
     const navigate = useNavigate();
@@ -46,7 +47,6 @@ function ManageHotels() {
             return "";
         }
 
-        // If database already contains a complete URL
         if (
             image.startsWith("http://") ||
             image.startsWith("https://")
@@ -54,11 +54,6 @@ function ManageHotels() {
             return image;
         }
 
-        // Images are stored in React public/images
-        // Example database value:
-        // /images/hotel.jpg
-        //
-        // React/Vite will serve this automatically.
         return image;
     };
 
@@ -71,7 +66,7 @@ function ManageHotels() {
             setLoading(true);
 
             const response = await fetch(
-                "http://localhost:5014/api/Hotels"
+                `${API_URL}/api/Hotels`
             );
 
             if (!response.ok) {
@@ -142,7 +137,6 @@ function ManageHotels() {
             return;
         }
 
-        // Maximum 5 MB
         if (file.size > 5 * 1024 * 1024) {
             setMessage(
                 "Image size must be 5 MB or less."
@@ -158,7 +152,6 @@ function ManageHotels() {
             return;
         }
 
-        // Allowed image types
         const allowedTypes = [
             "image/jpeg",
             "image/jpg",
@@ -406,7 +399,7 @@ function ManageHotels() {
                 );
 
                 const response = await fetch(
-                    `http://localhost:5014/api/Hotels/${editingId}`,
+                    `${API_URL}/api/Hotels/${editingId}`,
                     {
                         method: "PUT",
 
@@ -549,7 +542,7 @@ function ManageHotels() {
             // =================================================
 
             const response = await fetch(
-                "http://localhost:5014/api/Hotels",
+                `${API_URL}/api/Hotels`,
                 {
                     method: "POST",
 
@@ -638,7 +631,7 @@ function ManageHotels() {
 
         try {
             const response = await fetch(
-                `http://localhost:5014/api/Hotels/${id}`,
+                `${API_URL}/api/Hotels/${id}`,
                 {
                     method: "DELETE",
 
@@ -716,9 +709,7 @@ function ManageHotels() {
     return (
         <div className="manage-tourist-spots">
 
-            {/* =================================================
-                HEADER
-                ================================================= */}
+            {/* HEADER */}
 
             <div className="manage-header">
 
@@ -756,15 +747,11 @@ function ManageHotels() {
 
             </div>
 
-            {/* =================================================
-                CONTENT
-                ================================================= */}
+            {/* CONTENT */}
 
             <div className="manage-content">
 
-                {/* =================================================
-                    TOP
-                    ================================================= */}
+                {/* TOP */}
 
                 <div className="manage-top">
 
@@ -798,9 +785,7 @@ function ManageHotels() {
 
                 </div>
 
-                {/* =================================================
-                    MESSAGE
-                    ================================================= */}
+                {/* MESSAGE */}
 
                 {message && (
                     <div className="manage-message">
@@ -818,9 +803,7 @@ function ManageHotels() {
                     </div>
                 )}
 
-                {/* =================================================
-                    ADD / EDIT FORM
-                    ================================================= */}
+                {/* ADD / EDIT FORM */}
 
                 {showForm && (
 
@@ -836,8 +819,6 @@ function ManageHotels() {
                         <form
                             onSubmit={saveHotel}
                         >
-
-                            {/* ================= NAME ================= */}
 
                             <div className="form-group">
 
@@ -860,8 +841,6 @@ function ManageHotels() {
 
                             </div>
 
-                            {/* ================= LOCATION ================= */}
-
                             <div className="form-group">
 
                                 <label>
@@ -881,8 +860,6 @@ function ManageHotels() {
                                 />
 
                             </div>
-
-                            {/* ================= DESCRIPTION ================= */}
 
                             <div className="form-group">
 
@@ -904,8 +881,6 @@ function ManageHotels() {
 
                             </div>
 
-                            {/* ================= PRICE ================= */}
-
                             <div className="form-group">
 
                                 <label>
@@ -925,8 +900,6 @@ function ManageHotels() {
                                 />
 
                             </div>
-
-                            {/* ================= RATING ================= */}
 
                             <div className="form-group">
 
@@ -951,8 +924,6 @@ function ManageHotels() {
 
                             </div>
 
-                            {/* ================= TOTAL ROOMS ================= */}
-
                             <div className="form-group">
 
                                 <label>
@@ -975,8 +946,6 @@ function ManageHotels() {
 
                             </div>
 
-                            {/* ================= AVAILABLE ROOMS ================= */}
-
                             <div className="form-group">
 
                                 <label>
@@ -998,8 +967,6 @@ function ManageHotels() {
                                 />
 
                             </div>
-
-                            {/* ================= DISCOUNT ================= */}
 
                             <div className="form-group">
 
@@ -1024,8 +991,6 @@ function ManageHotels() {
 
                             </div>
 
-                            {/* ================= OFFER TEXT ================= */}
-
                             <div className="form-group">
 
                                 <label>
@@ -1045,8 +1010,6 @@ function ManageHotels() {
                                 />
 
                             </div>
-
-                            {/* ================= IMAGE ================= */}
 
                             <div className="form-group">
 
@@ -1072,8 +1035,6 @@ function ManageHotels() {
 
                             </div>
 
-                            {/* ================= SUBMIT ================= */}
-
                             <button
                                 type="submit"
                                 className="save-button"
@@ -1089,9 +1050,7 @@ function ManageHotels() {
                     </div>
                 )}
 
-                {/* =================================================
-                    LOADING / TABLE
-                    ================================================= */}
+                {/* LOADING / TABLE */}
 
                 {loading ? (
 
@@ -1185,8 +1144,6 @@ function ManageHotels() {
                                                 }
                                             </td>
 
-                                            {/* ================= ROOMS ================= */}
-
                                             <td>
 
                                                 <strong>
@@ -1205,8 +1162,6 @@ function ManageHotels() {
 
                                             </td>
 
-                                            {/* ================= DISCOUNT ================= */}
-
                                             <td>
 
                                                 {
@@ -1219,8 +1174,6 @@ function ManageHotels() {
 
                                             </td>
 
-                                            {/* ================= OFFER ================= */}
-
                                             <td>
 
                                                 {
@@ -1229,8 +1182,6 @@ function ManageHotels() {
                                                 }
 
                                             </td>
-
-                                            {/* ================= IMAGE ================= */}
 
                                             <td>
 
@@ -1264,8 +1215,6 @@ function ManageHotels() {
 
                                             </td>
 
-                                            {/* ================= RATING ================= */}
-
                                             <td>
 
                                                 {
@@ -1274,8 +1223,6 @@ function ManageHotels() {
                                                 }
 
                                             </td>
-
-                                            {/* ================= ACTIONS ================= */}
 
                                             <td>
 

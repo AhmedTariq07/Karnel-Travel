@@ -31,6 +31,126 @@ function ViewDetails() {
 
 
     // =====================================================
+    // LOCAL RESTAURANT IMAGES
+    // =====================================================
+
+    const restaurantImages = {
+        8: "/images/skardu-restaurant.jpg",
+        9: "/images/islamabad-restaurant.jpg",
+        10: "/images/tuscany-restaurant.jpg",
+        11: "/images/spice-bazar-restaurant.jpg",
+        12: "/images/haveli-restaurant.jpg",
+        13: "/images/lalqila-restaurant.jpg"
+    };
+
+
+    // =====================================================
+    // GET IMAGE URL
+    // =====================================================
+
+    const getImageUrl = (itemData) => {
+
+        if (!itemData) {
+            return "/images/restaurant-placeholder.jpg";
+        }
+
+
+        // =================================================
+        // RESTAURANT
+        // =================================================
+
+        if (type === "restaurant") {
+
+            if (restaurantImages[itemData.id]) {
+                return restaurantImages[itemData.id];
+            }
+        }
+
+
+        // =================================================
+        // DATABASE IMAGE
+        // =================================================
+
+        if (itemData.image) {
+
+            let imageUrl =
+                itemData.image
+                    .trim()
+                    .replace(/\\/g, "/");
+
+
+            // Old localhost restaurant upload URL
+            if (
+                imageUrl.includes(
+                    "/uploads/restaurants/"
+                )
+            ) {
+
+                const fileName =
+                    imageUrl.substring(
+                        imageUrl.lastIndexOf("/") + 1
+                    );
+
+                return `/images/${fileName}`;
+            }
+
+
+            // Already local frontend image
+            if (
+                imageUrl.startsWith("/images/")
+            ) {
+
+                return imageUrl;
+            }
+
+
+            // Absolute URL
+            if (
+                imageUrl.startsWith("http://") ||
+                imageUrl.startsWith("https://")
+            ) {
+
+                return imageUrl;
+            }
+
+
+            // Relative path
+            if (imageUrl.startsWith("/")) {
+                return imageUrl;
+            }
+
+
+            return `/images/${imageUrl}`;
+        }
+
+
+        // =================================================
+        // FALLBACK
+        // =================================================
+
+        return "/images/restaurant-placeholder.jpg";
+    };
+
+
+    // =====================================================
+    // IMAGE ERROR
+    // =====================================================
+
+    const handleImageError = (e) => {
+
+        console.error(
+            "Details image failed:",
+            e.currentTarget.src
+        );
+
+        e.currentTarget.onerror = null;
+
+        e.currentTarget.src =
+            "/images/restaurant-placeholder.jpg";
+    };
+
+
+    // =====================================================
     // CHECK USER LOGIN
     // =====================================================
 
@@ -38,7 +158,8 @@ function ViewDetails() {
 
         const checkLogin = () => {
 
-            const token = localStorage.getItem("userToken");
+            const token =
+                localStorage.getItem("userToken");
 
             setIsLoggedIn(!!token);
         };
@@ -153,6 +274,12 @@ function ViewDetails() {
                     await response.json();
 
 
+                console.log(
+                    "View Details Data:",
+                    data
+                );
+
+
                 setItem(data);
 
             }
@@ -179,10 +306,17 @@ function ViewDetails() {
 
 
         if (type && id) {
+
             loadDetails();
+
         } else {
+
             setLoading(false);
-            setError("Invalid item information.");
+
+            setError(
+                "Invalid item information."
+            );
+
         }
 
     }, [type, id]);
@@ -190,7 +324,6 @@ function ViewDetails() {
 
     // =====================================================
     // GET REAL RATING
-    // HOTEL + RESTAURANT + TOURIST SPOT + RESORT
     // =====================================================
 
     useEffect(() => {
@@ -210,9 +343,7 @@ function ViewDetails() {
 
 
             if (!id) {
-
                 return;
-
             }
 
 
@@ -221,10 +352,7 @@ function ViewDetails() {
                 let ratingApiUrl = "";
 
 
-                // =================================================
-                // HOTEL RATING API
-                // =================================================
-
+                // HOTEL
                 if (type === "hotel") {
 
                     ratingApiUrl =
@@ -233,10 +361,7 @@ function ViewDetails() {
                 }
 
 
-                // =================================================
-                // RESTAURANT RATING API
-                // =================================================
-
+                // RESTAURANT
                 else if (type === "restaurant") {
 
                     ratingApiUrl =
@@ -245,10 +370,7 @@ function ViewDetails() {
                 }
 
 
-                // =================================================
-                // TOURIST SPOT RATING API
-                // =================================================
-
+                // TOURIST SPOT
                 else if (type === "touristspot") {
 
                     ratingApiUrl =
@@ -257,10 +379,7 @@ function ViewDetails() {
                 }
 
 
-                // =================================================
-                // RESORT RATING API
-                // =================================================
-
+                // RESORT
                 else if (type === "resort") {
 
                     ratingApiUrl =
@@ -274,9 +393,7 @@ function ViewDetails() {
 
 
                 if (!response.ok) {
-
                     return;
-
                 }
 
 
@@ -323,10 +440,6 @@ function ViewDetails() {
             localStorage.getItem("userToken");
 
 
-        // =================================================
-        // CHECK LOGIN
-        // =================================================
-
         if (!token) {
 
             setIsLoggedIn(false);
@@ -336,13 +449,8 @@ function ViewDetails() {
             );
 
             return;
-
         }
 
-
-        // =================================================
-        // CHECK SELECTED RATING
-        // =================================================
 
         if (selectedRating === 0) {
 
@@ -351,7 +459,6 @@ function ViewDetails() {
             );
 
             return;
-
         }
 
 
@@ -361,14 +468,10 @@ function ViewDetails() {
 
             setRatingMessage("");
 
-
             let ratingApiUrl = "";
 
 
-            // =================================================
             // HOTEL
-            // =================================================
-
             if (type === "hotel") {
 
                 ratingApiUrl =
@@ -377,10 +480,7 @@ function ViewDetails() {
             }
 
 
-            // =================================================
             // RESTAURANT
-            // =================================================
-
             else if (type === "restaurant") {
 
                 ratingApiUrl =
@@ -389,10 +489,7 @@ function ViewDetails() {
             }
 
 
-            // =================================================
             // TOURIST SPOT
-            // =================================================
-
             else if (type === "touristspot") {
 
                 ratingApiUrl =
@@ -401,10 +498,7 @@ function ViewDetails() {
             }
 
 
-            // =================================================
             // RESORT
-            // =================================================
-
             else if (type === "resort") {
 
                 ratingApiUrl =
@@ -420,7 +514,6 @@ function ViewDetails() {
                 );
 
                 return;
-
             }
 
 
@@ -530,8 +623,6 @@ function ViewDetails() {
 
             if (!response.ok) {
 
-                // TOKEN EXPIRED
-
                 if (response.status === 401) {
 
                     localStorage.removeItem(
@@ -542,17 +633,13 @@ function ViewDetails() {
                         "user"
                     );
 
-
                     setIsLoggedIn(false);
-
 
                     setRatingMessage(
                         "Your login session has expired. Please login again."
                     );
 
-
                     return;
-
                 }
 
 
@@ -561,14 +648,12 @@ function ViewDetails() {
                     "Unable to submit rating."
                 );
 
-
                 return;
-
             }
 
 
             // =================================================
-            // UPDATE DISPLAYED RATING
+            // UPDATE RATING
             // =================================================
 
             setAverageRating(
@@ -581,19 +666,11 @@ function ViewDetails() {
             );
 
 
-            // =================================================
-            // SUCCESS MESSAGE
-            // =================================================
-
             setRatingMessage(
                 data.message ||
                 "Your rating has been submitted successfully."
             );
 
-
-            // =================================================
-            // RESET STAR SELECTION
-            // =================================================
 
             setSelectedRating(0);
 
@@ -784,111 +861,335 @@ function ViewDetails() {
 
         <div className="view-details-page">
 
-            <>
+            {/* =================================================
+                 PAGE BANNER
+            ================================================= */}
 
-                {/* =================================================
-                     PAGE BANNER
-                     ================================================= */}
+            <section className="page-banner">
 
-                <section className="page-banner">
+                <div className="container">
 
-                    <div className="container">
+                    <h2>
+                        Detail Information
+                    </h2>
 
-                        <h2>
-                            Detail Information
-                        </h2>
+                    <p>
+                        Discover {type}s across Pakistan
+                    </p>
 
+                </div>
 
-                        <p>
-                            Discover {type}s across Pakistan
-                        </p>
-
-                    </div>
-
-                </section>
+            </section>
 
 
-                {/* =================================================
-                     MAIN DETAILS
-                     ================================================= */}
+            {/* =================================================
+                 MAIN DETAILS
+            ================================================= */}
 
-                <section className="py-5">
+            <section className="py-5">
 
-                    <div className="container">
+                <div className="container">
 
-                        <div className="row g-5 align-items-center">
+                    <div className="row g-5 align-items-center">
+
+                        {/* =================================================
+                             IMAGE
+                        ================================================= */}
+
+                        <div className="col-lg-6">
+
+                            <img
+                                src={getImageUrl(item)}
+                                alt={
+                                    item.name ||
+                                    "Travel destination"
+                                }
+                                className="img-fluid rounded-4 shadow w-100"
+                                onError={handleImageError}
+                            />
+
+                        </div>
+
+
+                        {/* =================================================
+                             INFORMATION
+                        ================================================= */}
+
+                        <div className="col-lg-6">
+
+                            <h1 className="fw-bold mb-3">
+                                {item.name}
+                            </h1>
+
+
+                            <p className="text-muted fs-5">
+                                📍 {item.location}
+                            </p>
 
 
                             {/* =================================================
-                                 IMAGE
-                                 ================================================= */}
+                                 REAL RATING DISPLAY
+                            ================================================= */}
 
-                            <div className="col-lg-6">
+                            {(
+                                type === "hotel" ||
+                                type === "restaurant" ||
+                                type === "touristspot" ||
+                                type === "resort"
+                            ) ? (
 
-                                <img
-                                    src={item.image}
-                                    alt={item.name}
-                                    className="img-fluid rounded-4 shadow w-100"
-                                />
+                                <div className="hotel-rating-display mb-4">
 
-                            </div>
+                                    <div className="d-flex align-items-center gap-2">
 
+                                        <span className="rating-stars">
 
-                            {/* =================================================
-                                 INFORMATION
-                                 ================================================= */}
+                                            {averageRating > 0
+                                                ? "⭐"
+                                                : "☆"
+                                            }
 
-                            <div className="col-lg-6">
-
-
-                                {/* NAME */}
-
-                                <h1 className="fw-bold mb-3">
-
-                                    {item.name}
-
-                                </h1>
+                                        </span>
 
 
-                                {/* LOCATION */}
+                                        <strong className="fs-5">
 
-                                <p className="text-muted fs-5">
+                                            {averageRating > 0
+                                                ? averageRating.toFixed(1)
+                                                : "No rating yet"
+                                            }
 
-                                    📍 {item.location}
+                                        </strong>
+
+                                    </div>
+
+
+                                    {totalRatings > 0 && (
+
+                                        <small className="text-muted">
+
+                                            Based on{" "}
+
+                                            {totalRatings}{" "}
+
+                                            {totalRatings === 1
+                                                ? "rating"
+                                                : "ratings"
+                                            }
+
+                                        </small>
+
+                                    )}
+
+                                </div>
+
+                            ) : (
+
+                                <p className="text-warning fs-5">
+
+                                    ⭐ {item.rating}
 
                                 </p>
 
+                            )}
 
-                                {/* =================================================
-                                     REAL RATING DISPLAY
-                                     ================================================= */}
 
-                                {(
-                                    type === "hotel" ||
-                                    type === "restaurant" ||
-                                    type === "touristspot" ||
-                                    type === "resort"
-                                ) ? (
+                            {/* DESCRIPTION */}
 
-                                    <div className="hotel-rating-display mb-4">
+                            <p className="text-muted">
+                                {item.description}
+                            </p>
 
-                                        <div className="d-flex align-items-center gap-2">
 
-                                            <span className="rating-stars">
+                            {/* =================================================
+                                 RESTAURANT DETAILS
+                            ================================================= */}
 
-                                                {averageRating > 0
-                                                    ? "⭐"
-                                                    : "☆"
-                                                }
+                            {type === "restaurant" && (
 
+                                <div className="card border-0 shadow-sm mb-4">
+
+                                    <div className="card-body">
+
+                                        <h5 className="fw-bold mb-3">
+                                            🍽️ Restaurant Details
+                                        </h5>
+
+
+                                        {item.cuisine && (
+
+                                            <p className="mb-2">
+
+                                                <strong>
+                                                    Cuisine:
+                                                </strong>{" "}
+
+                                                {item.cuisine}
+
+                                            </p>
+
+                                        )}
+
+
+                                        {item.price && (
+
+                                            <p className="mb-2">
+
+                                                <strong>
+                                                    Average Price:
+                                                </strong>{" "}
+
+                                                <span className="text-success fw-bold">
+
+                                                    {item.price}
+
+                                                </span>{" "}
+
+                                                <span>
+                                                    per person
+                                                </span>
+
+                                            </p>
+
+                                        )}
+
+
+                                        {item.availableSeats !== undefined && (
+
+                                            <p className="mb-0">
+
+                                                <strong>
+                                                    🪑 Available Seats:
+                                                </strong>{" "}
+
+                                                <span className="text-success fw-bold">
+
+                                                    {item.availableSeats}
+
+                                                </span>
+
+                                                {item.totalSeats !== undefined && (
+
+                                                    <span>
+
+                                                        {" "} / {item.totalSeats} total seats
+
+                                                    </span>
+
+                                                )}
+
+                                            </p>
+
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+                            )}
+
+
+                            {/* =================================================
+                                 RESORT DETAILS
+                            ================================================= */}
+
+                            {type === "resort" && (
+
+                                <div className="card border-0 shadow-sm mb-4">
+
+                                    <div className="card-body">
+
+                                        <h5 className="fw-bold mb-3">
+                                            🏨 Resort Details
+                                        </h5>
+
+
+                                        {item.price && (
+
+                                            <p className="mb-2">
+
+                                                <strong>
+                                                    Price:
+                                                </strong>{" "}
+
+                                                <span className="text-success fw-bold">
+
+                                                    {item.price}
+
+                                                </span>{" "}
+
+                                                <span>
+                                                    per room / night
+                                                </span>
+
+                                            </p>
+
+                                        )}
+
+
+                                        {item.availableRooms !== undefined && (
+
+                                            <p className="mb-0">
+
+                                                <strong>
+                                                    🛏️ Available Rooms:
+                                                </strong>{" "}
+
+                                                <span className="text-success fw-bold">
+
+                                                    {item.availableRooms}
+
+                                                </span>
+
+                                                {item.totalRooms !== undefined && (
+
+                                                    <span>
+
+                                                        {" "} / {item.totalRooms} total rooms
+
+                                                    </span>
+
+                                                )}
+
+                                            </p>
+
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+                            )}
+
+
+                            {/* =================================================
+                                 TOURIST SPOT PACKAGE
+                            ================================================= */}
+
+                            {type === "touristspot" && (
+
+                                <div className="card border-success shadow-sm mb-4">
+
+                                    <div className="card-body">
+
+                                        <h5 className="fw-bold mb-3">
+                                            🏔️ Tour Package
+                                        </h5>
+
+
+                                        <div className="d-flex justify-content-between align-items-center mb-3">
+
+                                            <span className="fw-semibold">
+                                                🗓️ Tour Duration
                                             </span>
 
+                                            <strong>
 
-                                            <strong className="fs-5">
+                                                {item.tourDays}{" "}
 
-                                                {averageRating > 0
-                                                    ? averageRating.toFixed(1)
-                                                    : "No rating yet"
+                                                {Number(item.tourDays) === 1
+                                                    ? "Day"
+                                                    : "Days"
                                                 }
 
                                             </strong>
@@ -896,715 +1197,448 @@ function ViewDetails() {
                                         </div>
 
 
-                                        {totalRatings > 0 && (
+                                        <div className="d-flex justify-content-between align-items-center mb-3">
 
-                                            <small className="text-muted">
+                                            <span className="fw-semibold">
+                                                Original Package Price
+                                            </span>
 
-                                                Based on{" "}
+                                            <strong>
 
-                                                {totalRatings}{" "}
+                                                Rs.{" "}
 
-                                                {totalRatings === 1
-                                                    ? "rating"
-                                                    : "ratings"
-                                                }
+                                                {touristSpotOriginalPrice.toLocaleString()}
 
-                                            </small>
+                                            </strong>
 
-                                        )}
-
-                                    </div>
-
-                                ) : (
-
-                                    <p className="text-warning fs-5">
-
-                                        ⭐ {item.rating}
-
-                                    </p>
-
-                                )}
+                                        </div>
 
 
-                                {/* DESCRIPTION */}
+                                        <div className="d-flex justify-content-between align-items-center mb-3">
 
-                                <p className="text-muted">
+                                            <span className="fw-semibold">
+                                                🏷️ Discount
+                                            </span>
 
-                                    {item.description}
+                                            <strong className="text-danger">
 
-                                </p>
+                                                {touristSpotDiscount}% OFF
 
+                                            </strong>
 
-                                {/* =================================================
-                                     RESTAURANT DETAILS
-                                     ================================================= */}
-
-                                {type === "restaurant" && (
-
-                                    <div className="card border-0 shadow-sm mb-4">
-
-                                        <div className="card-body">
-
-                                            <h5 className="fw-bold mb-3">
-
-                                                🍽️ Restaurant Details
-
-                                            </h5>
+                                        </div>
 
 
-                                            {item.cuisine && (
+                                        <div className="d-flex justify-content-between align-items-center mb-3">
 
-                                                <p className="mb-2">
+                                            <span className="fw-semibold">
+                                                Discount Amount
+                                            </span>
 
-                                                    <strong>
-                                                        Cuisine:
-                                                    </strong>{" "}
+                                            <strong className="text-danger">
 
-                                                    {item.cuisine}
+                                                Rs.{" "}
 
-                                                </p>
+                                                {touristSpotDiscountAmount.toLocaleString()}
 
-                                            )}
+                                            </strong>
 
-
-                                            {item.price && (
-
-                                                <p className="mb-2">
-
-                                                    <strong>
-                                                        Average Price:
-                                                    </strong>{" "}
-
-                                                    <span className="text-success fw-bold">
-
-                                                        {item.price}
-
-                                                    </span>{" "}
-
-                                                    <span>
-                                                        per person
-                                                    </span>
-
-                                                </p>
-
-                                            )}
+                                        </div>
 
 
-                                            {item.availableSeats !== undefined && (
+                                        <hr />
 
-                                                <p className="mb-0">
 
-                                                    <strong>
-                                                        🪑 Available Seats:
-                                                    </strong>{" "}
+                                        <div className="d-flex justify-content-between align-items-center">
 
-                                                    <span className="text-success fw-bold">
+                                            <span className="fw-bold fs-5">
+                                                Final Package Price
+                                            </span>
 
-                                                        {item.availableSeats}
+                                            <strong className="text-success fs-4">
 
-                                                    </span>
+                                                Rs.{" "}
 
-                                                    {item.totalSeats !== undefined && (
+                                                {touristSpotFinalPrice.toLocaleString()}
 
-                                                        <span>
+                                            </strong>
 
-                                                            {" "} / {item.totalSeats} total seats
+                                        </div>
 
-                                                        </span>
 
-                                                    )}
+                                        <div className="alert alert-info mt-3 mb-0">
 
-                                                </p>
+                                            <strong>
+                                                Fixed Tour Package:
+                                            </strong>{" "}
 
-                                            )}
+                                            This package has a fixed duration and permanent{" "}
+
+                                            {touristSpotDiscount}% discount.
 
                                         </div>
 
                                     </div>
 
-                                )}
+                                </div>
 
+                            )}
 
-                                {/* =================================================
-                                     RESORT DETAILS
-                                     ================================================= */}
 
-                                {type === "resort" && (
+                            {/* =================================================
+                                 HOTEL DETAILS
+                            ================================================= */}
 
-                                    <div className="card border-0 shadow-sm mb-4">
+                            {type === "hotel" && (
 
-                                        <div className="card-body">
+                                <div className="card border-0 shadow-sm mb-4">
 
-                                            <h5 className="fw-bold mb-3">
+                                    <div className="card-body">
 
-                                                🏨 Resort Details
-
-                                            </h5>
-
-
-                                            {item.price && (
-
-                                                <p className="mb-2">
-
-                                                    <strong>
-                                                        Price:
-                                                    </strong>{" "}
-
-                                                    <span className="text-success fw-bold">
-
-                                                        {item.price}
-
-                                                    </span>{" "}
-
-                                                    <span>
-                                                        per room / night
-                                                    </span>
-
-                                                </p>
-
-                                            )}
-
-
-                                            {item.availableRooms !== undefined && (
-
-                                                <p className="mb-0">
-
-                                                    <strong>
-                                                        🛏️ Available Rooms:
-                                                    </strong>{" "}
-
-                                                    <span className="text-success fw-bold">
-
-                                                        {item.availableRooms}
-
-                                                    </span>
-
-                                                    {item.totalRooms !== undefined && (
-
-                                                        <span>
-
-                                                            {" "} / {item.totalRooms} total rooms
-
-                                                        </span>
-
-                                                    )}
-
-                                                </p>
-
-                                            )}
-
-                                        </div>
-
-                                    </div>
-
-                                )}
-
-
-                                {/* =================================================
-                                     TOURIST SPOT TOUR PACKAGE
-                                     ================================================= */}
-
-                                {type === "touristspot" && (
-
-                                    <div className="card border-success shadow-sm mb-4">
-
-                                        <div className="card-body">
-
-                                            <h5 className="fw-bold mb-3">
-
-                                                🏔️ Tour Package
-
-                                            </h5>
-
-
-                                            <div className="d-flex justify-content-between align-items-center mb-3">
-
-                                                <span className="fw-semibold">
-
-                                                    🗓️ Tour Duration
-
-                                                </span>
-
-                                                <strong>
-
-                                                    {item.tourDays}{" "}
-
-                                                    {Number(item.tourDays) === 1
-                                                        ? "Day"
-                                                        : "Days"
-                                                    }
-
-                                                </strong>
-
-                                            </div>
-
-
-                                            <div className="d-flex justify-content-between align-items-center mb-3">
-
-                                                <span className="fw-semibold">
-
-                                                    Original Package Price
-
-                                                </span>
-
-                                                <strong>
-
-                                                    Rs.{" "}
-
-                                                    {touristSpotOriginalPrice.toLocaleString()}
-
-                                                </strong>
-
-                                            </div>
-
-
-                                            <div className="d-flex justify-content-between align-items-center mb-3">
-
-                                                <span className="fw-semibold">
-
-                                                    🏷️ Discount
-
-                                                </span>
-
-                                                <strong className="text-danger">
-
-                                                    {touristSpotDiscount}% OFF
-
-                                                </strong>
-
-                                            </div>
-
-
-                                            <div className="d-flex justify-content-between align-items-center mb-3">
-
-                                                <span className="fw-semibold">
-
-                                                    Discount Amount
-
-                                                </span>
-
-                                                <strong className="text-danger">
-
-                                                    Rs.{" "}
-
-                                                    {touristSpotDiscountAmount.toLocaleString()}
-
-                                                </strong>
-
-                                            </div>
-
-
-                                            <hr />
-
-
-                                            <div className="d-flex justify-content-between align-items-center">
-
-                                                <span className="fw-bold fs-5">
-
-                                                    Final Package Price
-
-                                                </span>
-
-                                                <strong className="text-success fs-4">
-
-                                                    Rs.{" "}
-
-                                                    {touristSpotFinalPrice.toLocaleString()}
-
-                                                </strong>
-
-                                            </div>
-
-
-                                            <div className="alert alert-info mt-3 mb-0">
-
-                                                <strong>
-                                                    Fixed Tour Package:
-                                                </strong>{" "}
-
-                                                This package has a fixed duration and permanent{" "}
-
-                                                {touristSpotDiscount}% discount.
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                )}
-
-
-                                {/* =================================================
-                                     HOTEL DETAILS
-                                     ================================================= */}
-
-                                {type === "hotel" && (
-
-                                    <div className="card border-0 shadow-sm mb-4">
-
-                                        <div className="card-body">
-
-                                            <h5 className="fw-bold mb-3">
-
-                                                🏨 Hotel Details
-
-                                            </h5>
-
-
-                                            {item.price && (
-
-                                                <p className="mb-2">
-
-                                                    <strong>
-                                                        Price:
-                                                    </strong>{" "}
-
-                                                    <span className="text-success fw-bold">
-
-                                                        {item.price}
-
-                                                    </span>{" "}
-
-                                                    <span>
-                                                        per room / night
-                                                    </span>
-
-                                                </p>
-
-                                            )}
-
-
-                                            {item.availableRooms !== undefined && (
-
-                                                <p className="mb-2">
-
-                                                    <strong>
-                                                        🛏️ Rooms:
-                                                    </strong>{" "}
-
-                                                    <span className="text-success fw-bold">
-
-                                                        {item.availableRooms}
-
-                                                    </span>
-
-                                                    {item.totalRooms !== undefined && (
-
-                                                        <span>
-
-                                                            {" "} / {item.totalRooms} available
-
-                                                        </span>
-
-                                                    )}
-
-                                                </p>
-
-                                            )}
-
-
-                                            {item.discountPercent !== undefined &&
-                                                item.discountPercent !== null &&
-                                                item.discountPercent > 0 && (
-
-                                                    <p className="mb-2">
-
-                                                        <strong>
-                                                            🏷️ Discount:
-                                                        </strong>{" "}
-
-                                                        <span className="text-danger fw-bold">
-
-                                                            {item.discountPercent}% OFF
-
-                                                        </span>
-
-                                                    </p>
-
-                                                )}
-
-
-                                            {item.offerText && (
-
-                                                <p className="mb-0">
-
-                                                    <strong>
-                                                        🎁 Offer:
-                                                    </strong>{" "}
-
-                                                    <span className="text-primary fw-bold">
-
-                                                        {item.offerText}
-
-                                                    </span>
-
-                                                </p>
-
-                                            )}
-
-                                        </div>
-
-                                    </div>
-
-                                )}
-
-
-                                {/* =================================================
-                                     RATING BOX
-                                     ================================================= */}
-
-                                {(
-                                    type === "hotel" ||
-                                    type === "restaurant" ||
-                                    type === "touristspot" ||
-                                    type === "resort"
-                                ) && (
-
-                                    <div className="rating-box mt-4 mb-4">
-
-
-                                        <h5 className="fw-bold mb-2">
-
-                                            Rate this{" "}
-
-                                            {type === "hotel"
-                                                ? "hotel"
-                                                : type === "restaurant"
-                                                    ? "restaurant"
-                                                    : type === "touristspot"
-                                                        ? "tourist spot"
-                                                        : "resort"
-                                            }
-
+                                        <h5 className="fw-bold mb-3">
+                                            🏨 Hotel Details
                                         </h5>
 
 
-                                        {!isLoggedIn ? (
+                                        {item.price && (
 
-                                            <div>
+                                            <p className="mb-2">
 
-                                                <p className="text-muted mb-3">
+                                                <strong>
+                                                    Price:
+                                                </strong>{" "}
 
-                                                    Please login to rate this{" "}
+                                                <span className="text-success fw-bold">
 
-                                                    {type === "hotel"
-                                                        ? "hotel"
-                                                        : type === "restaurant"
-                                                            ? "restaurant"
-                                                            : type === "touristspot"
-                                                                ? "tourist spot"
-                                                                : "resort"
-                                                    }.
+                                                    {item.price}
+
+                                                </span>{" "}
+
+                                                <span>
+                                                    per room / night
+                                                </span>
+
+                                            </p>
+
+                                        )}
+
+
+                                        {item.availableRooms !== undefined && (
+
+                                            <p className="mb-2">
+
+                                                <strong>
+                                                    🛏️ Rooms:
+                                                </strong>{" "}
+
+                                                <span className="text-success fw-bold">
+
+                                                    {item.availableRooms}
+
+                                                </span>
+
+                                                {item.totalRooms !== undefined && (
+
+                                                    <span>
+
+                                                        {" "} / {item.totalRooms} available
+
+                                                    </span>
+
+                                                )}
+
+                                            </p>
+
+                                        )}
+
+
+                                        {item.discountPercent !== undefined &&
+                                            item.discountPercent !== null &&
+                                            item.discountPercent > 0 && (
+
+                                                <p className="mb-2">
+
+                                                    <strong>
+                                                        🏷️ Discount:
+                                                    </strong>{" "}
+
+                                                    <span className="text-danger fw-bold">
+
+                                                        {item.discountPercent}% OFF
+
+                                                    </span>
 
                                                 </p>
 
-
-                                                <Link
-                                                    to="/login"
-                                                    className="btn btn-success"
-                                                >
-
-                                                    Login to Rate
-
-                                                </Link>
-
-                                            </div>
-
-                                        ) : (
-
-                                            <>
-
-                                                <div
-                                                    className="rating-select"
-                                                    onMouseLeave={() =>
-                                                        setHoverRating(0)
-                                                    }
-                                                >
-
-                                                    {[1, 2, 3, 4, 5].map(
-                                                        (star) => (
-
-                                                            <button
-                                                                key={star}
-                                                                type="button"
-
-                                                                className={
-                                                                    star <=
-                                                                    (
-                                                                        hoverRating ||
-                                                                        selectedRating
-                                                                    )
-                                                                        ? "rating-star active"
-                                                                        : "rating-star"
-                                                                }
-
-                                                                onMouseEnter={() =>
-                                                                    setHoverRating(star)
-                                                                }
-
-                                                                onClick={() =>
-                                                                    setSelectedRating(star)
-                                                                }
-
-                                                                aria-label={
-                                                                    `${star} star rating`
-                                                                }
-                                                            >
-
-                                                                ★
-
-                                                            </button>
-
-                                                        )
-                                                    )}
-
-                                                </div>
+                                            )}
 
 
-                                                {selectedRating > 0 && (
+                                        {item.offerText && (
 
-                                                    <p className="mt-2 mb-2">
+                                            <p className="mb-0">
 
-                                                        You selected{" "}
+                                                <strong>
+                                                    🎁 Offer:
+                                                </strong>{" "}
 
-                                                        <strong>
+                                                <span className="text-primary fw-bold">
 
-                                                            {selectedRating} / 5
+                                                    {item.offerText}
 
-                                                        </strong>
+                                                </span>
 
-                                                    </p>
-
-                                                )}
-
-
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-success"
-
-                                                    onClick={
-                                                        submitRating
-                                                    }
-
-                                                    disabled={
-                                                        ratingLoading ||
-                                                        selectedRating === 0
-                                                    }
-                                                >
-
-                                                    {ratingLoading
-                                                        ? "Submitting..."
-                                                        : "Submit Rating"
-                                                    }
-
-                                                </button>
-
-
-                                                {ratingMessage && (
-
-                                                    <p className="mt-2 mb-0 text-muted">
-
-                                                        {ratingMessage}
-
-                                                    </p>
-
-                                                )}
-
-                                            </>
+                                            </p>
 
                                         )}
 
                                     </div>
 
-                                )}
+                                </div>
+
+                            )}
 
 
-                                {/* =================================================
-                                     CONTACT / BOOK
-                                     ================================================= */}
+                            {/* =================================================
+                                 RATING BOX
+                            ================================================= */}
 
-                                <Link
-                                    to={`/contact?type=${type}&id=${item.id}`}
-                                    className="btn btn-success btn-lg me-2"
-                                >
+                            {(
+                                type === "hotel" ||
+                                type === "restaurant" ||
+                                type === "touristspot" ||
+                                type === "resort"
+                            ) && (
 
-                                    Contact / Book
+                                <div className="rating-box mt-4 mb-4">
 
-                                </Link>
+                                    <h5 className="fw-bold mb-2">
+
+                                        Rate this{" "}
+
+                                        {type === "hotel"
+                                            ? "hotel"
+                                            : type === "restaurant"
+                                                ? "restaurant"
+                                                : type === "touristspot"
+                                                    ? "tourist spot"
+                                                    : "resort"
+                                        }
+
+                                    </h5>
 
 
-                                {/* =================================================
-                                     BACK
-                                     ================================================= */}
+                                    {!isLoggedIn ? (
 
-                                <Link
-                                    to={backPath}
-                                    className="btn btn-outline-success"
-                                >
+                                        <div>
 
-                                    {backText}
+                                            <p className="text-muted mb-3">
 
-                                </Link>
+                                                Please login to rate this{" "}
+
+                                                {type === "hotel"
+                                                    ? "hotel"
+                                                    : type === "restaurant"
+                                                        ? "restaurant"
+                                                        : type === "touristspot"
+                                                            ? "tourist spot"
+                                                            : "resort"
+                                                }.
+
+                                            </p>
+
+
+                                            <Link
+                                                to="/login"
+                                                className="btn btn-success"
+                                            >
+
+                                                Login to Rate
+
+                                            </Link>
+
+                                        </div>
+
+                                    ) : (
+
+                                        <>
+
+                                            <div
+                                                className="rating-select"
+                                                onMouseLeave={() =>
+                                                    setHoverRating(0)
+                                                }
+                                            >
+
+                                                {[1, 2, 3, 4, 5].map(
+                                                    (star) => (
+
+                                                        <button
+                                                            key={star}
+                                                            type="button"
+
+                                                            className={
+                                                                star <=
+                                                                (
+                                                                    hoverRating ||
+                                                                    selectedRating
+                                                                )
+                                                                    ? "rating-star active"
+                                                                    : "rating-star"
+                                                            }
+
+                                                            onMouseEnter={() =>
+                                                                setHoverRating(star)
+                                                            }
+
+                                                            onClick={() =>
+                                                                setSelectedRating(star)
+                                                            }
+
+                                                            aria-label={
+                                                                `${star} star rating`
+                                                            }
+                                                        >
+
+                                                            ★
+
+                                                        </button>
+
+                                                    )
+                                                )}
+
+                                            </div>
+
+
+                                            {selectedRating > 0 && (
+
+                                                <p className="mt-2 mb-2">
+
+                                                    You selected{" "}
+
+                                                    <strong>
+
+                                                        {selectedRating} / 5
+
+                                                    </strong>
+
+                                                </p>
+
+                                            )}
+
+
+                                            <button
+                                                type="button"
+                                                className="btn btn-success"
+
+                                                onClick={
+                                                    submitRating
+                                                }
+
+                                                disabled={
+                                                    ratingLoading ||
+                                                    selectedRating === 0
+                                                }
+                                            >
+
+                                                {ratingLoading
+                                                    ? "Submitting..."
+                                                    : "Submit Rating"
+                                                }
+
+                                            </button>
+
+
+                                            {ratingMessage && (
+
+                                                <p className="mt-2 mb-0 text-muted">
+
+                                                    {ratingMessage}
+
+                                                </p>
+
+                                            )}
+
+                                        </>
+
+                                    )}
+
+                                </div>
+
+                            )}
+
+
+                            {/* =================================================
+                                 CONTACT / BOOK
+                            ================================================= */}
+
+                            <Link
+                                to={`/contact?type=${type}&id=${item.id}`}
+                                className="btn btn-success btn-lg me-2"
+                            >
+
+                                Contact / Book
+
+                            </Link>
+
+
+                            {/* =================================================
+                                 BACK
+                            ================================================= */}
+
+                            <Link
+                                to={backPath}
+                                className="btn btn-outline-success"
+                            >
+
+                                {backText}
+
+                            </Link>
+
+                        </div>
+
+                    </div>
+
+
+                    {/* =================================================
+                         LOCATION + INFORMATION
+                    ================================================= */}
+
+                    <div className="row g-4 mt-5">
+
+                        <div className="col-md-6">
+
+                            <div className="card border-0 shadow-sm h-100">
+
+                                <div className="card-body p-4">
+
+                                    <h4 className="fw-bold mb-3">
+                                        📍 Location
+                                    </h4>
+
+                                    <p className="text-muted mb-0">
+                                        {item.location}
+                                    </p>
+
+                                </div>
 
                             </div>
 
                         </div>
 
 
-                        {/* =================================================
-                             LOCATION + INFORMATION
-                             ================================================= */}
+                        <div className="col-md-6">
 
-                        <div className="row g-4 mt-5">
+                            <div className="card border-0 shadow-sm h-100">
 
+                                <div className="card-body p-4">
 
-                            <div className="col-md-6">
+                                    <h4 className="fw-bold mb-3">
+                                        ℹ️ Information
+                                    </h4>
 
-                                <div className="card border-0 shadow-sm h-100">
-
-                                    <div className="card-body p-4">
-
-                                        <h4 className="fw-bold mb-3">
-
-                                            📍 Location
-
-                                        </h4>
-
-
-                                        <p className="text-muted mb-0">
-
-                                            {item.location}
-
-                                        </p>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <div className="col-md-6">
-
-                                <div className="card border-0 shadow-sm h-100">
-
-                                    <div className="card-body p-4">
-
-                                        <h4 className="fw-bold mb-3">
-
-                                            ℹ️ Information
-
-                                        </h4>
-
-
-                                        <p className="text-muted mb-0">
-
-                                            {item.description}
-
-                                        </p>
-
-                                    </div>
+                                    <p className="text-muted mb-0">
+                                        {item.description}
+                                    </p>
 
                                 </div>
 
@@ -1614,50 +1648,45 @@ function ViewDetails() {
 
                     </div>
 
-                </section>
+                </div>
+
+            </section>
 
 
-                {/* =================================================
-                     CALL TO ACTION
-                     ================================================= */}
+            {/* =================================================
+                 CALL TO ACTION
+            ================================================= */}
 
-                <section className="bg-success text-white py-5">
+            <section className="bg-success text-white py-5">
 
-                    <div className="container text-center">
+                <div className="container text-center">
 
-                        <h2 className="fw-bold">
-
-                            Ready to Explore Pakistan?
-
-                        </h2>
+                    <h2 className="fw-bold">
+                        Ready to Explore Pakistan?
+                    </h2>
 
 
-                        <p className="lead">
-
-                            Contact Karnel Travel Guide and plan your trip today.
-
-                        </p>
+                    <p className="lead">
+                        Contact Karnel Travel Guide and plan your trip today.
+                    </p>
 
 
-                        <Link
-                            to="/contact"
-                            className="btn btn-light btn-lg"
-                        >
+                    <Link
+                        to="/contact"
+                        className="btn btn-light btn-lg"
+                    >
 
-                            Contact Us
+                        Contact Us
 
-                        </Link>
+                    </Link>
 
-                    </div>
+                </div>
 
-                </section>
-
-            </>
+            </section>
 
         </div>
 
     );
-
 }
 
 export default ViewDetails;

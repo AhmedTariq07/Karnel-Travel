@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../api";
 import "../Pages/ManageTouristSpots.css";
 
 function Cashbook() {
@@ -24,7 +25,7 @@ function Cashbook() {
             setLoading(true);
 
             const response = await fetch(
-                "http://localhost:5014/api/Bookings"
+                `${API_URL}/api/Bookings`
             );
 
             if (!response.ok) {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../api";
 
 function CreateTrip() {
     const navigate = useNavigate();
@@ -50,7 +51,7 @@ function CreateTrip() {
 
         try {
             const response = await fetch(
-                "http://localhost:5014/api/Trips",
+                `${API_URL}/api/Trips`,
                 {
                     method: "POST",
                     headers: {
@@ -90,11 +91,15 @@ function CreateTrip() {
             }, 1000);
 
         } catch (err) {
-            console.error("Create Trip Error:", err);
+            console.error(
+                "Create Trip Error:",
+                err
+            );
 
             setError(
                 "Unable to connect to the server."
             );
+
         } finally {
             setLoading(false);
         }
@@ -108,7 +113,10 @@ function CreateTrip() {
                 padding: "30px"
             }}
         >
-            <h1>Create Travel Itinerary</h1>
+
+            <h1>
+                Create Travel Itinerary
+            </h1>
 
             <p>
                 Create a new itinerary for users to explore.
@@ -147,8 +155,11 @@ function CreateTrip() {
             <form onSubmit={handleSubmit}>
 
                 <div style={{ marginBottom: "20px" }}>
+
                     <label>
-                        <strong>Itinerary Name</strong>
+                        <strong>
+                            Itinerary Name
+                        </strong>
                     </label>
 
                     <input
@@ -165,11 +176,16 @@ function CreateTrip() {
                             boxSizing: "border-box"
                         }}
                     />
+
                 </div>
 
+
                 <div style={{ marginBottom: "20px" }}>
+
                     <label>
-                        <strong>Destination</strong>
+                        <strong>
+                            Destination
+                        </strong>
                     </label>
 
                     <input
@@ -186,20 +202,25 @@ function CreateTrip() {
                             boxSizing: "border-box"
                         }}
                     />
+
                 </div>
+
 
                 <div
                     style={{
                         display: "grid",
-                        gridTemplateColumns:
-                            "1fr 1fr",
+                        gridTemplateColumns: "1fr 1fr",
                         gap: "20px",
                         marginBottom: "25px"
                     }}
                 >
+
                     <div>
+
                         <label>
-                            <strong>Start Date</strong>
+                            <strong>
+                                Start Date
+                            </strong>
                         </label>
 
                         <input
@@ -215,11 +236,16 @@ function CreateTrip() {
                                 boxSizing: "border-box"
                             }}
                         />
+
                     </div>
 
+
                     <div>
+
                         <label>
-                            <strong>End Date</strong>
+                            <strong>
+                                End Date
+                            </strong>
                         </label>
 
                         <input
@@ -235,8 +261,11 @@ function CreateTrip() {
                                 boxSizing: "border-box"
                             }}
                         />
+
                     </div>
+
                 </div>
+
 
                 <div
                     style={{
@@ -244,14 +273,17 @@ function CreateTrip() {
                         gap: "15px"
                     }}
                 >
+
                     <button
                         type="submit"
                         disabled={loading}
                     >
                         {loading
                             ? "Creating..."
-                            : "Create Itinerary"}
+                            : "Create Itinerary"
+                        }
                     </button>
+
 
                     <button
                         type="button"
@@ -261,9 +293,11 @@ function CreateTrip() {
                     >
                         Cancel
                     </button>
+
                 </div>
 
             </form>
+
         </div>
     );
 }
