@@ -1,73 +1,70 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API_URL from "../api";
+import "../Pages/ManageTouristSpots.css";
 
-function ManageTrips() {
+function ManageUsers() {
 
     const navigate = useNavigate();
 
-    const [trips, setTrips] = useState([]);
+    const [users, setUsers] = useState([]);
+
     const [loading, setLoading] = useState(true);
+
     const [message, setMessage] = useState("");
-    const [error, setError] = useState("");
+
+    const [changingRole, setChangingRole] = useState(null);
+
+    const [currentUser, setCurrentUser] = useState(null);
 
 
     // =====================================================
-    // FETCH TRIPS
+    // LOAD USERS
     // =====================================================
 
-    const fetchTrips = async () => {
-
-        setLoading(true);
-        setError("");
-
-        const token = localStorage.getItem("adminToken");
-
-        if (!token) {
-            setError("Admin login required.");
-            setLoading(false);
-            return;
-        }
+    const loadUsers = async () => {
 
         try {
 
-            const response = await fetch(
-                `${API_URL}/api/Trips`,
-                {
-                    method: "GET",
+            setLoading(true);
 
+            const token =
+                localStorage.getItem("userToken");
+
+
+            const response = await fetch(
+                `${API_URL}/api/Users`,
+                {
                     headers: {
-                        "Authorization": `Bearer ${token}`
+                        Authorization:
+                            `Bearer ${token}`
                     }
                 }
             );
 
-            const data = await response.json();
 
             if (!response.ok) {
-
-                setError(
-                    data.message ||
-                    "Unable to load itineraries."
-                );
-
-                return;
+                throw new Error("Failed to load users");
             }
 
-            setTrips(data);
 
-        } catch (err) {
+            const data =
+                await response.json();
 
-            console.error(
-                "Fetch Trips Error:",
-                err
+
+            setUsers(data);
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+            setMessage(
+                "Unable to load users."
             );
 
-            setError(
-                "Unable to connect to the server."
-            );
-
-        } finally {
+        }
+        finally {
 
             setLoading(false);
 
@@ -76,97 +73,217 @@ function ManageTrips() {
 
 
     // =====================================================
-    // LOAD TRIPS
+    // CHECK LOGIN + LOAD USERS
     // =====================================================
 
     useEffect(() => {
 
-        fetchTrips();
+        const token =
+            localStorage.getItem("userToken");
 
-    }, []);
+
+        const storedUser =
+            localStorage.getItem("user");
+
+
+        let loggedInUser = null;
+
+
+        try {
+
+            loggedInUser = storedUser
+                ? JSON.parse(storedUser)
+                : null;
+
+        }
+        catch (error) {
+
+            console.error(
+                "Invalid user data:",
+                error
+            );
+
+        }
+
+
+        // -------------------------------------------------
+        // ONLY ADMIN CAN OPEN THIS PAGE
+        // -------------------------------------------------
+
+        if (
+            !token ||
+            !loggedInUser ||
+            loggedInUser.role !== "Admin"
+        ) {
+
+            navigate("/login");
+
+            return;
+        }
+
+
+        // -------------------------------------------------
+        // SAVE CURRENT USER
+        // -------------------------------------------------
+
+        setCurrentUser(loggedInUser);
+
+
+        // -------------------------------------------------
+        // LOAD USERS
+        // -------------------------------------------------
+
+        loadUsers();
+
+    }, [navigate]);
 
 
     // =====================================================
-    // GET TRIP ID
+    // CHANGE USER ROLE
+    // ONLY MAIN ADMIN SHOULD REACH THIS FUNCTION
     // =====================================================
 
-    const getTripId = (trip) => {
+    const changeUserRole = async (
+        userId,
+        currentRole,
+        isMainAdmin
+    ) => {
 
-        return trip.id ?? trip.Id;
+        // -------------------------------------------------
+        // EXTRA FRONTEND PROTECTION
+        // -------------------------------------------------
 
-    };
+        if (
+            !currentUser ||
+            !currentUser.isMainAdmin
+        ) {
+
+            setMessage(
+                "Only the Main Admin can give or remove Admin access."
+            );
+
+            return;
+        }
 
 
-    // =====================================================
-    // DELETE TRIP
-    // =====================================================
+        // -------------------------------------------------
+        // NEVER DEMOTE MAIN ADMIN
+        // -------------------------------------------------
 
-    const handleDelete = async (id) => {
+        if (
+            isMainAdmin &&
+            currentRole === "Admin"
+        ) {
 
-        const confirmed = window.confirm(
-            "Are you sure you want to delete this itinerary?"
-        );
+            setMessage(
+                "Main Admin access cannot be removed."
+            );
+
+            return;
+        }
+
+
+        const newRole =
+            currentRole === "Admin"
+                ? "User"
+                : "Admin";
+
+
+        const confirmMessage =
+            newRole === "Admin"
+                ? "Give this user Admin access?"
+                : "Remove Admin access from this user?";
+
+
+        const confirmed =
+            window.confirm(confirmMessage);
+
 
         if (!confirmed) {
             return;
         }
 
-        const token = localStorage.getItem("adminToken");
-
-        if (!token) {
-            setError("Admin login required.");
-            return;
-        }
-
-        setMessage("");
-        setError("");
 
         try {
 
+            setChangingRole(userId);
+
+            setMessage("");
+
+
+            const token =
+                localStorage.getItem("userToken");
+
+
             const response = await fetch(
-                `${API_URL}/api/Trips/${id}`,
+                `${API_URL}/api/Users/${userId}/role`,
                 {
-                    method: "DELETE",
+                    method: "PUT",
 
                     headers: {
-                        "Authorization": `Bearer ${token}`
-                    }
+                        "Content-Type":
+                            "application/json",
+
+                        Authorization:
+                            `Bearer ${token}`
+                    },
+
+                    body: JSON.stringify({
+                        role: newRole
+                    })
                 }
             );
 
-            const data = await response.json();
+
+            const data =
+                await response.json();
+
 
             if (!response.ok) {
 
-                setError(
+                throw new Error(
                     data.message ||
-                    "Unable to delete itinerary."
+                    "Failed to change user role."
                 );
-
-                return;
             }
 
-            setMessage(
-                "Itinerary deleted successfully."
-            );
 
-            setTrips((currentTrips) =>
-                currentTrips.filter(
-                    (trip) =>
-                        getTripId(trip) !== id
+            // =================================================
+            // UPDATE TABLE
+            // =================================================
+
+            setUsers((previousUsers) =>
+                previousUsers.map((user) =>
+                    user.id === userId
+                        ? {
+                            ...user,
+                            role: newRole
+                        }
+                        : user
                 )
             );
 
-        } catch (err) {
 
-            console.error(
-                "Delete Trip Error:",
-                err
+            setMessage(
+                data.message ||
+                "User role updated successfully."
             );
 
-            setError(
-                "Unable to connect to the server."
+        }
+        catch (error) {
+
+            console.error(error);
+
+            setMessage(
+                error.message ||
+                "Unable to change user role."
             );
+
+        }
+        finally {
+
+            setChangingRole(null);
+
         }
     };
 
@@ -175,34 +292,21 @@ function ManageTrips() {
     // LOGOUT
     // =====================================================
 
-    const handleLogout = () => {
+    const logout = () => {
 
-        localStorage.removeItem("adminToken");
-        localStorage.removeItem("adminUsername");
-
-        navigate("/admin-login");
-
-    };
-
-
-    // =====================================================
-    // FORMAT DATE
-    // =====================================================
-
-    const formatDate = (dateString) => {
-
-        if (!dateString) {
-            return "N/A";
-        }
-
-        return new Date(dateString).toLocaleDateString(
-            "en-GB",
-            {
-                day: "2-digit",
-                month: "short",
-                year: "numeric"
-            }
+        localStorage.removeItem(
+            "userToken"
         );
+
+        localStorage.removeItem(
+            "user"
+        );
+
+        window.dispatchEvent(
+            new Event("userAuthChanged")
+        );
+
+        navigate("/login");
     };
 
 
@@ -212,113 +316,47 @@ function ManageTrips() {
 
     return (
 
-        <div
-            style={{
-                maxWidth: "1200px",
-                margin: "40px auto",
-                padding: "30px"
-            }}
-        >
+        <div className="manage-tourist-spots">
+
 
             {/* =================================================
-                TOP HEADER
+                HEADER
             ================================================= */}
 
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "25px",
-                    flexWrap: "wrap",
-                    gap: "15px"
-                }}
-            >
-
-                {/* TITLE */}
+            <div className="manage-header">
 
                 <div>
 
                     <h1>
-                        Manage Itineraries
+                        Manage Users
                     </h1>
 
                     <p>
-                        Create, edit and manage travel
-                        itineraries for users.
+                        View registered users
                     </p>
 
                 </div>
 
 
-                {/* =================================================
-                    TOP BUTTONS
-                ================================================= */}
-
-                <div
-                    style={{
-                        display: "flex",
-                        gap: "10px",
-                        alignItems: "center",
-                        flexWrap: "wrap"
-                    }}
-                >
-
-                    {/* DASHBOARD */}
+                <div className="manage-header-buttons">
 
                     <button
+                        className="back-button"
                         onClick={() =>
-                            navigate("/admin-dashboard")
+                            navigate(
+                                "/admin-dashboard"
+                            )
                         }
-                        style={{
-                            padding: "12px 20px",
-                            cursor: "pointer",
-                            border: "none",
-                            borderRadius: "6px",
-                            background: "#075b96",
-                            color: "#fff",
-                            fontWeight: "600"
-                        }}
                     >
-                        🏠 Dashboard
+                        ← Dashboard
                     </button>
 
 
-                    {/* CREATE */}
-
                     <button
-                        onClick={() =>
-                            navigate("/create-trip")
-                        }
-                        style={{
-                            padding: "12px 20px",
-                            cursor: "pointer",
-                            border: "none",
-                            borderRadius: "6px",
-                            background: "#198754",
-                            color: "#fff",
-                            fontWeight: "600"
-                        }}
+                        className="logout-button"
+                        onClick={logout}
                     >
-                        + Create Itinerary
-                    </button>
-
-
-                    {/* LOGOUT */}
-
-                    <button
-                        onClick={handleLogout}
-                        style={{
-                            padding: "12px 20px",
-                            cursor: "pointer",
-                            border: "none",
-                            borderRadius: "6px",
-                            background: "#dc3545",
-                            color: "#fff",
-                            fontWeight: "600"
-                        }}
-                    >
-                        🚪 Logout
+                        Logout
                     </button>
 
                 </div>
@@ -327,298 +365,209 @@ function ManageTrips() {
 
 
             {/* =================================================
-                SUCCESS MESSAGE
+                CONTENT
             ================================================= */}
 
-            {message && (
+            <div className="manage-content">
 
-                <div
-                    style={{
-                        padding: "15px",
-                        marginBottom: "20px",
-                        background: "#e6f7e6",
-                        color: "#176b17",
-                        borderRadius: "8px"
-                    }}
-                >
-                    {message}
+
+                {/* =================================================
+                    TOP
+                ================================================= */}
+
+                <div className="manage-top">
+
+                    <h2>
+                        Registered Users
+                    </h2>
+
                 </div>
 
-            )}
+
+                {/* =================================================
+                    MESSAGE
+                ================================================= */}
+
+                {message && (
+
+                    <div className="manage-message">
+
+                        {message}
+
+                        <button
+                            onClick={() =>
+                                setMessage("")
+                            }
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                )}
 
 
-            {/* =================================================
-                ERROR MESSAGE
-            ================================================= */}
+                {/* =================================================
+                    LOADING
+                ================================================= */}
 
-            {error && (
+                {loading ? (
 
-                <div
-                    style={{
-                        padding: "15px",
-                        marginBottom: "20px",
-                        background: "#ffe5e5",
-                        color: "#b00000",
-                        borderRadius: "8px"
-                    }}
-                >
-                    {error}
-                </div>
-
-            )}
-
-
-            {/* =================================================
-                TABLE
-            ================================================= */}
-
-            {loading ? (
-
-                <p>
-                    Loading itineraries...
-                </p>
-
-            ) : trips.length === 0 ? (
-
-                <div
-                    style={{
-                        padding: "30px",
-                        textAlign: "center",
-                        border: "1px solid #ddd",
-                        borderRadius: "10px"
-                    }}
-                >
-
-                    <h3>
-                        No itineraries found.
-                    </h3>
-
-                    <p>
-                        Create your first travel itinerary.
+                    <p className="loading">
+                        Loading users...
                     </p>
 
-                </div>
+                ) : users.length === 0 ? (
 
-            ) : (
+                    /* =================================================
+                       EMPTY STATE
+                    ================================================= */
 
-                <div
-                    style={{
-                        overflowX: "auto"
-                    }}
-                >
+                    <div className="empty-state">
 
-                    <table
-                        style={{
-                            width: "100%",
-                            borderCollapse: "collapse",
-                            background: "#fff"
-                        }}
-                    >
+                        <h3>
+                            No Users Found
+                        </h3>
 
-                        <thead>
+                        <p>
+                            There are currently no registered users.
+                        </p>
 
-                            <tr>
+                    </div>
 
-                                <th
-                                    style={{
-                                        padding: "14px",
-                                        borderBottom: "1px solid #ddd",
-                                        textAlign: "left"
-                                    }}
-                                >
-                                    #
-                                </th>
+                ) : (
 
-                                <th
-                                    style={{
-                                        padding: "14px",
-                                        borderBottom: "1px solid #ddd",
-                                        textAlign: "left"
-                                    }}
-                                >
-                                    Itinerary
-                                </th>
+                    /* =================================================
+                       USERS TABLE
+                    ================================================= */
 
-                                <th
-                                    style={{
-                                        padding: "14px",
-                                        borderBottom: "1px solid #ddd",
-                                        textAlign: "left"
-                                    }}
-                                >
-                                    Destination
-                                </th>
+                    <div className="tourist-table-wrapper">
 
-                                <th
-                                    style={{
-                                        padding: "14px",
-                                        borderBottom: "1px solid #ddd",
-                                        textAlign: "left"
-                                    }}
-                                >
-                                    Start Date
-                                </th>
+                        <table className="tourist-table">
 
-                                <th
-                                    style={{
-                                        padding: "14px",
-                                        borderBottom: "1px solid #ddd",
-                                        textAlign: "left"
-                                    }}
-                                >
-                                    End Date
-                                </th>
+                            <thead>
 
-                                <th
-                                    style={{
-                                        padding: "14px",
-                                        borderBottom: "1px solid #ddd",
-                                        textAlign: "left"
-                                    }}
-                                >
-                                    Actions
-                                </th>
+                                <tr>
 
-                            </tr>
+                                    <th>
+                                        ID
+                                    </th>
 
-                        </thead>
+                                    <th>
+                                        Name
+                                    </th>
+
+                                    <th>
+                                        Email
+                                    </th>
+
+                                    <th>
+                                        Role
+                                    </th>
+
+                                    <th>
+                                        Admin Access
+                                    </th>
+
+                                </tr>
+
+                            </thead>
 
 
-                        <tbody>
+                            <tbody>
 
-                            {trips.map((trip, index) => {
+                                {users.map((user) => (
 
-                                const tripId =
-                                    getTripId(trip);
+                                    <tr key={user.id}>
 
-                                return (
-
-                                    <tr key={tripId}>
-
-                                        <td
-                                            style={{
-                                                padding: "14px",
-                                                borderBottom: "1px solid #eee"
-                                            }}
-                                        >
-                                            {index + 1}
+                                        <td>
+                                            {user.id}
                                         </td>
 
-
-                                        <td
-                                            style={{
-                                                padding: "14px",
-                                                borderBottom: "1px solid #eee",
-                                                fontWeight: "600"
-                                            }}
-                                        >
-                                            {trip.name}
+                                        <td>
+                                            {user.name}
                                         </td>
 
-
-                                        <td
-                                            style={{
-                                                padding: "14px",
-                                                borderBottom: "1px solid #eee"
-                                            }}
-                                        >
-                                            {trip.destination ||
-                                                "N/A"}
+                                        <td>
+                                            {user.email}
                                         </td>
 
+                                        <td>
 
-                                        <td
-                                            style={{
-                                                padding: "14px",
-                                                borderBottom: "1px solid #eee"
-                                            }}
-                                        >
-                                            {formatDate(
-                                                trip.startDate
+                                            {user.isMainAdmin
+                                                ? "Main Admin"
+                                                : user.role}
+
+                                        </td>
+
+                                        <td>
+
+                                            {/* ==========================================
+                                                ONLY MAIN ADMIN CAN SEE ACCESS CONTROLS
+                                            ========================================== */}
+
+                                            {currentUser?.isMainAdmin ? (
+
+                                                user.isMainAdmin ? (
+
+                                                    <span>
+                                                        Protected
+                                                    </span>
+
+                                                ) : (
+
+                                                    <button
+                                                        onClick={() =>
+                                                            changeUserRole(
+                                                                user.id,
+                                                                user.role,
+                                                                user.isMainAdmin
+                                                            )
+                                                        }
+                                                        disabled={
+                                                            changingRole ===
+                                                            user.id
+                                                        }
+                                                    >
+
+                                                        {changingRole ===
+                                                        user.id
+                                                            ? "Updating..."
+                                                            : user.role ===
+                                                              "Admin"
+                                                            ? "Remove Admin Access"
+                                                            : "Give Admin Access"}
+
+                                                    </button>
+
+                                                )
+
+                                            ) : (
+
+                                                <span>
+                                                    —
+                                                </span>
+
                                             )}
-                                        </td>
-
-
-                                        <td
-                                            style={{
-                                                padding: "14px",
-                                                borderBottom: "1px solid #eee"
-                                            }}
-                                        >
-                                            {formatDate(
-                                                trip.endDate
-                                            )}
-                                        </td>
-
-
-                                        <td
-                                            style={{
-                                                padding: "14px",
-                                                borderBottom: "1px solid #eee"
-                                            }}
-                                        >
-
-                                            <div
-                                                style={{
-                                                    display: "flex",
-                                                    gap: "8px"
-                                                }}
-                                            >
-
-                                                {/* EDIT */}
-
-                                                <button
-                                                    onClick={() =>
-                                                        navigate(
-                                                            `/edit-trip/${tripId}`
-                                                        )
-                                                    }
-                                                    style={{
-                                                        padding: "8px 12px",
-                                                        cursor: "pointer"
-                                                    }}
-                                                >
-                                                    Edit
-                                                </button>
-
-
-                                                {/* DELETE */}
-
-                                                <button
-                                                    onClick={() =>
-                                                        handleDelete(
-                                                            tripId
-                                                        )
-                                                    }
-                                                    style={{
-                                                        padding: "8px 12px",
-                                                        cursor: "pointer"
-                                                    }}
-                                                >
-                                                    Delete
-                                                </button>
-
-                                            </div>
 
                                         </td>
 
                                     </tr>
 
-                                );
+                                ))}
 
-                            })}
+                            </tbody>
 
-                        </tbody>
+                        </table>
 
-                    </table>
+                    </div>
 
-                </div>
+                )}
 
-            )}
+            </div>
 
         </div>
-
     );
 }
 
-export default ManageTrips;
+export default ManageUsers;
