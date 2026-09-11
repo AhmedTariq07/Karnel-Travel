@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Profile.css";
+import API_URL from "../api";
 
 function Profile() {
 
@@ -135,7 +136,7 @@ function Profile() {
             // -------------------------------------------------
 
             const response = await fetch(
-                "http://localhost:5014/api/Auth/update-profile",
+                `${API_URL}/api/Auth/update-profile`,
                 {
                     method: "PUT",
 

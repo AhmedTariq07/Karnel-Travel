@@ -1,26 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import API_URL from "../api";
 
 function Contact() {
-
-    // =====================================================
-    // GET TYPE AND ID FROM URL
-    // =====================================================
 
     const [searchParams] = useSearchParams();
 
     const type = searchParams.get("type");
     const id = searchParams.get("id");
 
-
-    // =====================================================
-    // STATES
-    // =====================================================
-
     const [selectedItem, setSelectedItem] = useState(null);
-
     const [loading, setLoading] = useState(false);
-
     const [error, setError] = useState("");
 
     const [formData, setFormData] = useState({
@@ -31,29 +21,12 @@ function Contact() {
         message: ""
     });
 
-
-    // =====================================================
-    // HOTEL / RESORT BOOKING
-    // =====================================================
-
     const [rooms, setRooms] = useState(1);
-
     const [nights, setNights] = useState(1);
-
-
-    // =====================================================
-    // RESTAURANT QUANTITY
-    // =====================================================
 
     const [quantity, setQuantity] = useState(1);
 
-
-    // =====================================================
-    // SUBMIT STATES
-    // =====================================================
-
     const [submitting, setSubmitting] = useState(false);
-
     const [submitError, setSubmitError] = useState("");
 
 
@@ -68,58 +41,51 @@ function Contact() {
             return;
         }
 
-
         const loadItem = async () => {
 
             try {
 
                 setLoading(true);
-
                 setError("");
 
-
                 let apiUrl = "";
-
 
                 if (type === "hotel") {
 
                     apiUrl =
-                        `http://localhost:5014/api/Hotels/${id}`;
+                        `${API_URL}/api/Hotels/${id}`;
 
                 }
 
                 else if (type === "restaurant") {
 
                     apiUrl =
-                        `http://localhost:5014/api/Restaurants/${id}`;
+                        `${API_URL}/api/Restaurants/${id}`;
 
                 }
 
                 else if (type === "touristspot") {
 
                     apiUrl =
-                        `http://localhost:5014/api/TouristSpots/${id}`;
+                        `${API_URL}/api/TouristSpots/${id}`;
 
                 }
 
                 else if (type === "resort") {
 
                     apiUrl =
-                        `http://localhost:5014/api/Resorts/${id}`;
+                        `${API_URL}/api/Resorts/${id}`;
 
                 }
 
                 else {
 
                     setError("Invalid place type.");
-
                     return;
                 }
 
-
                 const response =
                     await fetch(apiUrl);
-
 
                 if (!response.ok) {
 
@@ -129,10 +95,8 @@ function Contact() {
 
                 }
 
-
                 const data =
                     await response.json();
-
 
                 setSelectedItem(data);
 
@@ -155,7 +119,6 @@ function Contact() {
             }
 
         };
-
 
         loadItem();
 
@@ -182,11 +145,8 @@ function Contact() {
 
             }));
 
-
             setRooms(1);
-
             setNights(1);
-
             setQuantity(1);
 
         }
@@ -201,7 +161,6 @@ function Contact() {
     const handleChange = (e) => {
 
         const { name, value } = e.target;
-
 
         setFormData((previous) => ({
 
@@ -221,15 +180,11 @@ function Contact() {
     const getNumericPrice = () => {
 
         if (!selectedItem) {
-
             return 0;
-
         }
-
 
         let price =
             selectedItem.price;
-
 
         if (
             price === null ||
@@ -241,7 +196,6 @@ function Contact() {
 
         }
 
-
         if (typeof price === "string") {
 
             price =
@@ -252,10 +206,8 @@ function Contact() {
 
         }
 
-
         const numericPrice =
             Number(price);
-
 
         return Number.isFinite(numericPrice)
             ? numericPrice
@@ -265,16 +217,11 @@ function Contact() {
 
 
     // =====================================================
-    // ORIGINAL UNIT PRICE
+    // PRICES
     // =====================================================
 
     const unitPrice =
         getNumericPrice();
-
-
-    // =====================================================
-    // TOURIST SPOT DISCOUNT
-    // =====================================================
 
     const touristSpotDiscount =
         type === "touristspot"
@@ -282,11 +229,6 @@ function Contact() {
                 selectedItem?.discountPercent ?? 20
             )
             : 0;
-
-
-    // =====================================================
-    // TOURIST SPOT DISCOUNT AMOUNT
-    // =====================================================
 
     const touristSpotDiscountAmount =
         type === "touristspot"
@@ -296,11 +238,6 @@ function Contact() {
                 100
             )
             : 0;
-
-
-    // =====================================================
-    // TOURIST SPOT FINAL PACKAGE PRICE
-    // =====================================================
 
     const touristSpotFinalPrice =
         type === "touristspot"
@@ -315,14 +252,10 @@ function Contact() {
 
     let totalAmount = 0;
 
-
     if (
         type === "hotel" ||
         type === "resort"
     ) {
-
-        // HOTEL / RESORT:
-        // Price × Rooms × Nights
 
         totalAmount =
             unitPrice *
@@ -333,9 +266,6 @@ function Contact() {
 
     else if (type === "restaurant") {
 
-        // RESTAURANT:
-        // Price × People
-
         totalAmount =
             unitPrice *
             quantity;
@@ -344,9 +274,6 @@ function Contact() {
 
     else if (type === "touristspot") {
 
-        // TOURIST SPOT:
-        // FIXED PACKAGE PRICE AFTER 20% DISCOUNT
-
         totalAmount =
             touristSpotFinalPrice;
 
@@ -354,7 +281,7 @@ function Contact() {
 
 
     // =====================================================
-    // BOOKING LABEL
+    // QUANTITY LABEL
     // =====================================================
 
     const getQuantityLabel = () => {
@@ -366,7 +293,6 @@ function Contact() {
                 : "People";
 
         }
-
 
         return "Quantity";
 
@@ -381,7 +307,6 @@ function Contact() {
 
         const value =
             Number(e.target.value);
-
 
         if (value >= 1) {
 
@@ -401,7 +326,6 @@ function Contact() {
         const value =
             Number(e.target.value);
 
-
         if (value >= 1) {
 
             setNights(value);
@@ -420,7 +344,6 @@ function Contact() {
         const value =
             Number(e.target.value);
 
-
         if (value >= 1) {
 
             setQuantity(value);
@@ -438,11 +361,9 @@ function Contact() {
 
         e.preventDefault();
 
-
         try {
 
             setSubmitting(true);
-
             setSubmitError("");
 
 
@@ -476,7 +397,6 @@ function Contact() {
                         selectedItem.availableRooms ?? 0
                     );
 
-
                 if (availableRooms <= 0) {
 
                     throw new Error(
@@ -484,7 +404,6 @@ function Contact() {
                     );
 
                 }
-
 
                 if (rooms > availableRooms) {
 
@@ -508,7 +427,6 @@ function Contact() {
                         selectedItem.availableSeats ?? 0
                     );
 
-
                 if (availableSeats <= 0) {
 
                     throw new Error(
@@ -516,7 +434,6 @@ function Contact() {
                     );
 
                 }
-
 
                 if (quantity > availableSeats) {
 
@@ -536,12 +453,7 @@ function Contact() {
             let bookingMessage =
                 formData.message;
 
-
             if (selectedItem) {
-
-                // =============================================
-                // HOTEL / RESORT
-                // =============================================
 
                 if (
                     type === "hotel" ||
@@ -558,11 +470,6 @@ function Contact() {
 
                 }
 
-
-                // =============================================
-                // RESTAURANT
-                // =============================================
-
                 else if (type === "restaurant") {
 
                     bookingMessage =
@@ -573,12 +480,6 @@ function Contact() {
                         `Total Amount: Rs. ${totalAmount.toLocaleString()}`;
 
                 }
-
-
-                // =============================================
-                // TOURIST SPOT
-                // FIXED TOUR PACKAGE
-                // =============================================
 
                 else if (type === "touristspot") {
 
@@ -630,11 +531,6 @@ function Contact() {
                         ? selectedItem.name
                         : null,
 
-
-                // =================================================
-                // CASHBOOK AMOUNT
-                // =================================================
-
                 amount:
                     selectedItem
                         ? totalAmount
@@ -667,7 +563,7 @@ function Contact() {
 
             const response =
                 await fetch(
-                    "http://localhost:5014/api/Bookings",
+                    `${API_URL}/api/Bookings`,
                     {
                         method: "POST",
 
@@ -688,10 +584,6 @@ function Contact() {
                 await response.json();
 
 
-            // =================================================
-            // BOOKING ERROR
-            // =================================================
-
             if (!response.ok) {
 
                 throw new Error(
@@ -710,7 +602,7 @@ function Contact() {
 
                 const reserveResponse =
                     await fetch(
-                        `http://localhost:5014/api/Hotels/${id}/reserve-rooms`,
+                        `${API_URL}/api/Hotels/${id}/reserve-rooms`,
                         {
                             method: "POST",
 
@@ -744,11 +636,8 @@ function Contact() {
                 setSelectedItem((previous) => {
 
                     if (!previous) {
-
                         return previous;
-
                     }
-
 
                     return {
 
@@ -772,7 +661,7 @@ function Contact() {
 
                 const reserveResponse =
                     await fetch(
-                        `http://localhost:5014/api/Resorts/${id}/reserve-rooms`,
+                        `${API_URL}/api/Resorts/${id}/reserve-rooms`,
                         {
                             method: "POST",
 
@@ -806,11 +695,8 @@ function Contact() {
                 setSelectedItem((previous) => {
 
                     if (!previous) {
-
                         return previous;
-
                     }
-
 
                     return {
 
@@ -834,7 +720,7 @@ function Contact() {
 
                 const reserveResponse =
                     await fetch(
-                        `http://localhost:5014/api/Restaurants/${id}/reserve-seats`,
+                        `${API_URL}/api/Restaurants/${id}/reserve-seats`,
                         {
                             method: "POST",
 
@@ -868,11 +754,8 @@ function Contact() {
                 setSelectedItem((previous) => {
 
                     if (!previous) {
-
                         return previous;
-
                     }
-
 
                     return {
 
@@ -902,20 +785,15 @@ function Contact() {
 
             });
 
-
             setRooms(1);
-
             setNights(1);
-
             setQuantity(1);
 
         }
 
-
         catch (error) {
 
             console.error(error);
-
 
             setSubmitError(
                 error.message ||
@@ -923,7 +801,6 @@ function Contact() {
             );
 
         }
-
 
         finally {
 
@@ -946,7 +823,7 @@ function Contact() {
 
 
     // =====================================================
-    // HOTEL / RESORT ROOM COUNT
+    // ROOM COUNT
     // =====================================================
 
     const roomCount =
@@ -1015,10 +892,6 @@ function Contact() {
     return (
         <>
 
-            {/* =====================================================
-                 HERO SECTION
-                 ===================================================== */}
-
             <section className="page-banner">
 
                 <div className="container">
@@ -1037,20 +910,11 @@ function Contact() {
             </section>
 
 
-            {/* =====================================================
-                 CONTACT SECTION
-                 ===================================================== */}
-
             <section className="contact-section py-5">
 
                 <div className="container">
 
                     <div className="row g-5">
-
-
-                        {/* =================================================
-                             CONTACT INFORMATION
-                             ================================================= */}
 
                         <div className="col-lg-5">
 
@@ -1064,15 +928,12 @@ function Contact() {
                                 contact us.
                             </p>
 
-
                             <div className="mt-4">
 
                                 <div className="d-flex mb-4">
 
                                     <div className="me-3">
-
                                         <i className="bi bi-geo-alt-fill fs-3"></i>
-
                                     </div>
 
                                     <div>
@@ -1093,9 +954,7 @@ function Contact() {
                                 <div className="d-flex mb-4">
 
                                     <div className="me-3">
-
                                         <i className="bi bi-telephone-fill fs-3"></i>
-
                                     </div>
 
                                     <div>
@@ -1116,9 +975,7 @@ function Contact() {
                                 <div className="d-flex mb-4">
 
                                     <div className="me-3">
-
                                         <i className="bi bi-envelope-fill fs-3"></i>
-
                                     </div>
 
                                     <div>
@@ -1140,10 +997,6 @@ function Contact() {
                         </div>
 
 
-                        {/* =================================================
-                             CONTACT / BOOKING FORM
-                             ================================================= */}
-
                         <div className="col-lg-7">
 
                             <div className="card shadow-sm border-0 p-4">
@@ -1153,46 +1006,32 @@ function Contact() {
                                 </h3>
 
 
-                                {/* LOADING */}
-
                                 {loading && (
 
                                     <div className="alert alert-info">
-
                                         Loading selected place...
-
                                     </div>
 
                                 )}
 
-
-                                {/* ERROR */}
 
                                 {error && (
 
                                     <div className="alert alert-danger">
-
                                         {error}
-
                                     </div>
 
                                 )}
 
-
-                                {/* SUBMIT ERROR */}
 
                                 {submitError && (
 
                                     <div className="alert alert-danger">
-
                                         {submitError}
-
                                     </div>
 
                                 )}
 
-
-                                {/* SELECTED PLACE */}
 
                                 {selectedItem && (
 
@@ -1222,8 +1061,6 @@ function Contact() {
                                             )}
 
 
-                                            {/* HOTEL / RESORT AVAILABILITY */}
-
                                             {(
                                                 type === "hotel" ||
                                                 type === "resort"
@@ -1236,17 +1073,13 @@ function Contact() {
                                                     </strong>{" "}
 
                                                     <span className="fw-bold">
-
                                                         {selectedItem.availableRooms ?? 0}
-
                                                     </span>
 
                                                 </div>
 
                                             )}
 
-
-                                            {/* RESTAURANT AVAILABILITY */}
 
                                             {type === "restaurant" && (
 
@@ -1257,17 +1090,13 @@ function Contact() {
                                                     </strong>{" "}
 
                                                     <span className="fw-bold">
-
                                                         {selectedItem.availableSeats ?? 0}
-
                                                     </span>
 
                                                 </div>
 
                                             )}
 
-
-                                            {/* TOURIST SPOT PACKAGE INFORMATION */}
 
                                             {type === "touristspot" && (
 
@@ -1287,8 +1116,7 @@ function Contact() {
                                                                 selectedItem.tourDays
                                                             ) === 1
                                                                 ? "Day"
-                                                                : "Days"
-                                                            }
+                                                                : "Days"}
 
                                                         </span>
 
@@ -1348,8 +1176,6 @@ function Contact() {
                                             )}
 
 
-                                            {/* HOTEL / RESORT PRICE */}
-
                                             {(
                                                 type === "hotel" ||
                                                 type === "resort"
@@ -1377,8 +1203,6 @@ function Contact() {
 
                                             )}
 
-
-                                            {/* RESTAURANT PRICE */}
 
                                             {type === "restaurant" && (
 
@@ -1411,12 +1235,7 @@ function Contact() {
                                 )}
 
 
-                                {/* FORM */}
-
                                 <form onSubmit={handleSubmit}>
-
-
-                                    {/* FULL NAME */}
 
                                     <div className="mb-3">
 
@@ -1437,8 +1256,6 @@ function Contact() {
                                     </div>
 
 
-                                    {/* EMAIL */}
-
                                     <div className="mb-3">
 
                                         <label className="form-label">
@@ -1457,8 +1274,6 @@ function Contact() {
 
                                     </div>
 
-
-                                    {/* PHONE */}
 
                                     <div className="mb-3">
 
@@ -1479,8 +1294,6 @@ function Contact() {
                                     </div>
 
 
-                                    {/* HOTEL / RESORT ROOMS */}
-
                                     {selectedItem &&
                                         (
                                             type === "hotel" ||
@@ -1490,20 +1303,15 @@ function Contact() {
                                             <div className="mb-3">
 
                                                 <label className="form-label fw-bold">
-
                                                     How many rooms?
-
                                                 </label>
-
 
                                                 {roomCount > 0 ? (
 
                                                     <select
                                                         className="form-select"
                                                         value={rooms}
-                                                        onChange={
-                                                            handleRoomsChange
-                                                        }
+                                                        onChange={handleRoomsChange}
                                                     >
 
                                                         {roomOptions.map(
@@ -1518,8 +1326,7 @@ function Contact() {
 
                                                                     {number === 1
                                                                         ? "Room"
-                                                                        : "Rooms"
-                                                                    }
+                                                                        : "Rooms"}
 
                                                                 </option>
 
@@ -1531,9 +1338,7 @@ function Contact() {
                                                 ) : (
 
                                                     <div className="alert alert-danger mb-0">
-
                                                         No rooms are currently available.
-
                                                     </div>
 
                                                 )}
@@ -1542,8 +1347,6 @@ function Contact() {
 
                                         )}
 
-
-                                    {/* HOTEL / RESORT NIGHTS */}
 
                                     {selectedItem &&
                                         (
@@ -1554,18 +1357,13 @@ function Contact() {
                                             <div className="mb-4">
 
                                                 <label className="form-label fw-bold">
-
                                                     How many nights?
-
                                                 </label>
-
 
                                                 <select
                                                     className="form-select"
                                                     value={nights}
-                                                    onChange={
-                                                        handleNightsChange
-                                                    }
+                                                    onChange={handleNightsChange}
                                                 >
 
                                                     {quantityOptions.map(
@@ -1580,8 +1378,7 @@ function Contact() {
 
                                                                 {number === 1
                                                                     ? "Night"
-                                                                    : "Nights"
-                                                                }
+                                                                    : "Nights"}
 
                                                             </option>
 
@@ -1595,28 +1392,21 @@ function Contact() {
                                         )}
 
 
-                                    {/* RESTAURANT PEOPLE */}
-
                                     {selectedItem &&
                                         type === "restaurant" && (
 
                                             <div className="mb-4">
 
                                                 <label className="form-label fw-bold">
-
                                                     How many people?
-
                                                 </label>
-
 
                                                 {seatCount > 0 ? (
 
                                                     <select
                                                         className="form-select"
                                                         value={quantity}
-                                                        onChange={
-                                                            handleQuantityChange
-                                                        }
+                                                        onChange={handleQuantityChange}
                                                     >
 
                                                         {restaurantQuantityOptions.map(
@@ -1631,8 +1421,7 @@ function Contact() {
 
                                                                     {number === 1
                                                                         ? "Person"
-                                                                        : "People"
-                                                                    }
+                                                                        : "People"}
 
                                                                 </option>
 
@@ -1644,9 +1433,7 @@ function Contact() {
                                                 ) : (
 
                                                     <div className="alert alert-danger mb-0">
-
                                                         No seats are currently available.
-
                                                     </div>
 
                                                 )}
@@ -1655,8 +1442,6 @@ function Contact() {
 
                                         )}
 
-
-                                    {/* TOURIST SPOT HAS NO QUANTITY SELECTOR */}
 
                                     {selectedItem &&
                                         type === "touristspot" && (
@@ -1686,16 +1471,11 @@ function Contact() {
                                         )}
 
 
-                                    {/* TOTAL AMOUNT */}
-
                                     {selectedItem && (
 
                                         <div className="card border-success mb-4">
 
                                             <div className="card-body">
-
-
-                                                {/* HOTEL / RESORT */}
 
                                                 {(
                                                     type === "hotel" ||
@@ -1753,9 +1533,7 @@ function Contact() {
                                                         <div className="d-flex justify-content-between">
 
                                                             <span className="fw-bold fs-5">
-
                                                                 Total Amount
-
                                                             </span>
 
                                                             <strong className="text-success fs-4">
@@ -1771,8 +1549,6 @@ function Contact() {
                                                     </>
 
                                                 ) : type === "restaurant" ? (
-
-                                                    /* RESTAURANT */
 
                                                     <>
 
@@ -1812,9 +1588,7 @@ function Contact() {
                                                         <div className="d-flex justify-content-between">
 
                                                             <span className="fw-bold fs-5">
-
                                                                 Total Amount
-
                                                             </span>
 
                                                             <strong className="text-success fs-4">
@@ -1830,8 +1604,6 @@ function Contact() {
                                                     </>
 
                                                 ) : (
-
-                                                    /* TOURIST SPOT */
 
                                                     <>
 
@@ -1849,8 +1621,7 @@ function Contact() {
                                                                     selectedItem.tourDays
                                                                 ) === 1
                                                                     ? "Day"
-                                                                    : "Days"
-                                                                }
+                                                                    : "Days"}
 
                                                             </strong>
 
@@ -1912,9 +1683,7 @@ function Contact() {
                                                         <div className="d-flex justify-content-between">
 
                                                             <span className="fw-bold fs-5">
-
                                                                 Final Package Price
-
                                                             </span>
 
                                                             <strong className="text-success fs-4">
@@ -1938,8 +1707,6 @@ function Contact() {
                                     )}
 
 
-                                    {/* SUBJECT */}
-
                                     <div className="mb-3">
 
                                         <label className="form-label">
@@ -1959,8 +1726,6 @@ function Contact() {
                                     </div>
 
 
-                                    {/* MESSAGE */}
-
                                     <div className="mb-3">
 
                                         <label className="form-label">
@@ -1979,8 +1744,6 @@ function Contact() {
 
                                     </div>
 
-
-                                    {/* SUBMIT */}
 
                                     <button
                                         type="submit"
@@ -2005,8 +1768,7 @@ function Contact() {
                                             ? "Sending..."
                                             : selectedItem
                                                 ? "Submit Booking"
-                                                : "Send Message"
-                                        }
+                                                : "Send Message"}
 
                                     </button>
 
@@ -2022,10 +1784,6 @@ function Contact() {
 
             </section>
 
-
-            {/* =====================================================
-                 FEEDBACK SECTION
-                 ===================================================== */}
 
             <section className="py-5">
 
@@ -2052,10 +1810,6 @@ function Contact() {
             </section>
 
 
-            {/* =====================================================
-                 FOOTER
-                 ===================================================== */}
-
             <footer className="py-4 bg-dark text-white">
 
                 <div className="container text-center">
@@ -2070,6 +1824,7 @@ function Contact() {
 
         </>
     );
+
 }
 
 export default Contact;

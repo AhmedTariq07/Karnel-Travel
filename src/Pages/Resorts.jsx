@@ -1,3 +1,4 @@
+import API_URL from "../api";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -25,7 +26,6 @@ function Resorts() {
             return "";
         }
 
-        // Remove accidental spaces
         image = image.trim();
 
         // If API already returns a complete URL
@@ -37,13 +37,6 @@ function Resorts() {
         }
 
         // Images stored in React public/images
-        //
-        // Example database value:
-        // /images/resort.jpg
-        //
-        // Browser loads:
-        // http://localhost:5173/images/resort.jpg
-
         if (!image.startsWith("/")) {
             return `/${image}`;
         }
@@ -58,7 +51,7 @@ function Resorts() {
 
     useEffect(() => {
 
-        fetch("http://localhost:5014/api/Resorts")
+        fetch(`${API_URL}/api/Resorts`)
 
             .then((response) => {
 
@@ -93,7 +86,7 @@ function Resorts() {
                         try {
 
                             const response = await fetch(
-                                `http://localhost:5014/api/ResortRatings/${resort.id}`
+                                `${API_URL}/api/ResortRatings/${resort.id}`
                             );
 
                             if (!response.ok) {
@@ -470,6 +463,7 @@ function Resorts() {
                     <p>
                         © 2026 Karnel Travel Guide.
                         All Rights Reserved.
+
                     </p>
 
                 </div>

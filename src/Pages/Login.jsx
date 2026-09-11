@@ -1,6 +1,7 @@
 import "./Login.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import API_URL from "../api";
 
 function Login() {
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ function Login() {
             setLoading(true);
 
             const response = await fetch(
-                "http://localhost:5014/api/Auth/user-login",
+                `${API_URL}/api/Auth/user-login`,
                 {
                     method: "POST",
                     headers: {
@@ -312,4 +313,3 @@ function Login() {
 }
 
 export default Login;
-

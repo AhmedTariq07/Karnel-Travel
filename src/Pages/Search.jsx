@@ -1,3 +1,4 @@
+import API_URL from "../api";
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
@@ -63,13 +64,13 @@ function Search() {
                     resortsResponse
                 ] = await Promise.all([
 
-                    fetch("http://localhost:5014/api/TouristSpots"),
+                    fetch(`${API_URL}/api/TouristSpots`),
 
-                    fetch("http://localhost:5014/api/Hotels"),
+                    fetch(`${API_URL}/api/Hotels`),
 
-                    fetch("http://localhost:5014/api/Restaurants"),
+                    fetch(`${API_URL}/api/Restaurants`),
 
-                    fetch("http://localhost:5014/api/Resorts")
+                    fetch(`${API_URL}/api/Resorts`)
 
                 ]);
 
@@ -374,8 +375,10 @@ function Search() {
 
             data = data.filter((item) => {
 
-                if (item.rating === null ||
-                    item.rating === undefined) {
+                if (
+                    item.rating === null ||
+                    item.rating === undefined
+                ) {
                     return false;
                 }
 
@@ -950,6 +953,7 @@ function Search() {
                                                         {item.price && (
 
                                                             <>
+
                                                                 <strong>
                                                                     Price:
                                                                 </strong>
@@ -959,6 +963,7 @@ function Search() {
                                                                 {item.price}
 
                                                                 <br />
+
                                                             </>
 
                                                         )}
@@ -968,6 +973,7 @@ function Search() {
                                                             item.rating !== undefined && (
 
                                                                 <>
+
                                                                     <strong>
                                                                         Rating:
                                                                     </strong>

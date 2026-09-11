@@ -1,28 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import API_URL from "../api";
 
 function ViewTrip() {
 
     const navigate = useNavigate();
+
     const { id } = useParams();
 
     const [trip, setTrip] = useState(null);
+
     const [loading, setLoading] = useState(true);
+
     const [error, setError] = useState("");
 
     const [showBookingForm, setShowBookingForm] = useState(false);
 
     const [fullName, setFullName] = useState("");
+
     const [email, setEmail] = useState("");
+
     const [phone, setPhone] = useState("");
+
     const [travelers, setTravelers] = useState("1");
+
     const [amount, setAmount] = useState("");
+
     const [paymentMethod, setPaymentMethod] = useState("");
+
     const [message, setMessage] = useState("");
 
     const [bookingLoading, setBookingLoading] = useState(false);
+
     const [bookingSuccess, setBookingSuccess] = useState("");
+
     const [bookingError, setBookingError] = useState("");
+
 
     // =====================================================
     // LOAD ITINERARY
@@ -33,38 +46,50 @@ function ViewTrip() {
         const loadTrip = async () => {
 
             if (!id) {
+
                 setError("Itinerary ID is missing.");
+
                 setLoading(false);
+
                 return;
             }
+
 
             const token = localStorage.getItem("userToken");
 
             if (!token) {
+
                 setError("Please login to view this itinerary.");
+
                 setLoading(false);
+
                 return;
             }
+
 
             try {
 
                 const response = await fetch(
-                    `http://localhost:5014/api/Trips/${id}`,
+                    `${API_URL}/api/Trips/${id}`,
                     {
                         method: "GET",
+
                         headers: {
                             "Authorization": `Bearer ${token}`
                         }
                     }
                 );
 
+
                 const data = await response.json();
+
 
                 if (!response.ok) {
 
                     if (response.status === 401) {
 
                         localStorage.removeItem("userToken");
+
                         localStorage.removeItem("user");
 
                         setError(
@@ -74,6 +99,7 @@ function ViewTrip() {
                         return;
                     }
 
+
                     setError(
                         data.message ||
                         "Unable to load itinerary."
@@ -81,6 +107,7 @@ function ViewTrip() {
 
                     return;
                 }
+
 
                 setTrip(data);
 
@@ -98,9 +125,9 @@ function ViewTrip() {
             } finally {
 
                 setLoading(false);
-
             }
         };
+
 
         loadTrip();
 
@@ -116,6 +143,7 @@ function ViewTrip() {
         if (!date) {
             return "N/A";
         }
+
 
         return new Date(date).toLocaleDateString(
             "en-US",
@@ -137,63 +165,100 @@ function ViewTrip() {
         e.preventDefault();
 
         setBookingSuccess("");
+
         setBookingError("");
 
+
         if (!fullName.trim()) {
-            setBookingError("Please enter your full name.");
+
+            setBookingError(
+                "Please enter your full name."
+            );
+
             return;
         }
+
 
         if (!email.trim()) {
-            setBookingError("Please enter your email.");
+
+            setBookingError(
+                "Please enter your email."
+            );
+
             return;
         }
+
 
         if (!phone.trim()) {
-            setBookingError("Please enter your phone number.");
+
+            setBookingError(
+                "Please enter your phone number."
+            );
+
             return;
         }
 
-        const phoneRegex = /^(03\d{9}|\+923\d{9})$/;
+
+        const phoneRegex =
+            /^(03\d{9}|\+923\d{9})$/;
+
 
         if (!phoneRegex.test(phone.trim())) {
+
             setBookingError(
                 "Please enter a valid Pakistani mobile number."
             );
+
             return;
         }
 
+
         if (!travelers || Number(travelers) < 1) {
+
             setBookingError(
                 "Number of travelers must be at least 1."
             );
+
             return;
         }
 
+
         if (!amount || Number(amount) <= 0) {
+
             setBookingError(
                 "Please enter a valid booking amount."
             );
+
             return;
         }
 
+
         if (!paymentMethod) {
+
             setBookingError(
                 "Please select a payment method."
             );
+
             return;
         }
 
-        const token = localStorage.getItem("userToken");
+
+        const token =
+            localStorage.getItem("userToken");
+
 
         if (!token) {
+
             setBookingError(
                 "Please login before booking an itinerary."
             );
+
             return;
         }
 
+
         setBookingLoading(true);
+
 
         try {
 
@@ -202,16 +267,21 @@ function ViewTrip() {
                     ? `${message.trim()}\n\nNumber of Travelers: ${travelers}`
                     : `Number of Travelers: ${travelers}`;
 
-            const bookingAmount = Number(amount);
+
+            const bookingAmount =
+                Number(amount);
+
 
             const response = await fetch(
-                "http://localhost:5014/api/Bookings",
+                `${API_URL}/api/Bookings`,
                 {
                     method: "POST",
 
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
+
+                        "Authorization":
+                            `Bearer ${token}`
                     },
 
                     body: JSON.stringify({
@@ -264,7 +334,10 @@ function ViewTrip() {
                 }
             );
 
-            const data = await response.json();
+
+            const data =
+                await response.json();
+
 
             if (!response.ok) {
 
@@ -276,17 +349,26 @@ function ViewTrip() {
                 return;
             }
 
+
             setBookingSuccess(
                 "Your itinerary booking request has been submitted successfully."
             );
 
+
             setFullName("");
+
             setEmail("");
+
             setPhone("");
+
             setTravelers("1");
+
             setAmount("");
+
             setPaymentMethod("");
+
             setMessage("");
+
 
         } catch (err) {
 
@@ -302,7 +384,6 @@ function ViewTrip() {
         } finally {
 
             setBookingLoading(false);
-
         }
     };
 
@@ -314,6 +395,7 @@ function ViewTrip() {
     if (loading) {
 
         return (
+
             <div
                 style={{
                     maxWidth: "900px",
@@ -321,9 +403,11 @@ function ViewTrip() {
                     padding: "30px"
                 }}
             >
+
                 <h2>
                     Loading itinerary...
                 </h2>
+
             </div>
         );
     }
@@ -336,6 +420,7 @@ function ViewTrip() {
     if (error) {
 
         return (
+
             <div
                 style={{
                     maxWidth: "900px",
@@ -355,6 +440,7 @@ function ViewTrip() {
                 >
                     {error}
                 </div>
+
 
                 <button
                     onClick={() =>
@@ -380,6 +466,7 @@ function ViewTrip() {
     if (!trip) {
 
         return (
+
             <div
                 style={{
                     maxWidth: "900px",
@@ -391,6 +478,7 @@ function ViewTrip() {
                 <h2>
                     Itinerary not found.
                 </h2>
+
 
                 <button
                     onClick={() =>
@@ -483,9 +571,17 @@ function ViewTrip() {
                     </h3>
 
                     <p>
-                        {formatDate(trip.startDate)}
+
+                        {formatDate(
+                            trip.startDate
+                        )}
+
                         {" → "}
-                        {formatDate(trip.endDate)}
+
+                        {formatDate(
+                            trip.endDate
+                        )}
+
                     </p>
 
                 </div>
@@ -522,8 +618,13 @@ function ViewTrip() {
 
                     <button
                         onClick={() => {
-                            setShowBookingForm(!showBookingForm);
+
+                            setShowBookingForm(
+                                !showBookingForm
+                            );
+
                             setBookingSuccess("");
+
                             setBookingError("");
                         }}
                         style={{
@@ -537,9 +638,11 @@ function ViewTrip() {
                             fontWeight: "600"
                         }}
                     >
+
                         {showBookingForm
                             ? "Close Booking Form"
                             : "Book This Itinerary"}
+
                     </button>
 
                 </div>
@@ -568,6 +671,7 @@ function ViewTrip() {
 
 
                         {bookingSuccess && (
+
                             <div
                                 style={{
                                     padding: "15px",
@@ -579,10 +683,12 @@ function ViewTrip() {
                             >
                                 {bookingSuccess}
                             </div>
+
                         )}
 
 
                         {bookingError && (
+
                             <div
                                 style={{
                                     padding: "15px",
@@ -594,16 +700,19 @@ function ViewTrip() {
                             >
                                 {bookingError}
                             </div>
+
                         )}
 
 
                         <form onSubmit={handleBooking}>
+
 
                             <div
                                 style={{
                                     marginBottom: "18px"
                                 }}
                             >
+
                                 <label>
                                     <strong>
                                         Full Name
@@ -614,7 +723,9 @@ function ViewTrip() {
                                     type="text"
                                     value={fullName}
                                     onChange={(e) =>
-                                        setFullName(e.target.value)
+                                        setFullName(
+                                            e.target.value
+                                        )
                                     }
                                     placeholder="Enter your full name"
                                     style={{
@@ -626,6 +737,7 @@ function ViewTrip() {
                                         borderRadius: "6px"
                                     }}
                                 />
+
                             </div>
 
 
@@ -634,6 +746,7 @@ function ViewTrip() {
                                     marginBottom: "18px"
                                 }}
                             >
+
                                 <label>
                                     <strong>
                                         Email
@@ -644,7 +757,9 @@ function ViewTrip() {
                                     type="email"
                                     value={email}
                                     onChange={(e) =>
-                                        setEmail(e.target.value)
+                                        setEmail(
+                                            e.target.value
+                                        )
                                     }
                                     placeholder="Enter your email"
                                     style={{
@@ -656,6 +771,7 @@ function ViewTrip() {
                                         borderRadius: "6px"
                                     }}
                                 />
+
                             </div>
 
 
@@ -664,6 +780,7 @@ function ViewTrip() {
                                     marginBottom: "18px"
                                 }}
                             >
+
                                 <label>
                                     <strong>
                                         Phone
@@ -674,7 +791,9 @@ function ViewTrip() {
                                     type="tel"
                                     value={phone}
                                     onChange={(e) =>
-                                        setPhone(e.target.value)
+                                        setPhone(
+                                            e.target.value
+                                        )
                                     }
                                     placeholder="03001234567 or +923001234567"
                                     maxLength="13"
@@ -687,6 +806,7 @@ function ViewTrip() {
                                         borderRadius: "6px"
                                     }}
                                 />
+
                             </div>
 
 
@@ -695,6 +815,7 @@ function ViewTrip() {
                                     marginBottom: "18px"
                                 }}
                             >
+
                                 <label>
                                     <strong>
                                         Number of Travelers
@@ -706,7 +827,9 @@ function ViewTrip() {
                                     min="1"
                                     value={travelers}
                                     onChange={(e) =>
-                                        setTravelers(e.target.value)
+                                        setTravelers(
+                                            e.target.value
+                                        )
                                     }
                                     style={{
                                         width: "100%",
@@ -717,6 +840,7 @@ function ViewTrip() {
                                         borderRadius: "6px"
                                     }}
                                 />
+
                             </div>
 
 
@@ -725,6 +849,7 @@ function ViewTrip() {
                                     marginBottom: "18px"
                                 }}
                             >
+
                                 <label>
                                     <strong>
                                         Booking Amount (Rs.)
@@ -736,7 +861,9 @@ function ViewTrip() {
                                     min="1"
                                     value={amount}
                                     onChange={(e) =>
-                                        setAmount(e.target.value)
+                                        setAmount(
+                                            e.target.value
+                                        )
                                     }
                                     placeholder="Enter booking amount"
                                     style={{
@@ -748,6 +875,7 @@ function ViewTrip() {
                                         borderRadius: "6px"
                                     }}
                                 />
+
                             </div>
 
 
@@ -756,6 +884,7 @@ function ViewTrip() {
                                     marginBottom: "18px"
                                 }}
                             >
+
                                 <label>
                                     <strong>
                                         Payment Method
@@ -765,7 +894,9 @@ function ViewTrip() {
                                 <select
                                     value={paymentMethod}
                                     onChange={(e) =>
-                                        setPaymentMethod(e.target.value)
+                                        setPaymentMethod(
+                                            e.target.value
+                                        )
                                     }
                                     style={{
                                         width: "100%",
@@ -804,6 +935,7 @@ function ViewTrip() {
                                     marginBottom: "20px"
                                 }}
                             >
+
                                 <label>
                                     <strong>
                                         Message
@@ -813,7 +945,9 @@ function ViewTrip() {
                                 <textarea
                                     value={message}
                                     onChange={(e) =>
-                                        setMessage(e.target.value)
+                                        setMessage(
+                                            e.target.value
+                                        )
                                     }
                                     placeholder="Any additional information or requests..."
                                     rows="4"
@@ -827,6 +961,7 @@ function ViewTrip() {
                                         resize: "vertical"
                                     }}
                                 />
+
                             </div>
 
 
@@ -846,14 +981,17 @@ function ViewTrip() {
                                     fontWeight: "600"
                                 }}
                             >
+
                                 {bookingLoading
                                     ? "Submitting..."
                                     : "Submit Booking"}
+
                             </button>
 
                         </form>
 
                     </div>
+
                 )}
 
             </div>

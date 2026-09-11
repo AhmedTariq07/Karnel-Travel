@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from "../Components/Navbar/AdminSidebar/AdminSidebar";
+import API_URL from "../api";
 import "./AdminDashboard.css";
 
 function AdminDashboard() {
@@ -41,7 +42,6 @@ function AdminDashboard() {
         bookings: 0,
         users: 0
     });
-
 
     const [loadingCounts, setLoadingCounts] = useState(true);
 
@@ -134,27 +134,27 @@ function AdminDashboard() {
                 const endpoints = [
                     {
                         key: "touristSpots",
-                        url: "http://localhost:5014/api/TouristSpots"
+                        url: `${API_URL}/api/TouristSpots`
                     },
                     {
                         key: "hotels",
-                        url: "http://localhost:5014/api/Hotels"
+                        url: `${API_URL}/api/Hotels`
                     },
                     {
                         key: "restaurants",
-                        url: "http://localhost:5014/api/Restaurants"
+                        url: `${API_URL}/api/Restaurants`
                     },
                     {
                         key: "resorts",
-                        url: "http://localhost:5014/api/Resorts"
+                        url: `${API_URL}/api/Resorts`
                     },
                     {
                         key: "bookings",
-                        url: "http://localhost:5014/api/Bookings"
+                        url: `${API_URL}/api/Bookings`
                     },
                     {
                         key: "users",
-                        url: "http://localhost:5014/api/Users"
+                        url: `${API_URL}/api/Users`
                     }
                 ];
 
@@ -277,24 +277,17 @@ function AdminDashboard() {
 
         <div className="admin-dashboard">
 
-
-            {/* =================================================
-                SIDEBAR
-            ================================================= */}
+            {/* SIDEBAR */}
 
             <AdminSidebar />
 
 
-            {/* =================================================
-                MAIN AREA
-            ================================================= */}
+            {/* MAIN AREA */}
 
             <main className="admin-main">
 
 
-                {/* =================================================
-                    TOP HEADER
-                ================================================= */}
+                {/* TOP HEADER */}
 
                 <header className="admin-top-header">
 
@@ -356,16 +349,12 @@ function AdminDashboard() {
 
 
 
-                {/* =================================================
-                    CONTENT
-                ================================================= */}
+                {/* CONTENT */}
 
                 <section className="admin-dashboard-content">
 
 
-                    {/* =================================================
-                        WELCOME BANNER
-                    ================================================= */}
+                    {/* WELCOME BANNER */}
 
                     <div className="admin-welcome">
 
@@ -397,9 +386,7 @@ function AdminDashboard() {
 
 
 
-                    {/* =================================================
-                        SEARCH
-                    ================================================= */}
+                    {/* SEARCH */}
 
                     <div className="dashboard-search">
 
@@ -436,9 +423,7 @@ function AdminDashboard() {
 
 
 
-                    {/* =================================================
-                        STATISTICS
-                    ================================================= */}
+                    {/* STATISTICS */}
 
                     <div className="dashboard-stats">
 
@@ -608,9 +593,7 @@ function AdminDashboard() {
 
 
 
-                    {/* =================================================
-                        SECTION HEADING
-                    ================================================= */}
+                    {/* SECTION HEADING */}
 
                     <div className="dashboard-section-heading">
 
@@ -631,9 +614,7 @@ function AdminDashboard() {
 
 
 
-                    {/* =================================================
-                        MANAGEMENT CARDS
-                    ================================================= */}
+                    {/* MANAGEMENT CARDS */}
 
                     <div className="admin-cards">
 
@@ -959,9 +940,7 @@ function AdminDashboard() {
 
 
 
-                    {/* =================================================
-                        RECENT BOOKINGS
-                    ================================================= */}
+                    {/* RECENT BOOKINGS */}
 
                     <div className="recent-bookings">
 
@@ -1071,9 +1050,7 @@ function AdminDashboard() {
 
 
 
-                    {/* =================================================
-                        QUICK ACCESS
-                    ================================================= */}
+                    {/* QUICK ACCESS */}
 
                     <div className="quick-access">
 
@@ -1103,9 +1080,7 @@ function AdminDashboard() {
 
 
 
-                {/* =================================================
-                    FOOTER
-                ================================================= */}
+                {/* FOOTER */}
 
                 <footer className="admin-footer">
 
@@ -1124,4 +1099,3 @@ function AdminDashboard() {
 }
 
 export default AdminDashboard;
-

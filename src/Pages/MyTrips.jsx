@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API_URL from "../api";
 
 function MyTrips() {
 
@@ -26,7 +27,7 @@ function MyTrips() {
         try {
 
             const response = await fetch(
-                "http://localhost:5014/api/Trips",
+                `${API_URL}/api/Trips`,
                 {
                     method: "GET",
 

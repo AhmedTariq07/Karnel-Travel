@@ -1,3 +1,4 @@
+import API_URL from "../api";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -20,7 +21,7 @@ function Restaurants() {
 
     useEffect(() => {
 
-        fetch("http://localhost:5014/api/Restaurants")
+        fetch(`${API_URL}/api/Restaurants`)
             .then((response) => {
 
                 if (!response.ok) {
@@ -68,11 +69,11 @@ function Restaurants() {
 
         // Image path starts with /
         if (image.startsWith("/")) {
-            return `http://localhost:5014${image}`;
+            return `${API_URL}${image}`;
         }
 
         // Image path does not start with /
-        return `http://localhost:5014/${image}`;
+        return `${API_URL}/${image}`;
     };
 
 

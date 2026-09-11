@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Pages/ManageTouristSpots.css";
+import API_URL from "../api";
 
 function ManageBookings() {
 
@@ -26,7 +27,7 @@ function ManageBookings() {
             setLoading(true);
 
             const response = await fetch(
-                "http://localhost:5014/api/Bookings"
+                `${API_URL}/api/Bookings`
             );
 
             if (!response.ok) {

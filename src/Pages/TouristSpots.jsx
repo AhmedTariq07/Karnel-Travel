@@ -1,4 +1,4 @@
-
+import API_URL from "../api";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/touristspots.css";
@@ -39,7 +39,7 @@ function TouristSpots() {
 
     useEffect(() => {
 
-        fetch("http://localhost:5014/api/TouristSpots")
+        fetch(`${API_URL}/api/TouristSpots`)
 
             .then((response) => {
 
@@ -79,7 +79,7 @@ function TouristSpots() {
 
                             const response =
                                 await fetch(
-                                    `http://localhost:5014/api/TouristSpotRatings/${spot.id}`
+                                    `${API_URL}/api/TouristSpotRatings/${spot.id}`
                                 );
 
 
@@ -471,4 +471,3 @@ function TouristSpots() {
 }
 
 export default TouristSpots;
-
