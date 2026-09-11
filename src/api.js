@@ -1,3 +1,3 @@
-const API_URL = "https://directive-democratic-stadium-container.trycloudflare.com";
+const API_URL = "https://affectionate-courage-production-0fc8.up.railway.app";
 
 export default API_URL;
